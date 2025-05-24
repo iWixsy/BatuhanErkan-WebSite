@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Burada iletişim sayfamın başlığını ve gerekli stilleri ekledim -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | Batuhan</title>
+    <meta name="description" content="Batuhan ile iletişime geçin. Telefon, e-posta, adres ve iletişim formu.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Dil seçici (TR/EN) -->
+    <!-- <div id="lang-switcher" ...> ... </div> -->
+    <!-- Blob efektlerini burada ekledim, arka planı daha canlı yapmak için -->
+    <div class="bg-blob top"></div>
+    <div class="bg-blob bottom"></div>
+    <header>
+        <!-- Navigasyon menümü burada oluşturdum -->
+        <nav aria-label="Site ana menüsü">
+            <a href="index.html#anasayfa" class="logo" aria-label="Anasayfa">Batuhan</a>
+            <button id="nav-toggle" aria-label="Menüyü Aç/Kapat"><i class="fas fa-bars"></i></button>
+            <ul id="nav-menu">
+                <li><a href="index.html#anasayfa">Anasayfa</a></li>
+                <li><a href="index.html#referanslar">Referanslar</a></li>
+                <li><a href="index.html#hakkimda">Hakkımda</a></li>
+                <li><a href="index.html#portfoy">Portföy</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="iletisim.html" aria-current="page">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- İletişim bilgilerimi ve haritamı burada paylaşıyorum -->
+        <section id="iletisim" tabindex="-1">
+            <h1>İletişim</h1>
+            <div class="about-container" style="margin-bottom:2rem;">
+                <div style="flex:1;">
+                    <h2>İletişim Bilgileri</h2>
+                    <ul style="list-style:none;padding:0;">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:batuhan@email.com">batuhan@email.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+905551112233">+90 555 111 22 33</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bilecik Merkez, Türkiye</li>
+                    </ul>
+                    <div class="social" style="margin-top:1rem;">
+                        <a href="https://instagram.com/kendi_instagramin" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/kendi_githubun" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/kendi_linkedin" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div style="flex:1;min-width:220px;">
+                    <iframe
+                        title="Adres Haritası"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12213.40176999113!2d29.979309!3d40.142799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x409d7e2e2e2e2e2b%3A0x7e2e2e2e2e2e2e2e!2sBilecik%20Merkez%2C%20Bilecik!5e0!3m2!1str!2str!4v1680000000000!5m2!1str!2str"
+                        width="100%" height="180" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <a href="https://maps.app.goo.gl/4FLLFdREHstLTSRf6" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:0.7rem;font-weight:500;color:#0077ff;">
+                        <i class="fas fa-map-marker-alt"></i> Konumu Google Haritalar'da Aç
+                    </a>
+                </div>
+            </div>
+            <form id="contact-form" action="https://formspree.io/f/movdzrpn" method="POST" autocomplete="on">
+                <label for="adsoyad">Ad Soyad</label>
+                <input type="text" id="adsoyad" name="adsoyad" required aria-required="true" aria-label="Ad Soyad" autocomplete="name">
+                <label for="email">E-posta</label>
+                <input type="email" id="email" name="email" required aria-required="true" aria-label="E-posta" autocomplete="email">
+                <label for="konu">Konu</label>
+                <input type="text" id="konu" name="konu" required aria-required="true" aria-label="Konu">
+                <label for="mesaj">Mesaj</label>
+                <textarea id="mesaj" name="mesaj" required aria-required="true" aria-label="Mesaj"></textarea>
+                <!-- Google reCAPTCHA v2 -->
+                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                <button type="submit" class="btn">Gönder</button>
+                <div id="form-message" role="alert" aria-live="polite"></div>
+                <div style="font-size:0.9em;color:#888;margin-top:1rem;">
+                    Formu göndererek <a href="kvkk.html" target="_blank">KVKK Aydınlatma Metni</a>'ni okuduğunuzu kabul etmiş olursunuz.
+                </div>
+            </form>
+            <section style="margin-top:2rem;">
+                <h2>SSS</h2>
+                <details>
+                    <summary>Size nasıl ulaşabilirim?</summary>
+                    <p>Yukarıdaki formu doldurabilir veya doğrudan e-posta/telefon ile iletişime geçebilirsiniz.</p>
+                </details>
+                <details>
+                    <summary>Yanıt süreniz nedir?</summary>
+                    <p>Genellikle 24 saat içinde dönüş yapıyorum.</p>
+                </details>
+                <details>
+                    <summary>Gizliliğim konusunda endişelenmeli miyim?</summary>
+                    <p>Hayır, ilettiğiniz bilgiler sadece sizinle iletişim kurmak için kullanılır ve asla üçüncü kişilerle paylaşılmaz. Detaylar için <a href="kvkk.html" target="_blank">KVKK Aydınlatma Metni</a>'ni inceleyebilirsiniz.</p>
+                </details>
+                <details>
+                    <summary>Hangi konularda iletişime geçebilirim?</summary>
+                    <p>Her türlü soru, iş birliği, proje teklifi veya önerileriniz için bana ulaşabilirsiniz.</p>
+                </details>
+                <details>
+                    <summary>Formu doldurduktan sonra bilgilerim ne kadar süreyle saklanır?</summary>
+                    <p>Bilgileriniz sadece iletişim süresi boyunca ve yasal zorunluluklar kapsamında saklanır, sonrasında silinir.</p>
+                </details>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <!-- Sosyal medya hesaplarımı ve telif hakkı bilgisini burada gösteriyorum -->
+        <div class="social">
+            <a href="https://instagram.com/kendi_instagramin" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/kendi_githubun" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/kendi_linkedin" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; <span id="year"></span> Batuhan. Tüm hakları saklıdır.</p>
+        <div style="font-size:0.95em;color:#888;margin-top:0.5rem;">
+            Sürüm: v1.0.0 &nbsp;|&nbsp; Son güncelleme: 2024-06-01
+            &nbsp;|&nbsp; <a href="#" id="aboutSiteBtn" style="color:inherit;text-decoration:underline;">Site Hakkında</a>
+        </div>
+    </footer>
+    <!-- Site hakkında modalı -->
+    <div id="aboutSiteModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="aboutSiteModalClose">&times;</span>
+            <h2>Site Hakkında</h2>
+            <p>Bu site Batuhan tarafından 2025 yılında geliştirilmiştir. Modern web teknolojileri, erişilebilirlik ve mobil uyumluluk ön planda tutulmuştur. Tüm kodlar GitHub'da açık kaynak olarak paylaşılmıştır.</p>
+            <p style="font-size:0.95em;color:#888;">Sürüm: v1.0.0<br>Son güncelleme: 2024-06-01</p>
+        </div>
+    </div>
+    <!-- Toast bildirimi -->
+    <div id="toast" class="toast"></div>
+    <!-- reCAPTCHA ve ana JS dosyamı burada çağırıyorum -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="main.js"></script>
+    <button id="backToTop" aria-label="Yukarı Çık" style="display:none;"><i class="fas fa-arrow-up"></i></button>
+</body>
+</html>

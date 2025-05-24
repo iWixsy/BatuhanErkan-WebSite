@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Burada site başlığımı, faviconumu ve meta etiketlerimi ekledim -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batuhan | Kişisel Web Sitesi</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <meta name="description" content="Batuhan'ın portföyü, blogu, referansları ve iletişim bilgileri. Modern, erişilebilir ve mobil uyumlu kişisel web sitesi.">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Batuhan | Kişisel Web Sitesi">
+    <meta property="og:description" content="Batuhan'ın portföyü, blogu, referansları ve iletişim bilgileri.">
+    <meta property="og:image" content="assets/og-image.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://seninsiten.com">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Batuhan | Kişisel Web Sitesi">
+    <meta name="twitter:description" content="Batuhan'ın portföyü, blogu, referansları ve iletişim bilgileri.">
+    <meta name="twitter:image" content="assets/og-image.jpg">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Analytics kodunu buraya ekledim -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-XXXXXXXXX-X');
+    </script>
+</head>
+<body>
+    <!-- Dil seçici (TR/EN) -->
+    <!-- <div id="lang-switcher" ...> ... </div> -->
+    <!-- Blob efektlerini burada ekledim, arka planı daha canlı yapmak için -->
+    <div class="bg-blob top"></div>
+    <div class="bg-blob bottom"></div>
+    <header>
+        <!-- Navigasyon menümü burada oluşturdum -->
+        <nav aria-label="Site ana menüsü">
+            <a href="#anasayfa" class="logo" aria-label="Anasayfa">Batuhan Erkan</a>
+            <button id="nav-toggle" aria-label="Menüyü Aç/Kapat"><i class="fas fa-bars"></i></button>
+            <ul id="nav-menu">
+                <li><a href="#anasayfa">Anasayfa</a></li>
+                <li><a href="#referanslar">Referanslar</a></li>
+                <li><a href="#hakkimda">Hakkımda</a></li>
+                <li><a href="#portfoy">Portföy</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Progress bar (sayfa yukarıda ilerleme çubuğu) -->
+    <div id="progress-bar"></div>
+    <main>
+        <!-- Ana sayfa, hakkımda, portföy ve blog bölümlerimi burada sıraladım -->
+        <section id="anasayfa" tabindex="-1">
+            <div class="welcome-hero">
+                <div class="welcome-hero-bg"></div>
+                <div class="welcome-hero-content">
+                    <img src="assets/profil.jpg" alt="Batuhan'ın profil fotoğrafı" class="welcome-hero-img">
+                    <div>
+                        <h1 class="welcome-hero-title">Merhaba, ben Batuhan!</h1>
+                        <h2 class="welcome-hero-subtitle">İnternet ve Ağ Teknolojileri öğrencisi</h2>
+                        <p class="welcome-hero-desc">
+                            Dijital dünyada kendimi geliştiriyor, modern ve erişilebilir web projeleriyle ilgileniyorum.<br>
+                            <span class="welcome-hero-highlight">Portföyümü inceleyebilir, blog yazılarımı okuyabilir veya iletişime geçebilirsin.</span>
+                        </p>
+                        <div class="welcome-hero-actions">
+                            <a href="#portfoy" class="btn">Portföyüm</a>
+                            <a href="#blog" class="btn secondary">Blog</a>
+                            <a href="iletisim.html" class="btn">İletişim</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="quote-banner" class="quote-banner"></div>
+            </div>
+            <h1 style="margin-top:3.5rem;">Anasayfa</h1>
+            <div class="grid">
+                <div class="card">
+                    <h2><i class="fas fa-user"></i> Hakkımda</h2>
+                    <p>Kısa özgeçmiş, <a href="#hakkimda">devamı</a></p>
+                </div>
+                <div class="card">
+                    <h2><i class="fas fa-briefcase"></i> Portföy</h2>
+                    <p>Projelerimden örnekler, <a href="#portfoy">devamı</a></p>
+                </div>
+                <div class="card">
+                    <h2><i class="fas fa-blog"></i> Blog</h2>
+                    <p>Son yazılarım, <a href="#blog">devamı</a></p>
+                </div>
+                <div class="card">
+                    <h2><i class="fas fa-envelope"></i> İletişim</h2>
+                    <p>Bana ulaşmak için <a href="iletisim.html">tıklayın</a></p>
+                </div>
+            </div>
+            <section id="referanslar" aria-label="Referanslar">
+                <div class="ref-container">
+                    <div class="ref-card">
+                        <h3>Referans 1</h3>
+                        <p>Kısa açıklama, pozisyon, şirket.</p>
+                    </div>
+                    <div class="ref-card">
+                        <h3>Referans 2</h3>
+                        <p>Kısa açıklama, pozisyon, şirket.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section id="hakkimda" tabindex="-1">
+            <h1>Hakkımda</h1>
+            <div class="about-container">
+                <img src="assets/profil.jpg" alt="Batuhan'ın profil fotoğrafı" class="profile-img">
+                <div>
+                    <p>Buraya kendinizle ilgili detaylı bilgi ekleyebilirsiniz.</p>
+                    <a href="assets/Batuhan_CV.pdf" download class="btn" aria-label="CV'yi indir">CV'yi İndir</a>
+                    <!-- Hakkımda modal açma butonu -->
+                    <button class="btn" id="aboutModalBtn" type="button" style="margin-left:1rem;">Kısaca Tanıt</button>
+                </div>
+            </div>
+            <!-- Zaman çizelgesi (timeline) -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2025</span>
+                        <span class="timeline-title">Kendi Web Sitemi Yayına Aldım</span>
+                        <span class="timeline-desc">Kişisel web sitemi yayına açtım ve dijital dünyada yerimi aldım.</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2024</span>
+                        <span class="timeline-title">İnternet ve Ağ Teknolojileri Bölümüne Başladım</span>
+                        <span class="timeline-desc">Üniversitede İnternet ve Ağ Teknolojileri bölümünde eğitimime başladım.</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2020</span>
+                        <span class="timeline-title">Lise Mezuniyeti</span>
+                        <span class="timeline-desc">Liseden mezun oldum ve teknoloji alanında kendimi geliştirmeye başladım.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="portfoy" tabindex="-1">
+            <h1>Portföy</h1>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="assets/proje1.jpg" alt="Proje 1 ekran görüntüsü">
+                    <h3>Proje Adı 1</h3>
+                    <p>Kapsamlı açıklama, kullanılan teknolojiler, bağlantı vs.</p>
+                    <a href="#" class="btn">Detay</a>
+                </div>
+                <div class="portfolio-item">
+                    <img src="assets/proje2.jpg" alt="Proje 2 ekran görüntüsü">
+                    <h3>Proje Adı 2</h3>
+                    <p>Kapsamlı açıklama, kullanılan teknolojiler, bağlantı vs.</p>
+                    <a href="#" class="btn">Detay</a>
+                </div>
+                <!-- ...daha fazla proje ekleyebilirsiniz... -->
+            </div>
+        </section>
+        <section id="blog" tabindex="-1">
+            <h1>Blog</h1>
+            <div class="blog-list">
+                <article>
+                    <h2>Blog Başlığı 1</h2>
+                    <p>Kapsamlı bir yazı özeti. <a href="#">Devamını oku</a></p>
+                </article>
+                <article>
+                    <h2>Blog Başlığı 2</h2>
+                    <p>Kapsamlı bir yazı özeti. <a href="#">Devamını oku</a></p>
+                </article>
+                <!-- ...daha fazla blog ekleyebilirsiniz... -->
+            </div>
+        </section>
+        
+    </main>
+    <footer>
+        <!-- Sosyal medya ve iletişim bilgilerimi burada paylaşıyorum -->
+        <div class="social">
+            <a href="https://instagram.com/kendi_instagramin" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/kendi_githubun" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/kendi_linkedin" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div>
+            <a href="mailto:batuhan@email.com" style="color:inherit;text-decoration:none;"><i class="fas fa-envelope"></i> batuhan@email.com</a>
+            &nbsp;|&nbsp;
+            <a href="tel:+905551112233" style="color:inherit;text-decoration:none;"><i class="fas fa-phone"></i> +90 555 111 22 33</a>
+        </div>
+        <div style="margin:1rem 0 0.5rem 0;">
+            <span id="visitor-counter"><i class="fas fa-users"></i> Ziyaretçi: <span id="visitor-count">...</span></span>
+        </div>
+        <p>&copy; <span id="year"></span> Batuhan. Tüm hakları saklıdır.</p>
+        <div style="font-size:0.95em;color:#888;margin-top:0.5rem;">
+            Sürüm: v1.0.0 &nbsp;|&nbsp; Son güncelleme: 2024-06-01
+            &nbsp;|&nbsp; <a href="#" id="aboutSiteBtn" style="color:inherit;text-decoration:underline;">Site Hakkında</a>
+        </div>
+    </footer>
+    <!-- Hakkımda modalı -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="aboutModalClose">&times;</span>
+            <h2>Kısaca Ben</h2>
+            <p>Merhaba! Ben Batuhan. Web teknolojileriyle ilgileniyorum, modern ve erişilebilir arayüzler geliştiriyorum. Daha fazlası için iletişime geçebilirsin!</p>
+        </div>
+    </div>
+    <!-- Site hakkında modalı -->
+    <div id="aboutSiteModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="aboutSiteModalClose">&times;</span>
+            <h2>Site Hakkında</h2>
+            <p>Bu site Batuhan tarafından 2025 yılında geliştirilmiştir. Modern web teknolojileri, erişilebilirlik ve mobil uyumluluk ön planda tutulmuştur. Tüm kodlar GitHub'da açık kaynak olarak paylaşılmıştır.</p>
+            <p style="font-size:0.95em;color:#888;">Sürüm: v1.0.0<br>Son güncelleme: 2025-05-24</p>
+        </div>
+    </div>
+    <!-- Toast bildirimi -->
+    <div id="toast" class="toast"></div>
+    <!-- Tema, reCAPTCHA ve ana JS dosyamı burada çağırıyorum -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="main.js"></script>
+    <button id="backToTop" aria-label="Yukarı Çık"><i class="fas fa-arrow-up"></i></button>
+</body>
+</html>
