@@ -210,6 +210,12 @@ document.addEventListener('DOMContentLoaded', function() {
         greetingTitle.textContent = `${getGreeting()}, ben Batuhan!`;
     }
 
+    // Ortak viewport kontrol fonksiyonu
+    function isInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
     // Skill bar animasyonu
     function animateSkills() {
         const bars = document.querySelectorAll('.skill-bar-fill');
@@ -222,11 +228,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         });
     }
-    // Hakkımda bölümü görünür olunca animasyonu başlat
-    function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
-    }
     const skillsSection = document.querySelector('.skills-section');
     let skillsAnimated = false;
     if (skillsSection) {
@@ -236,10 +237,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 skillsAnimated = true;
             }
         });
-        // Sayfa başında da kontrol et
         if (isInViewport(skillsSection)) {
             animateSkills();
             skillsAnimated = true;
+        }
+    }
+
+    // Sayaçlar (Counter) animasyonu
+    function animateCounters() {
+        const counters = document.querySelectorAll('.counter-number');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-count');
+            let current = 0;
+            const increment = Math.max(1, Math.ceil(target / 60));
+            function update() {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target;
+                } else {
+                    counter.textContent = current;
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        });
+    }
+    const counterSection = document.querySelector('.counter-section');
+    let countersAnimated = false;
+    if (counterSection) {
+        window.addEventListener('scroll', () => {
+            if (!countersAnimated && isInViewport(counterSection)) {
+                animateCounters();
+                countersAnimated = true;
+            }
+        });
+        if (isInViewport(counterSection)) {
+            animateCounters();
+            countersAnimated = true;
         }
     }
 

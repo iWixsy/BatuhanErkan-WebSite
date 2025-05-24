@@ -1078,3 +1078,44 @@ body.dark .skill-bar-bg {
 .social a {
     margin: 0 0.35rem;
 }
+
+/* Sayaçlar (Counter) */
+.counter-section {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 2.5rem 0 2.5rem 0;
+    flex-wrap: wrap;
+}
+.counter-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.2rem 2.2rem;
+    text-align: center;
+    min-width: 140px;
+    border: 1px solid var(--border);
+}
+.counter-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+    transition: color 0.2s;
+}
+.counter-label {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+body.dark .counter-card {
+    background: #232a36;
+    border-color: #2c3440;
+}
+body.dark .counter-label {
+    color: #b0b8c1;
+}
