@@ -197,5 +197,66 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Kullanıcıya özel selamlama (greeting)
+    function getGreeting() {
+        const hour = new Date().getHours();
+        if (hour < 6) return "İyi geceler";
+        if (hour < 12) return "Günaydın";
+        if (hour < 18) return "İyi günler";
+        return "İyi akşamlar";
+    }
+    const greetingTitle = document.getElementById('greeting-title');
+    if (greetingTitle) {
+        greetingTitle.textContent = `${getGreeting()}, ben Batuhan!`;
+    }
+
+    // Skill bar animasyonu
+    function animateSkills() {
+        const bars = document.querySelectorAll('.skill-bar-fill');
+        bars.forEach(bar => {
+            const percent = bar.getAttribute('data-skill');
+            bar.style.width = '0%';
+            bar.style.transition = 'width 1.2s cubic-bezier(.4,0,.2,1)';
+            setTimeout(() => {
+                bar.style.width = percent + '%';
+            }, 300);
+        });
+    }
+    // Hakkımda bölümü görünür olunca animasyonu başlat
+    function isInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+    const skillsSection = document.querySelector('.skills-section');
+    let skillsAnimated = false;
+    if (skillsSection) {
+        window.addEventListener('scroll', () => {
+            if (!skillsAnimated && isInViewport(skillsSection)) {
+                animateSkills();
+                skillsAnimated = true;
+            }
+        });
+        // Sayfa başında da kontrol et
+        if (isInViewport(skillsSection)) {
+            animateSkills();
+            skillsAnimated = true;
+        }
+    }
+
+    // Konami Kodu Easter Egg
+    const konami = [38,38,40,40,37,39,37,39,66,65];
+    let konamiPos = 0;
+    window.addEventListener('keydown', function(e) {
+        if (e.keyCode === konami[konamiPos]) {
+            konamiPos++;
+            if (konamiPos === konami.length) {
+                showToast("🎉 Tebrikler! Gizli Konami kodunu buldun! 🚀");
+                konamiPos = 0;
+            }
+        } else {
+            konamiPos = 0;
+        }
+    });
+
     // Kodlarınızda eksik veya hatalı bir kısım yok, tüm sayfalarda sorunsuz çalışır.
 });

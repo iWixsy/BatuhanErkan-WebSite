@@ -1016,3 +1016,65 @@ body.dark .modal-content {
         height: 64px;
     }
 }
+
+/* Skill Barlar */
+.skills-section {
+    margin: 2.5rem 0 2.5rem 0;
+    max-width: 540px;
+}
+.skills-section h2 {
+    margin-bottom: 1.2rem;
+}
+.skill-bar {
+    margin-bottom: 1.1rem;
+}
+.skill-bar span {
+    font-weight: 500;
+    color: var(--primary-dark);
+    display: inline-block;
+    margin-bottom: 0.2rem;
+}
+.skill-bar-bg {
+    background: #e9f1fb;
+    border-radius: 8px;
+    height: 18px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 1px 4px #0077ff11;
+    position: relative;
+}
+body.dark .skill-bar-bg {
+    background: #232a36;
+}
+.skill-bar-fill {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    height: 100%;
+    width: 0%;
+    border-radius: 8px;
+    transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 1px 8px #0077ff22;
+}
+
+/* Başarılar/Sertifikalar */
+.achievements-section {
+    margin: 2.5rem 0 2.5rem 0;
+    max-width: 540px;
+}
+.achievements-section h2 {
+    margin-bottom: 1.2rem;
+}
+.achievements-list {
+    list-style: "🏅 ";
+    padding-left: 1.5rem;
+    color: var(--text);
+}
+.achievements-list li {
+    margin-bottom: 0.7rem;
+    font-size: 1.04rem;
+    font-weight: 500;
+}
+
+/* Sosyal medya ikonları için ekstra boşluk */
+.social a {
+    margin: 0 0.35rem;
+}
