@@ -292,5 +292,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Blog yazısı sayısını otomatik olarak güncelle
+    document.addEventListener('DOMContentLoaded', function() {
+        var blogCount = document.querySelectorAll('#blog article').length;
+        var blogCounter = document.getElementById('blog-count');
+        if (blogCounter) {
+            blogCounter.setAttribute('data-count', blogCount);
+            blogCounter.textContent = 0; // Sayaç animasyonu varsa, animasyon kodu bunu günceller
+        }
+    });
+
     // Kodlarınızda eksik veya hatalı bir kısım yok, tüm sayfalarda sorunsuz çalışır.
 });
