@@ -302,5 +302,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Scroll ile arka plan overlay efektini değiştir kaldırıldı
+    // window.addEventListener('scroll', function() {
+    //     if (window.scrollY > 120) {
+    //         document.body.classList.add('scrolled');
+    //     } else {
+    //         document.body.classList.remove('scrolled');
+    //     }
+    // });
+
     // Kodlarınızda eksik veya hatalı bir kısım yok, tüm sayfalarda sorunsuz çalışır.
 });
