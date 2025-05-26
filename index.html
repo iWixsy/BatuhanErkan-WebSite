@@ -132,7 +132,11 @@
             <div class="about-container">
                 <img src="assets/profil.jpg" alt="Batuhan'ın profil fotoğrafı" class="profile-img">
                 <div>
-                    <p>Buraya kendinizle ilgili detaylı bilgi ekleyebilirsiniz.</p>
+                    <p>Şu anda Bilecik Şeyh Edebali Üniversitesi’nde İnternet ve Ağ Teknolojileri bölümünde öğrenim görüyorum. Lise dönemimde, Yıldızlar Yatırım Holding iştiraki olan İstanbul Gübre Sanayi A.Ş.’de bilgi işlem departmanında 9 ay süren bir staj programına katılarak kurumsal BT süreçlerine erken yaşta dahil oldum.
+
+Bu süreçte donanım kurulumu, ağ bağlantısı sorunları, yazılım destekleri ve kullanıcı taleplerine müdahale gibi görevlerde aktif rol aldım. Hem sahada hem masa başında gerçek dünya tecrübesi kazandım.
+
+Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleşmeye yöneltti. Şu anda hem teorik bilgimi artırıyor hem de bu bilgiyi pratiğe dökme fırsatlarını arıyorum. Hedefim, ağ sistemleri, siber güvenlik ve sistem yönetimi gibi alanlarda uzmanlaşmak; gelişen dünyada güvenilir ve sağlam dijital altyapılar kuran ekiplerin bir parçası olmak.</p>
                     <a href="assets/Batuhan_CV.pdf" download class="btn" aria-label="CV'yi indir">CV'yi İndir</a>
                     <!-- Hakkımda modal açma butonu -->
                     <button class="btn" id="aboutModalBtn" type="button" style="margin-left:1rem;">Kısaca Tanıt</button>
@@ -156,18 +160,24 @@
             </div>
             <!-- Başarılar/Sertifikalar -->
             <div class="achievements-section">
-                <h2>Başarılar & Sertifikalar</h2>
-                <ul class="achievements-list">
-                    <li>Sertifika doldurulacak</li>
-                </ul>
-            </div>
+    <h2>Başarılar & Sertifikalar</h2>
+    <ul class="achievements-list" style="font-size:1.18rem;list-style:none;padding-left:0;">
+        <li style="display:inline;white-space:normal;overflow-x:unset;">
+            🏅 Sosyal Mühendislik ve Oltalama Sertifikası
+            <a href="#" id="sertifikaBtn" style="color:var(--primary);font-weight:600;text-decoration:none;font-size:1.08em;margin-left:0.5em;display:inline;">
+                (Görüntüle)
+            </a>
+        </li>
+        <!-- Başka sertifikalar eklemek isterseniz aynı şekilde ekleyin -->
+    </ul>
+</div>
             <!-- Zaman çizelgesi (timeline) -->
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <span class="timeline-date">2025</span>
-                        <span class="timeline-title">Kendi Web Sitemi Yayına Aldım</span>
+                        <span class="timeline-title">Kendi Web sitemi Yayına Aldım</span>
                         <span class="timeline-desc">Kişisel web sitemi yayına açtım ve dijital dünyada yerimi aldım.</span>
                     </div>
                 </div>
@@ -267,12 +277,21 @@
             <p style="font-size:0.95em;color:#888;">Sürüm: v1.1.10<br>Son güncelleme: 2025-05-26</p>
         </div>
     </div>
+    <!-- Sertifika modalı -->
+    <div id="sertifikaModal" class="modal">
+        <div class="modal-content" style="max-width:900px;width:95vw;height:90vh;padding:1.2rem;display:flex;flex-direction:column;">
+            <span class="modal-close" id="sertifikaModalClose">&times;</span>
+            <h2>Sertifika</h2>
+            <!-- PDF yerine PNG kullanmak isterseniz aşağıdaki <img> satırını kullanılııı -->
+            <!-- <img src="assets/sertifika.png" alt="Sertifika" style="width:100%;border-radius:12px;max-height:75vh;object-fit:contain;"> -->
+            <iframe src="assets/Sosyal_Mühendislik_ve_Oltalama_Sertifika.pdf" style="flex:1 1 auto;width:100%;height:100%;border:none;border-radius:12px;" title="Sertifika"></iframe>
+        </div>
+    </div>
     <!-- Toast bildirimi -->
     <div id="toast" class="toast"></div>
     <!-- Tema, reCAPTCHA ve ana JS dosyamı burada çağırıyorum -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="main.js"></script>
-
     <button id="backToTop" aria-label="Yukarı Çık"><i class="fas fa-arrow-up"></i></button>
 </body>
 </html>

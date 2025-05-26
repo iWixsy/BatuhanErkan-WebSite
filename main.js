@@ -161,6 +161,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Sertifika modalı aç/kapat
+    var sertifikaBtn = document.getElementById('sertifikaBtn');
+    var sertifikaModal = document.getElementById('sertifikaModal');
+    var sertifikaModalClose = document.getElementById('sertifikaModalClose');
+    if (sertifikaBtn && sertifikaModal && sertifikaModalClose) {
+        sertifikaBtn.onclick = function(e) {
+            e.preventDefault();
+            sertifikaModal.classList.add('show');
+        };
+        sertifikaModalClose.onclick = function() {
+            sertifikaModal.classList.remove('show');
+        };
+        window.addEventListener('click', function(e) {
+            if (e.target === sertifikaModal) sertifikaModal.classList.remove('show');
+        });
+    }
+
     // Toast bildirimi fonksiyonu
     window.showToast = function(msg) {
         const toast = document.getElementById('toast');
