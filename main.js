@@ -162,20 +162,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Sertifika modalını açıp kapatmak için kodumu ekledim
-    var sertifikaBtn = document.getElementById('sertifikaBtn');
-    var sertifikaModal = document.getElementById('sertifikaModal');
-    var sertifikaModalClose = document.getElementById('sertifikaModalClose');
-    if (sertifikaBtn && sertifikaModal && sertifikaModalClose) {
-        sertifikaBtn.onclick = function(e) {
+    // Sertifika modalını açıp kapatmak için gelişmiş kod
+    document.querySelectorAll('.certificate-view-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
             e.preventDefault();
-            sertifikaModal.classList.add('show');
-        };
+            var modal = document.getElementById('sertifikaModal');
+            var iframe = document.getElementById('sertifikaIframe');
+            var title = document.getElementById('sertifikaModalTitle');
+            if (modal && iframe && title) {
+                title.textContent = btn.getAttribute('data-title') || "Sertifika";
+                iframe.src = btn.getAttribute('data-src');
+                modal.classList.add('show');
+            }
+        });
+    });
+    var sertifikaModalClose = document.getElementById('sertifikaModalClose');
+    var sertifikaModal = document.getElementById('sertifikaModal');
+    var sertifikaIframe = document.getElementById('sertifikaIframe');
+    if (sertifikaModalClose && sertifikaModal) {
         sertifikaModalClose.onclick = function() {
             sertifikaModal.classList.remove('show');
+            if (sertifikaIframe) sertifikaIframe.src = "";
         };
         window.addEventListener('click', function(e) {
-            if (e.target === sertifikaModal) sertifikaModal.classList.remove('show');
+            if (e.target === sertifikaModal) {
+                sertifikaModal.classList.remove('show');
+                if (sertifikaIframe) sertifikaIframe.src = "";
+            }
         });
     }
 

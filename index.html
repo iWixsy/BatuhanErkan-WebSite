@@ -172,14 +172,30 @@ Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleş
             <!-- Başarılar/Sertifikalar -->
             <div class="achievements-section">
     <h2>Başarılar & Sertifikalar</h2>
-    <ul class="achievements-list" style="font-size:1.18rem;list-style:none;padding-left:0;">
-        <li style="display:inline;white-space:normal;overflow-x:unset;">
-            🏅 Sosyal Mühendislik ve Oltalama Sertifikası
-            <a href="#" id="sertifikaBtn" style="color:var(--primary);font-weight:600;text-decoration:none;font-size:1.08em;margin-left:0.5em;display:inline;">
-                (Görüntüle)
-            </a>
-        </li>
-    </ul>
+    <div class="certificates-grid">
+        <div class="certificate-card">
+            <div class="certificate-icon">🏅</div>
+            <div class="certificate-info">
+                <div class="certificate-title">Sosyal Mühendislik ve Oltalama Sertifikası</div>
+                <div class="certificate-actions">
+                    <button class="btn secondary certificate-view-btn" data-title="Sosyal Mühendislik ve Oltalama Sertifikası" data-src="assets/sertifika1.pdf">
+                        Görüntüle
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="certificate-card">
+            <div class="certificate-icon">🏅</div>
+            <div class="certificate-info">
+                <div class="certificate-title">HTML5 ile Web Geliştirme Sertifikası</div>
+                <div class="certificate-actions">
+                    <button class="btn secondary certificate-view-btn" data-title="HTML5 ile Web Geliştirme Sertifikası" data-src="assets/sertifika2.pdf">
+                        Görüntüle
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
             <!-- Zaman çizelgesi (timeline) -->
             <div class="timeline">
@@ -304,12 +320,10 @@ Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleş
     </div>
     <!-- Sertifika modalı -->
     <div id="sertifikaModal" class="modal">
-        <div class="modal-content" style="max-width:900px;width:95vw;height:90vh;padding:1.2rem;display:flex;flex-direction:column;">
+        <div class="modal-content" id="sertifikaModalContent" style="max-width:900px;width:95vw;height:90vh;padding:1.2rem;display:flex;flex-direction:column;">
             <span class="modal-close" id="sertifikaModalClose">&times;</span>
-            <h2>Sertifika</h2>
-            <!-- PDF yerine PNG kullanmak isterseniz aşağıdaki <img> satırını kullanılııı -->
-            <!-- <img src="assets/sertifika.png" alt="Sertifika" style="width:100%;border-radius:12px;max-height:75vh;object-fit:contain;"> -->
-            <iframe src="assets/Sosyal_Mühendislik_ve_Oltalama_Sertifika.pdf" style="flex:1 1 auto;width:100%;height:100%;border:none;border-radius:12px;" title="Sertifika"></iframe>
+            <h2 id="sertifikaModalTitle">Sertifika</h2>
+            <iframe id="sertifikaIframe" src="" style="flex:1 1 auto;width:100%;height:100%;border:none;border-radius:12px;" title="Sertifika"></iframe>
         </div>
     </div>
     <!-- Toast bildirimi -->
