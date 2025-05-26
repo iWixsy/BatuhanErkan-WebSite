@@ -626,15 +626,16 @@ footer {
     width: 36px;
     height: 36px;
     background: #f1f5f9;
+    text-decoration: none;
+    border-bottom: none !important;
+    box-shadow: none;
 }
-.social a:hover, .social a:focus {
-    color: #fff;
-    background: var(--primary);
-    transform: scale(1.12);
-    outline: none;
-}
-body.dark .social a {
-    background: #23263a;
+.social a:visited,
+.social a:active,
+.social a:focus {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    box-shadow: none;
 }
 
 .theme-toggle {

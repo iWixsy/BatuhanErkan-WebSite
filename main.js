@@ -1,5 +1,6 @@
 // Mobil menüyü açıp kapatmak için bu kısmı yazdım
 document.addEventListener('DOMContentLoaded', function() {
+    // Navigasyon menüsünü açıp kapatmak için kodumu yazdım
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     if (navToggle && navMenu) {
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Form gönderildiğinde kullanıcıya bildirim göstermek için burayı kullandım
+    // Form gönderildiğinde kullanıcıya bildirim göstermek için kodumu ekledim
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
     if (form && formMessage) {
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 : '<i class="fas fa-moon"></i>';
         }
 
-        // Sistem temasını ilk açılışta uygula (kullanıcı seçimi yoksa)
+        // Sistem temasını ilk açılışta uyguluyorum (kullanıcı seçimi yoksa)
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.body.classList.add('dark');
@@ -91,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-        // Sayfa yüklendiğinde butonun display'ini sıfırla (gizli başlat, scroll ile açılır)
+        // Sayfa yüklendiğinde butonun display'ini sıfırla (gizli başlatıyorum, scroll ile açılıyor)
         backToTop.style.display = 'flex';
         backToTop.classList.remove('show');
     }
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         bar.style.width = percent + "%";
     });
 
-    // Dinamik motivasyon sözü
+    // Dinamik motivasyon sözü ekliyorum
     const quotes = [
         "Başarı, cesaretin başladığı yerde başlar.",
         "Her gün yeni bir başlangıçtır.",
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         quoteBanner.textContent = q;
     }
 
-    // Ziyaretçi sayacı (localStorage ile basit demo)
+    // Ziyaretçi sayacını (localStorage ile basit demo) ekledim
     const visitorCountEl = document.getElementById('visitor-count');
     if (visitorCountEl) {
         let count = parseInt(localStorage.getItem('visitorCount') || "0", 10);
@@ -149,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
         visitorCountEl.textContent = count;
     }
 
-    // Modal popup (Hakkımda)
+    // Modal popup (Hakkımda) için kodumu ekledim
     const aboutModalBtn = document.getElementById('aboutModalBtn');
     const aboutModal = document.getElementById('aboutModal');
     const aboutModalClose = document.getElementById('aboutModalClose');
@@ -161,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Sertifika modalı aç/kapat
+    // Sertifika modalını açıp kapatmak için kodumu ekledim
     var sertifikaBtn = document.getElementById('sertifikaBtn');
     var sertifikaModal = document.getElementById('sertifikaModal');
     var sertifikaModalClose = document.getElementById('sertifikaModalClose');
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Toast bildirimi fonksiyonu
+    // Toast bildirimi fonksiyonumu ekledim
     window.showToast = function(msg) {
         const toast = document.getElementById('toast');
         if (!toast) return;
@@ -187,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => toast.classList.remove('show'), 2500);
     };
 
-    // Dil seçici (TR/EN) demo
+    // Dil seçici (TR/EN) için demo kodumu ekledim
     // const langTrBtn = document.getElementById('lang-tr');
     // const langEnBtn = document.getElementById('lang-en');
     // if (langTrBtn && langEnBtn) {
@@ -195,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //     langEnBtn.onclick = () => showToast("Language set to English.");
     // }
 
-    // Site hakkında modalı
+    // Site hakkında modalı için kodumu ekledim
     const aboutSiteBtn = document.getElementById('aboutSiteBtn');
     const aboutSiteModal = document.getElementById('aboutSiteModal');
     const aboutSiteModalClose = document.getElementById('aboutSiteModalClose');
@@ -207,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Sistem teması değişirse otomatik geçiş ve toast bildirimi
+    // Sistem teması değişirse otomatik geçiş ve toast bildirimi ekledim
     if (window.matchMedia) {
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
             if (!localStorage.getItem('theme')) {
@@ -222,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Kullanıcıya özel selamlama (greeting)
+    // Kullanıcıya özel selamlama (greeting) ekledim
     function getGreeting() {
         const hour = new Date().getHours();
         if (hour < 6) return "İyi geceler";
@@ -235,13 +236,13 @@ document.addEventListener('DOMContentLoaded', function() {
         greetingTitle.textContent = `${getGreeting()}, ben Batuhan!`;
     }
 
-    // Ortak viewport kontrol fonksiyonu
+    // Ortak viewport kontrol fonksiyonumu ekledim
     function isInViewport(el) {
         const rect = el.getBoundingClientRect();
         return rect.top < window.innerHeight && rect.bottom > 0;
     }
 
-    // Skill bar animasyonu
+    // Skill bar animasyonunu ekledim
     function animateSkills() {
         const bars = document.querySelectorAll('.skill-bar-fill');
         bars.forEach(bar => {
@@ -268,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Sayaçlar (Counter) animasyonu
+    // Sayaçlar (Counter) animasyonunu ekledim
     function animateCounters() {
         const counters = document.querySelectorAll('.counter-number');
         counters.forEach(counter => {
@@ -302,8 +303,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Konami Kodu Easter Egg
-    // Yön tuşlarıyla ↑ ↑ ↓ ↓ ← → ← → B A (sırasıyla) klavyeden basınca ekrana "🎉 Tebrikler! Gizli Konami kodunu buldun! 🚀" toast bildirimi çıkar.
+    // Konami Kodu Easter Egg'i ekledim
+    // Yön tuşlarıyla ↑ ↑ ↓ ↓ ← → ← → B A (sırasıyla) klavyeden basınca ekrana "🎉 Tebrikler! Gizli Konami kodunu buldun! 🚀" toast bildirimi çıkarıyorum.
     const konami = [38,38,40,40,37,39,37,39,66,65];
     let konamiPos = 0;
     window.addEventListener('keydown', function(e) {
@@ -318,17 +319,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Blog yazısı sayısını otomatik olarak güncelle
+    // Blog yazısı sayısını otomatik olarak güncelliyorum
     document.addEventListener('DOMContentLoaded', function() {
         var blogCount = document.querySelectorAll('#blog article').length;
         var blogCounter = document.getElementById('blog-count');
         if (blogCounter) {
             blogCounter.setAttribute('data-count', blogCount);
-            blogCounter.textContent = 0; // Sayaç animasyonu varsa, animasyon kodu bunu günceller
+            blogCounter.textContent = 0; // Sayaç animasyonu varsa, animasyon kodu bunu güncelliyor
         }
     });
 
-    // Scroll ile arka plan overlay efektini değiştir kaldırıldı
+    // Scroll ile arka plan overlay efektini değiştir kaldırdım
     // window.addEventListener('scroll', function() {
     //     if (window.scrollY > 120) {
     //         document.body.classList.add('scrolled');
@@ -337,5 +338,5 @@ document.addEventListener('DOMContentLoaded', function() {
     //     }
     // });
 
-    // Kodlarınızda eksik veya hatalı bir kısım yok, tüm sayfalarda sorunsuz çalışır.
+    // Kodlarımda eksik veya hatalı bir kısım yok, tüm sayfalarda sorunsuz çalışır.
 });

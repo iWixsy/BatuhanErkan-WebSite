@@ -197,7 +197,7 @@
         const messageEl = document.getElementById('game-message');
         const restartBtn = document.getElementById('restart-btn');
 
-        // KOLAYLAŞTIRMA: Başlangıçta 3 tane 2 ekle, yeni taş çıkma olasılığı %90 2, %10 4 yerine %80 2, %20 4
+        // Başlangıçta 3 tane 2 ekliyorum, yeni taş çıkma olasılığı %80 2, %20 4 olacak şekilde ayarladım
         function initBoard() {
             board = [];
             for (let i = 0; i < size; i++) {
@@ -207,7 +207,7 @@
             gameOver = false;
             addRandomTile();
             addRandomTile();
-            addRandomTile(); // 3 taş ile başla
+            addRandomTile(); // 3 taş ile başlatıyorum
             updateBoard();
             updateScore();
             messageEl.textContent = '';
@@ -222,7 +222,7 @@
             }
             if (empty.length === 0) return;
             let [i, j] = empty[Math.floor(Math.random() * empty.length)];
-            board[i][j] = Math.random() < 0.8 ? 2 : 4; // %80 2, %20 4
+            board[i][j] = Math.random() < 0.8 ? 2 : 4; // %80 ihtimalle 2, %20 ihtimalle 4 ekliyorum
         }
 
         function updateBoard() {
@@ -269,7 +269,7 @@
                         arr[i] *= 2;
                         score += arr[i];
                         arr[i + 1] = 0;
-                        i++; // KOLAYLAŞTIRMA: Birleşen taşın hemen arkasındakiyle tekrar birleşmesini engelleme (klasik 2048'de de bu var)
+                        i++; // Birleşen taşın hemen arkasındakiyle tekrar birleşmesini engelliyorum (klasik 2048'de de bu var)
                     }
                 }
                 arr = arr.filter(x => x !== 0);
@@ -321,7 +321,7 @@
             }
         }
 
-        // KOLAYLAŞTIRMA: WASD tuşları ile de oynanabilir
+        // KOLAYLAŞTIRMA: WASD tuşları ile de oynanabilmesini sağladım
         document.addEventListener('keydown', function(e) {
             if (gameOver) return;
             if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') move('left');
@@ -330,7 +330,7 @@
             else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') move('down');
         });
 
-        // Mobil için kaydırma desteği
+        // Mobil için kaydırma desteğini ekledim
         let touchStartX = 0, touchStartY = 0;
         boardEl.addEventListener('touchstart', function(e) {
             if (e.touches.length !== 1) return;
@@ -354,7 +354,7 @@
             initBoard();
         };
 
-        // Başlat
+        // Oyunu başlatıyorum
         initBoard();
     </script>
 </body>
