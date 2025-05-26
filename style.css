@@ -188,7 +188,7 @@ body.dark .quote-banner {
 
 body.dark .welcome-hero-bg {
     background: linear-gradient(120deg, #312e81 60%, #be185d 100%);
-    opacity: 0.92;
+    opacity: 0.80; /* Opaklık azaltıldı, yazı daha net */
 }
 
 body.dark .welcome-hero-title,
@@ -197,12 +197,17 @@ body.dark .welcome-hero-subtitle {
 }
 
 body.dark .welcome-hero-desc {
-    color: #e0e7ef;
+    color: #fffde7;
+    background: rgba(60, 60, 80, 0.38);
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 4px 18px #0005;
 }
 
 body.dark .welcome-hero-highlight {
-    color: #fbbf24;
-    background: rgba(255,255,255,0.08);
+    color: #fffbe6;
+    background: none;
+    -webkit-text-fill-color: #fffbe6;
+    text-shadow: 0 2px 8px #000a;
 }
 
 body.dark .social a {
@@ -433,8 +438,8 @@ h3 {
 }
 
 .profile-img {
-    width: 110px;
-    height: 110px;
+    width: 170px;
+    height: 170px;
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid var(--primary);
@@ -971,89 +976,116 @@ body.dark .modal-content {
     flex-shrink: 0;
 }
 .welcome-hero-title {
-    font-size: 2.1rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem 0;
+    font-size: 2.3rem;
+    font-weight: 800;
     color: #fff;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 12px #0002, 0 1px 0 #7c3aed44;
+    line-height: 1.1;
 }
-.welcome-hero-subtitle {
-    font-size: 1.15rem;
-    font-weight: 500;
-    margin: 0 0 1rem 0;
-    color: #fff;
-}
-.welcome-hero-desc {
-    font-size: 1.08rem;
-    margin: 0 0 1.2rem 0;
-    color: #f8f8f8;
-}
-.welcome-hero-highlight {
-    font-weight: 600;
-    color: #fffbe6;
-    background: rgba(0,0,0,0.08);
-    padding: 0.1em 0.4em;
-    border-radius: 6px;
-    margin-left: 0.2em;
-}
-.welcome-hero-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-.welcome-hero-actions .btn {
-    margin-top: 0;
-    font-size: 1em;
-    padding: 0.5rem 1.3rem;
-}
-.welcome-hero .quote-banner {
-    margin: 1.5rem 0 0 0;
-    background: #fffbe6;
-    color: #b8860b;
-    border-radius: var(--radius);
-    box-shadow: 0 2px 8px #0001;
-    padding: 0.7rem 1.2rem;
-    font-size: 1.05rem;
-    text-align: center;
-    font-style: italic;
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 2;
-    position: relative;
-}
-
-/* Responsive hero alanı */
 @media (max-width: 900px) {
-    .welcome-hero-content {
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem 1rem 1.5rem 1rem;
-        gap: 1.2rem;
-    }
     .welcome-hero-title {
         font-size: 1.5rem;
     }
-    .welcome-hero-img {
-        width: 90px;
-        height: 90px;
-    }
-    .welcome-hero .quote-banner {
-        font-size: 0.98rem;
-        padding: 0.7rem 0.7rem;
-    }
 }
 @media (max-width: 600px) {
-    .welcome-hero-content {
-        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
-    }
     .welcome-hero-title {
         font-size: 1.1rem;
     }
-    .welcome-hero-img {
-        width: 64px;
-        height: 64px;
-    }
+}
+
+.welcome-hero-subtitle {
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: #fbbf24;
+    margin-bottom: 1.1rem;
+    letter-spacing: 0.1px;
+    text-shadow: 0 1px 8px #0001;
+}
+
+.welcome-hero-desc {
+    font-size: 1.11rem;
+    color: #f8fafc;
+    background: rgba(124,58,237,0.09);
+    border-radius: 8px;
+    padding: 0.7em 1em 0.7em 1em;
+    margin-bottom: 1.3rem;
+    box-shadow: 0 2px 8px #0001;
+    line-height: 1.7;
+    border-left: 4px solid var(--primary);
+}
+
+.welcome-hero-highlight {
+    color: #fffbe6;
+    background: linear-gradient(90deg, #7c3aed 0%, #fbbf24 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    display: inline;
+}
+
+/* Koyu temada karşılama yazısı ve motivasyon sözü için kontrast ve derinlik düzeltmeleri */
+body.dark .welcome-hero-bg {
+    background: linear-gradient(120deg, #312e81 60%, #be185d 100%);
+    opacity: 0.80; /* Opaklık azaltıldı, yazı daha net */
+}
+
+body.dark .welcome-hero-desc {
+    color: #fffde7;
+    background: rgba(60, 60, 80, 0.38);
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 4px 18px #0005;
+}
+
+body.dark .welcome-hero-highlight {
+    color: #fffbe6;
+    background: none;
+    -webkit-text-fill-color: #fffbe6;
+    text-shadow: 0 2px 8px #000a;
+}
+
+body.dark .quote-banner {
+    background: #181825;
+    color: #fbbf24;
+    box-shadow: 0 4px 18px #0007;
+    border: 1.5px solid #312e81;
+    position: relative;
+    z-index: 2;
+}
+
+/* Karşılama yazısı ve motivasyon sözü için açık temada da kontrast ve derinlik düzeltmeleri */
+.welcome-hero-bg {
+    background: linear-gradient(120deg, var(--primary) 60%, var(--secondary) 100%);
+    opacity: 0.80; /* Opaklık azaltıldı, yazı daha net */
+    z-index: 1;
+}
+
+.welcome-hero-desc {
+    color: #2d2250;
+    background: rgba(240, 240, 255, 0.82);
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 4px 18px #0002;
+}
+
+.welcome-hero-highlight {
+    color: #7c3aed;
+    background: none;
+    -webkit-text-fill-color: #7c3aed;
+    text-shadow: 0 2px 8px #fff8;
+}
+
+.quote-banner {
+    background: #fffbe6;
+    color: #be123c;
+    box-shadow: 0 4px 18px #0002;
+    border: 1.5px solid #e5e7eb;
+    position: relative;
+    z-index: 2;
 }
 
 /* Scroll ile değişen arka plan overlay efekti kaldırıldı */
