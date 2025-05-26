@@ -121,7 +121,15 @@ document.addEventListener('DOMContentLoaded', function() {
         "Bugün, en iyi günün olabilir.",
         "Yapamazsın diyenlere gülümse ve devam et.",
         "Her zorluk bir fırsattır.",
-        "Kendine inan, yeter!"
+        "Kendine inan, yeter!",
+        "“Yapabileceğine inanırsan yolun yarısı tamamdır.” – Theodore Roosevelt",
+        "“Düşünmek kolaydır, yapmak zordur.” – Goethe",
+        "“Başarı, hazırlık ve fırsatın buluşmasıdır.” – Seneca",
+        "“En büyük risk, hiç risk almamaktır.” – Mark Zuckerberg",
+        "“Başlamak için mükemmel olmak zorunda değilsin, ama mükemmel olmak için başlamak zorundasın.” – Zig Ziglar",
+        "“Hayat, cesur olana fırsat verir.” – Virgil",
+        "“Bugün yapabileceğini yarına bırakma.”",
+        "“Başarı, pes etmeyenlerindir.”"
     ];
     const quoteBanner = document.getElementById('quote-banner');
     if (quoteBanner) {
@@ -278,6 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Konami Kodu Easter Egg
+    // Yön tuşlarıyla ↑ ↑ ↓ ↓ ← → ← → B A (sırasıyla) klavyeden basınca ekrana "🎉 Tebrikler! Gizli Konami kodunu buldun! 🚀" toast bildirimi çıkar.
     const konami = [38,38,40,40,37,39,37,39,66,65];
     let konamiPos = 0;
     window.addEventListener('keydown', function(e) {
