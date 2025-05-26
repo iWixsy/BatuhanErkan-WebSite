@@ -433,4 +433,65 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
     });
+
+    // Mikro etkileşim: Kartlara ve butonlara tıklanınca ripple efekti
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.btn');
+        if (btn) {
+            let ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255,255,255,0.25)';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.width = ripple.style.height = Math.max(btn.offsetWidth, btn.offsetHeight) + 'px';
+            ripple.style.left = (e.clientX - btn.getBoundingClientRect().left - btn.offsetWidth/2) + 'px';
+            ripple.style.top = (e.clientY - btn.getBoundingClientRect().top - btn.offsetHeight/2) + 'px';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.opacity = '1';
+            ripple.style.transition = 'transform 0.5s, opacity 0.7s';
+            btn.appendChild(ripple);
+            setTimeout(() => {
+                ripple.style.transform = 'scale(2.5)';
+                ripple.style.opacity = '0';
+            }, 10);
+            setTimeout(() => {
+                ripple.remove();
+            }, 700);
+        }
+    });
+
+    // Mikro etkileşim: Kartlara hoverda hafif parıltı efekti
+    document.querySelectorAll('.card, .portfolio-item, article').forEach(el => {
+        el.addEventListener('mouseenter', function() {
+            el.style.boxShadow = '0 16px 48px 0 rgba(124,58,237,0.18), 0 2px 8px #0001';
+        });
+        el.addEventListener('mouseleave', function() {
+            el.style.boxShadow = '';
+        });
+    });
+
+    // Mikro etkileşim: Sosyal ikonlara tıklanınca kısa bir büyüme animasyonu
+    document.querySelectorAll('.social a').forEach(icon => {
+        icon.addEventListener('mousedown', function() {
+            icon.style.transform = 'scale(1.22)';
+        });
+        icon.addEventListener('mouseup', function() {
+            icon.style.transform = '';
+        });
+        icon.addEventListener('mouseleave', function() {
+            icon.style.transform = '';
+        });
+    });
+
+    // Mikro etkileşim: Section başlıkları görünür olunca animasyon başlat
+    function animateTitlesOnScroll() {
+        document.querySelectorAll('h1, h2, h3').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 40) {
+                el.style.animationPlayState = 'running';
+            }
+        });
+    }
+    window.addEventListener('scroll', animateTitlesOnScroll);
+    window.addEventListener('DOMContentLoaded', animateTitlesOnScroll);
 });
