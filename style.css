@@ -429,8 +429,8 @@ h3 {
 
 .about-container {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
+    align-items: flex-start;
+    gap: 2.5rem;
     flex-wrap: wrap;
     max-width: 900px;
     margin-left: auto;
