@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Online CV Oluşturucu | Batuhan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f3f4f6; }
+        .cv-builder-container {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .cv-form {
+            flex: 1 1 340px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px #7c3aed22;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            min-width: 320px;
+        }
+        .cv-form h2 { margin-top: 0; color: #7c3aed; }
+        .cv-form label { font-weight: 600; margin-top: 1rem; display: block; }
+        .cv-form input, .cv-form textarea, .cv-form select {
+            width: 100%; margin-top: 0.2rem; margin-bottom: 0.7rem;
+            padding: 0.5rem 0.8rem; border-radius: 8px; border: 1.5px solid #e0e7ef; font-size: 1rem;
+            font-family: inherit; background: #f8fafc;
+        }
+        .cv-form .cv-section-title { margin-top: 1.5rem; color: #4c1d95; font-size: 1.1rem; }
+        .cv-form .cv-add-btn { background: #38bdf8; color: #fff; border: none; border-radius: 8px; padding: 0.3rem 1rem; font-size: 0.97rem; font-weight: 600; cursor: pointer; margin-bottom: 0.7rem; }
+        .cv-form .cv-remove-btn { background: #ef4444; color: #fff; border: none; border-radius: 8px; padding: 0.2rem 0.7rem; font-size: 0.93rem; cursor: pointer; margin-left: 0.5rem; }
+        .cv-preview-container {
+            flex: 1 1 420px;
+            min-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cv-preview-actions { margin-bottom: 1.2rem; text-align: right; width: 100%; }
+        .cv-preview-actions button { background: #7c3aed; color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .cv-preview {
+            width: 100%; max-width: 420px; min-height: 600px;
+            background: #fff; border-radius: 18px; box-shadow: 0 8px 32px #7c3aed22;
+            padding: 2.2rem 2rem 2.2rem 2rem; color: #222;
+            font-family: 'Inter', Arial, sans-serif;
+            position: relative;
+        }
+        .cv-header { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1.2rem; }
+        .cv-photo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #7c3aed; background: #f3f4f6; }
+        .cv-header-info { flex: 1; }
+        .cv-name { font-size: 2rem; font-weight: 700; color: #7c3aed; margin-bottom: 0.2rem; }
+        .cv-title { font-size: 1.1rem; color: #4c1d95; font-weight: 600; }
+        .cv-contact { margin-top: 0.5rem; font-size: 0.97rem; color: #555; }
+        .cv-section { margin-bottom: 1.2rem; }
+        .cv-section h3 { color: #4c1d95; font-size: 1.08rem; margin-bottom: 0.5rem; }
+        .cv-list { list-style: none; padding-left: 0; margin: 0; }
+        .cv-list li { margin-bottom: 0.4rem; }
+        .cv-skill-bar-bg { background: #e0e7ef; border-radius: 8px; height: 10px; width: 100%; margin-top: 0.2rem; }
+        .cv-skill-bar-fill { background: linear-gradient(90deg, #7c3aed, #38bdf8); height: 100%; border-radius: 8px; }
+        .cv-desc { color: #444; font-size: 0.98rem; margin-bottom: 0.7rem; }
+        .cv-date { color: #888; font-size: 0.95em; margin-right: 0.5em; }
+        .cv-badge { background: #ede9fe; color: #7c3aed; border-radius: 8px; padding: 0.1em 0.7em; font-size: 0.93em; margin-left: 0.5em; }
+        @media (max-width: 900px) {
+            .cv-builder-container { flex-direction: column; gap: 2rem; }
+            .cv-preview { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="cv-builder-container">
+            <form class="cv-form" id="cvForm" autocomplete="off">
+                <h2>CV Bilgilerini Gir</h2>
+                <label>Ad Soyad</label>
+                <input type="text" name="name" id="cvName" required>
+                <label>Ünvan / Meslek</label>
+                <input type="text" name="title" id="cvTitle" required>
+                <label>Profil Fotoğrafı (URL)</label>
+                <input type="url" name="photo" id="cvPhoto" placeholder="https://...">
+                <label>E-posta</label>
+                <input type="email" name="email" id="cvEmail" required>
+                <label>Telefon</label>
+                <input type="text" name="phone" id="cvPhone">
+                <label>Adres</label>
+                <input type="text" name="address" id="cvAddress">
+                <label>Kısa Açıklama</label>
+                <textarea name="desc" id="cvDesc" rows="2"></textarea>
+
+                <div class="cv-section-title">Yetenekler</div>
+                <div id="cvSkills"></div>
+                <button type="button" class="cv-add-btn" onclick="addSkill()">+ Yetenek Ekle</button>
+
+                <div class="cv-section-title">Deneyimler</div>
+                <div id="cvExperiences"></div>
+                <button type="button" class="cv-add-btn" onclick="addExperience()">+ Deneyim Ekle</button>
+
+                <div class="cv-section-title">Eğitim</div>
+                <div id="cvEducations"></div>
+                <button type="button" class="cv-add-btn" onclick="addEducation()">+ Eğitim Ekle</button>
+
+                <div class="cv-section-title">Sertifikalar</div>
+                <div id="cvCertificates"></div>
+                <button type="button" class="cv-add-btn" onclick="addCertificate()">+ Sertifika Ekle</button>
+            </form>
+            <div class="cv-preview-container">
+                <div class="cv-preview-actions">
+                    <button type="button" onclick="downloadPDF()">PDF Olarak İndir</button>
+                </div>
+                <div class="cv-preview" id="cvPreview">
+                    <!-- CV önizlemesi burada dinamik olarak oluşacak -->
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+    // --- Dinamik Alanlar ---
+    let skills = [{name:"HTML/CSS",level:80}];
+    let experiences = [];
+    let educations = [];
+    let certificates = [];
+
+    function addSkill() {
+        skills.push({name:"",level:50});
+        renderSkills();
+        updatePreview();
+    }
+    function removeSkill(i) {
+        skills.splice(i,1);
+        renderSkills();
+        updatePreview();
+    }
+    function renderSkills() {
+        const el = document.getElementById('cvSkills');
+        el.innerHTML = "";
+        skills.forEach((s,i) => {
+            el.innerHTML += `
+                <div style="display:flex;align-items:center;gap:0.5em;">
+                    <input type="text" placeholder="Yetenek" value="${s.name}" oninput="skills[${i}].name=this.value;updatePreview()">
+                    <input type="number" min="0" max="100" value="${s.level}" style="width:60px;" oninput="skills[${i}].level=this.value;updatePreview()">
+                    <span>%</span>
+                    <button type="button" class="cv-remove-btn" onclick="removeSkill(${i})">&times;</button>
+                </div>
+            `;
+        });
+    }
+    function addExperience() {
+        experiences.push({title:"",company:"",date:"",desc:""});
+        renderExperiences();
+        updatePreview();
+    }
+    function removeExperience(i) {
+        experiences.splice(i,1);
+        renderExperiences();
+        updatePreview();
+    }
+    function renderExperiences() {
+        const el = document.getElementById('cvExperiences');
+        el.innerHTML = "";
+        experiences.forEach((e,i) => {
+            el.innerHTML += `
+                <div style="margin-bottom:0.5em;">
+                    <input type="text" placeholder="Pozisyon" value="${e.title}" oninput="experiences[${i}].title=this.value;updatePreview()">
+                    <input type="text" placeholder="Şirket" value="${e.company}" oninput="experiences[${i}].company=this.value;updatePreview()">
+                    <input type="text" placeholder="Tarih (örn: 2022-2024)" value="${e.date}" oninput="experiences[${i}].date=this.value;updatePreview()">
+                    <textarea placeholder="Açıklama" rows="1" oninput="experiences[${i}].desc=this.value;updatePreview()">${e.desc||""}</textarea>
+                    <button type="button" class="cv-remove-btn" onclick="removeExperience(${i})">&times;</button>
+                </div>
+            `;
+        });
+    }
+    function addEducation() {
+        educations.push({school:"",degree:"",date:""});
+        renderEducations();
+        updatePreview();
+    }
+    function removeEducation(i) {
+        educations.splice(i,1);
+        renderEducations();
+        updatePreview();
+    }
+    function renderEducations() {
+        const el = document.getElementById('cvEducations');
+        el.innerHTML = "";
+        educations.forEach((e,i) => {
+            el.innerHTML += `
+                <div style="margin-bottom:0.5em;">
+                    <input type="text" placeholder="Okul" value="${e.school}" oninput="educations[${i}].school=this.value;updatePreview()">
+                    <input type="text" placeholder="Bölüm/Derece" value="${e.degree}" oninput="educations[${i}].degree=this.value;updatePreview()">
+                    <input type="text" placeholder="Tarih (örn: 2020-2024)" value="${e.date}" oninput="educations[${i}].date=this.value;updatePreview()">
+                    <button type="button" class="cv-remove-btn" onclick="removeEducation(${i})">&times;</button>
+                </div>
+            `;
+        });
+    }
+    function addCertificate() {
+        certificates.push({name:"",date:""});
+        renderCertificates();
+        updatePreview();
+    }
+    function removeCertificate(i) {
+        certificates.splice(i,1);
+        renderCertificates();
+        updatePreview();
+    }
+    function renderCertificates() {
+        const el = document.getElementById('cvCertificates');
+        el.innerHTML = "";
+        certificates.forEach((c,i) => {
+            el.innerHTML += `
+                <div style="margin-bottom:0.5em;">
+                    <input type="text" placeholder="Sertifika Adı" value="${c.name}" oninput="certificates[${i}].name=this.value;updatePreview()">
+                    <input type="text" placeholder="Tarih" value="${c.date}" oninput="certificates[${i}].date=this.value;updatePreview()">
+                    <button type="button" class="cv-remove-btn" onclick="removeCertificate(${i})">&times;</button>
+                </div>
+            `;
+        });
+    }
+
+    // --- Önizleme ---
+    function updatePreview() {
+        const name = document.getElementById('cvName').value;
+        const title = document.getElementById('cvTitle').value;
+        const photo = document.getElementById('cvPhoto').value;
+        const email = document.getElementById('cvEmail').value;
+        const phone = document.getElementById('cvPhone').value;
+        const address = document.getElementById('cvAddress').value;
+        const desc = document.getElementById('cvDesc').value;
+
+        let html = `
+        <div class="cv-header">
+            <img class="cv-photo" src="${photo || ''}" alt="Profil Fotoğrafı">
+            <div class="cv-header-info">
+                <div class="cv-name">${name || "Ad Soyad"}</div>
+                <div class="cv-title">${title || "Ünvan / Meslek"}</div>
+                <div class="cv-contact">
+                    ${email ? `<i class="fas fa-envelope"></i> ${email}<br>` : ""}
+                    ${phone ? `<i class="fas fa-phone"></i> ${phone}<br>` : ""}
+                    ${address ? `<i class="fas fa-map-marker-alt"></i> ${address}` : ""}
+                </div>
+            </div>
+        </div>
+        ${desc ? `<div class="cv-section cv-desc">${desc}</div>` : ""}
+        `;
+
+        if (skills.length) {
+            html += `<div class="cv-section"><h3>Yetenekler</h3><ul class="cv-list">`;
+            skills.forEach(s => {
+                if (!s.name) return;
+                html += `<li>
+                    <div style="display:flex;justify-content:space-between;"><span>${s.name}</span><span>${s.level}%</span></div>
+                    <div class="cv-skill-bar-bg"><div class="cv-skill-bar-fill" style="width:${s.level}%;"></div></div>
+                </li>`;
+            });
+            html += `</ul></div>`;
+        }
+        if (experiences.length) {
+            html += `<div class="cv-section"><h3>Deneyimler</h3><ul class="cv-list">`;
+            experiences.forEach(e => {
+                if (!e.title && !e.company) return;
+                html += `<li><span class="cv-date">${e.date}</span><b>${e.title}</b> <span class="cv-badge">${e.company}</span><br>${e.desc||""}</li>`;
+            });
+            html += `</ul></div>`;
+        }
+        if (educations.length) {
+            html += `<div class="cv-section"><h3>Eğitim</h3><ul class="cv-list">`;
+            educations.forEach(e => {
+                if (!e.school && !e.degree) return;
+                html += `<li><span class="cv-date">${e.date}</span><b>${e.school}</b> <span class="cv-badge">${e.degree}</span></li>`;
+            });
+            html += `</ul></div>`;
+        }
+        if (certificates.length) {
+            html += `<div class="cv-section"><h3>Sertifikalar</h3><ul class="cv-list">`;
+            certificates.forEach(c => {
+                if (!c.name) return;
+                html += `<li><b>${c.name}</b> <span class="cv-date">${c.date}</span></li>`;
+            });
+            html += `</ul></div>`;
+        }
+        document.getElementById('cvPreview').innerHTML = html;
+    }
+
+    // --- PDF İndir ---
+    function downloadPDF() {
+        const element = document.getElementById('cvPreview');
+        html2pdf().set({
+            margin: 0,
+            filename: 'cv.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).from(element).save();
+    }
+
+    // --- Başlangıçta bir alan ekle ve önizlemeyi başlat ---
+    renderSkills(); renderExperiences(); renderEducations(); renderCertificates();
+    updatePreview();
+
+    // Formdaki alanlar değiştikçe önizlemeyi güncelle
+    document.getElementById('cvForm').addEventListener('input', updatePreview);
+    </script>
+</body>
+</html>

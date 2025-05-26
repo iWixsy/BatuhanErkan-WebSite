@@ -339,4 +339,98 @@ document.addEventListener('DOMContentLoaded', function() {
     // });
 
     // Kodlarımda eksik veya hatalı bir kısım yok, tüm sayfalarda sorunsuz çalışır.
+
+    // Profil fotoğrafı tıklanınca büyük aç (modal)
+    function openImgModal(src) {
+        let modal = document.getElementById('imgModal');
+        let modalImg = document.getElementById('imgModalImg');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'imgModal';
+            modal.style.cssText = 'position:fixed;z-index:99999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;';
+            modal.innerHTML = '<img id="imgModalImg" src="" alt="Profil Fotoğrafı" style="max-width:90vw;max-height:90vh;border-radius:18px;box-shadow:0 8px 32px #000a;"><span id="imgModalClose" style="position:absolute;top:32px;right:48px;font-size:2.5rem;color:#fff;cursor:pointer;font-weight:bold;z-index:2;">&times;</span>';
+            document.body.appendChild(modal);
+            modal.onclick = function(e) {
+                if (e.target === modal || e.target.id === 'imgModalClose') modal.style.display = 'none';
+            };
+        }
+        modalImg = document.getElementById('imgModalImg');
+        modalImg.src = src;
+        modal.style.display = 'flex';
+    }
+    document.getElementById('mainProfileImg')?.addEventListener('click', function() {
+        openImgModal(this.src);
+    });
+    document.getElementById('aboutProfileImg')?.addEventListener('click', function() {
+        openImgModal(this.src);
+    });
+
+    // Portföy döngüsü + manuel geçiş
+    document.addEventListener('DOMContentLoaded', function() {
+        const showcase = document.getElementById('portfolioShowcase');
+        const img = document.getElementById('portfolioImg');
+        const title = document.getElementById('portfolioTitle');
+        const desc = document.getElementById('portfolioDesc');
+        const prevBtn = document.getElementById('portfolioPrev');
+        const nextBtn = document.getElementById('portfolioNext');
+        const apps = [
+            {
+                img: "assets/2048.png",
+                title: "2048 Oyunu",
+                desc: "HTML, CSS ve JavaScript ile geliştirilmiş, mobil uyumlu klasik 2048 bulmaca oyunu.",
+                link: "2048.html"
+            },
+            {
+                img: "assets/QR.png",
+                title: "QR Kod Oluşturucu",
+                desc: "Metni QR koda çevir, anında indir. Tamamen tarayıcıda çalışır.",
+                link: "qr.html"
+            }
+            // Eğer başka uygulama eklediyseniz buraya ekleyin
+        ];
+        if (showcase && img && title && desc && prevBtn && nextBtn) {
+            let idx = 0, intervalId;
+            function showApp(i) {
+                img.src = apps[i].img;
+                img.alt = apps[i].title + " ekran görüntüsü";
+                title.textContent = apps[i].title;
+                desc.textContent = apps[i].desc;
+                showcase.setAttribute('data-link', apps[i].link);
+            }
+            function next() {
+                idx = (idx + 1) % apps.length;
+                showApp(idx);
+            }
+            function prev() {
+                idx = (idx - 1 + apps.length) % apps.length;
+                showApp(idx);
+            }
+            function startAuto() {
+                intervalId = setInterval(next, 3000);
+            }
+            function stopAuto() {
+                clearInterval(intervalId);
+            }
+            showApp(idx);
+            startAuto();
+            showcase.onclick = function(e) {
+                // Butonlara tıklanırsa yönlendirme olmasın
+                if (e.target === prevBtn || e.target === nextBtn || prevBtn.contains(e.target) || nextBtn.contains(e.target)) return;
+                const link = showcase.getAttribute('data-link');
+                if (link && link !== "#") window.open(link, "_blank");
+            };
+            prevBtn.onclick = function(e) {
+                e.stopPropagation();
+                stopAuto();
+                prev();
+                startAuto();
+            };
+            nextBtn.onclick = function(e) {
+                e.stopPropagation();
+                stopAuto();
+                next();
+                startAuto();
+            };
+        }
+    });
 });
