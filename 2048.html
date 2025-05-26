@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Oyunu | Batuhan</title>
+    <meta name="description" content="2048 oyunu - Batuhan'ın portföy projesi.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 2048 oyun stili */
+        body {
+            background: #f3f4f6;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #222;
+        }
+        .game-container {
+            max-width: 400px;
+            margin: 3rem auto 2rem auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px #7c3aed22;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            position: relative;
+        }
+        .game-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+        }
+        .game-score {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 64px);
+            grid-template-rows: repeat(4, 64px);
+            gap: 10px;
+            background: #e0e7ef;
+            border-radius: 12px;
+            padding: 10px;
+            margin: 0 auto 1.2rem auto;
+            width: max-content;
+        }
+        .tile {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            font-weight: 700;
+            border-radius: 10px;
+            background: #ede9fe;
+            color: #4c1d95;
+            transition: background 0.18s, color 0.18s, transform 0.1s;
+            user-select: none;
+        }
+        .tile-0 { background: #e0e7ef; color: transparent; }
+        .tile-2 { background: #ede9fe; color: #4c1d95; }
+        .tile-4 { background: #c7d2fe; color: #3730a3; }
+        .tile-8 { background: #f472b6; color: #fff; }
+        .tile-16 { background: #fbbf24; color: #fff; }
+        .tile-32 { background: #38bdf8; color: #fff; }
+        .tile-64 { background: #22d3ee; color: #fff; }
+        .tile-128 { background: #a3e635; color: #222; }
+        .tile-256 { background: #22c55e; color: #fff; }
+        .tile-512 { background: #f43f5e; color: #fff; }
+        .tile-1024 { background: #be185d; color: #fff; }
+        .tile-2048 { background: #7c3aed; color: #fff; }
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .game-controls button {
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 0.5rem 1.3rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.18s;
+        }
+        .game-controls button:hover {
+            background: #f472b6;
+        }
+        .game-message {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #be185d;
+            margin-bottom: 1rem;
+            min-height: 1.2em;
+        }
+        .game-footer {
+            text-align: center;
+            font-size: 0.98rem;
+            color: #888;
+            margin-top: 1.5rem;
+        }
+        /* Yükleniyor ekranı */
+        #game-loader {
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(243,244,246,0.97);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s;
+        }
+        #game-loader .loader-content {
+            text-align: center;
+        }
+        #game-loader .loader-spinner {
+            border: 6px solid #e0e7ef;
+            border-top: 6px solid #7c3aed;
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.2rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        @media (max-width: 600px) {
+            .game-board {
+                grid-template-columns: repeat(4, 44px);
+                grid-template-rows: repeat(4, 44px);
+                gap: 6px;
+                padding: 6px;
+            }
+            .tile {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+            }
+            .game-container {
+                padding: 1rem 0.3rem 1rem 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="game-loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div style="font-size:1.1rem;font-weight:600;color:#7c3aed;">2048 Yükleniyor...</div>
+        </div>
+    </div>
+    <main>
+        <div class="game-container">
+            <div class="game-title">2048</div>
+            <div class="game-score">Skor: <span id="score">0</span> &nbsp;|&nbsp; En Yüksek: <span id="best-score">0</span></div>
+            <div class="game-board" id="game-board"></div>
+            <div class="game-message" id="game-message"></div>
+            <div class="game-controls">
+                <button id="restart-btn">Yeniden Başlat</button>
+                <button id="back-btn" onclick="window.location.href='index.html#portfoy'">Portföye Dön</button>
+            </div>
+            <div class="game-footer">
+                <span>Yön tuşları veya kaydırarak oynayabilirsin.</span>
+            </div>
+        </div>
+    </main>
+    <script>
+        // Yükleniyor ekranı
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('game-loader').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('game-loader').style.display = 'none';
+                }, 400);
+            }, 900); // min 0.9s göster
+        });
+
+        // 2048 OYUNU - Kolaylaştırılmış
+        const size = 4;
+        let board = [];
+        let score = 0;
+        let bestScore = Number(localStorage.getItem('best2048') || 0);
+        let gameOver = false;
+
+        const boardEl = document.getElementById('game-board');
+        const scoreEl = document.getElementById('score');
+        const bestScoreEl = document.getElementById('best-score');
+        const messageEl = document.getElementById('game-message');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // KOLAYLAŞTIRMA: Başlangıçta 3 tane 2 ekle, yeni taş çıkma olasılığı %90 2, %10 4 yerine %80 2, %20 4
+        function initBoard() {
+            board = [];
+            for (let i = 0; i < size; i++) {
+                board.push(Array(size).fill(0));
+            }
+            score = 0;
+            gameOver = false;
+            addRandomTile();
+            addRandomTile();
+            addRandomTile(); // 3 taş ile başla
+            updateBoard();
+            updateScore();
+            messageEl.textContent = '';
+        }
+
+        function addRandomTile() {
+            let empty = [];
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    if (board[i][j] === 0) empty.push([i, j]);
+                }
+            }
+            if (empty.length === 0) return;
+            let [i, j] = empty[Math.floor(Math.random() * empty.length)];
+            board[i][j] = Math.random() < 0.8 ? 2 : 4; // %80 2, %20 4
+        }
+
+        function updateBoard() {
+            boardEl.innerHTML = '';
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    const val = board[i][j];
+                    const tile = document.createElement('div');
+                    tile.className = 'tile tile-' + val;
+                    tile.textContent = val === 0 ? '' : val;
+                    boardEl.appendChild(tile);
+                }
+            }
+        }
+
+        function updateScore() {
+            scoreEl.textContent = score;
+            if (score > bestScore) {
+                bestScore = score;
+                localStorage.setItem('best2048', bestScore);
+            }
+            bestScoreEl.textContent = bestScore;
+        }
+
+        function canMove() {
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    if (board[i][j] === 0) return true;
+                    if (i < size - 1 && board[i][j] === board[i + 1][j]) return true;
+                    if (j < size - 1 && board[i][j] === board[i][j + 1]) return true;
+                }
+            }
+            return false;
+        }
+
+        // KOLAYLAŞTIRMA: Bir hamlede birden fazla birleşmeye izin ver (klasik 2048'de de var ama burada kod sadeleştirildi)
+        function move(dir) {
+            if (gameOver) return;
+            let moved = false;
+            function slide(row) {
+                let arr = row.filter(x => x !== 0);
+                for (let i = 0; i < arr.length - 1; i++) {
+                    if (arr[i] === arr[i + 1]) {
+                        arr[i] *= 2;
+                        score += arr[i];
+                        arr[i + 1] = 0;
+                        i++; // KOLAYLAŞTIRMA: Birleşen taşın hemen arkasındakiyle tekrar birleşmesini engelleme (klasik 2048'de de bu var)
+                    }
+                }
+                arr = arr.filter(x => x !== 0);
+                while (arr.length < size) arr.push(0);
+                return arr;
+            }
+            if (dir === 'left') {
+                for (let i = 0; i < size; i++) {
+                    let newRow = slide(board[i]);
+                    if (board[i].join() !== newRow.join()) moved = true;
+                    board[i] = newRow;
+                }
+            } else if (dir === 'right') {
+                for (let i = 0; i < size; i++) {
+                    let row = board[i].slice().reverse();
+                    let newRow = slide(row).reverse();
+                    if (board[i].join() !== newRow.join()) moved = true;
+                    board[i] = newRow;
+                }
+            } else if (dir === 'up') {
+                for (let j = 0; j < size; j++) {
+                    let col = [];
+                    for (let i = 0; i < size; i++) col.push(board[i][j]);
+                    let newCol = slide(col);
+                    for (let i = 0; i < size; i++) {
+                        if (board[i][j] !== newCol[i]) moved = true;
+                        board[i][j] = newCol[i];
+                    }
+                }
+            } else if (dir === 'down') {
+                for (let j = 0; j < size; j++) {
+                    let col = [];
+                    for (let i = 0; i < size; i++) col.push(board[i][j]);
+                    let newCol = slide(col.reverse()).reverse();
+                    for (let i = 0; i < size; i++) {
+                        if (board[i][j] !== newCol[i]) moved = true;
+                        board[i][j] = newCol[i];
+                    }
+                }
+            }
+            if (moved) {
+                addRandomTile();
+                updateBoard();
+                updateScore();
+                if (!canMove()) {
+                    gameOver = true;
+                    messageEl.textContent = "Oyun Bitti! Skor: " + score;
+                }
+            }
+        }
+
+        // KOLAYLAŞTIRMA: WASD tuşları ile de oynanabilir
+        document.addEventListener('keydown', function(e) {
+            if (gameOver) return;
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') move('left');
+            else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') move('right');
+            else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') move('up');
+            else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') move('down');
+        });
+
+        // Mobil için kaydırma desteği
+        let touchStartX = 0, touchStartY = 0;
+        boardEl.addEventListener('touchstart', function(e) {
+            if (e.touches.length !== 1) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        });
+        boardEl.addEventListener('touchend', function(e) {
+            if (e.changedTouches.length !== 1) return;
+            let dx = e.changedTouches[0].clientX - touchStartX;
+            let dy = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(dx) > Math.abs(dy)) {
+                if (dx > 30) move('right');
+                else if (dx < -30) move('left');
+            } else {
+                if (dy > 30) move('down');
+                else if (dy < -30) move('up');
+            }
+        });
+
+        restartBtn.onclick = function() {
+            initBoard();
+        };
+
+        // Başlat
+        initBoard();
+    </script>
+</body>
+</html>
