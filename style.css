@@ -518,9 +518,22 @@ body.dark .card:hover, body.dark .portfolio-item:hover, body.dark article:hover 
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* 3 sütun sabit */
     gap: 1.2rem;
 }
+
+/* Mobilde tek sütun, tablette iki sütun */
+@media (max-width: 900px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .portfolio-item {
     background: var(--card);
     border-radius: var(--radius);
@@ -1550,4 +1563,44 @@ h3 { animation-delay: 0.3s; }
     .certificate-title {
         font-size: 1rem;
     }
+}
+
+/* Modern scroll bar tasarımı */
+::-webkit-scrollbar {
+    width: 10px;
+    background: var(--bg-alt);
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(120deg, var(--primary) 60%, var(--secondary) 100%);
+    border-radius: 8px;
+    min-height: 40px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(120deg, var(--secondary), var(--primary));
+}
+::-webkit-scrollbar-corner {
+    background: var(--bg-alt);
+}
+
+/* Firefox için */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--bg-alt);
+}
+
+/* Koyu tema scroll barı */
+body.dark ::-webkit-scrollbar {
+    background: #23263a;
+}
+body.dark ::-webkit-scrollbar-thumb {
+    background: linear-gradient(120deg, var(--primary-dark) 60%, var(--secondary-dark) 100%);
+}
+body.dark ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(120deg, var(--secondary-dark), var(--primary-dark));
+}
+body.dark ::-webkit-scrollbar-corner {
+    background: #23263a;
+}
+body.dark html {
+    scrollbar-color: var(--primary-dark) #23263a;
 }

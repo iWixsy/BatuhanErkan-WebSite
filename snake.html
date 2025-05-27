@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Yılan Oyunu | Batuhan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f3f4f6;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #222;
+        }
+        .snake-container {
+            max-width: 420px;
+            margin: 3rem auto 2rem auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px #7c3aed22;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            position: relative;
+        }
+        .snake-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 0.7rem;
+        }
+        .snake-score {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+        #snake-canvas {
+            display: block;
+            margin: 0 auto 1.2rem auto;
+            background: #e0e7ef;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #7c3aed22;
+        }
+        .snake-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .snake-controls button {
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 0.5rem 1.3rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.18s;
+        }
+        .snake-controls button:hover {
+            background: #f472b6;
+        }
+        .snake-message {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #be185d;
+            margin-bottom: 1rem;
+            min-height: 1.2em;
+        }
+        .snake-footer {
+            text-align: center;
+            font-size: 0.98rem;
+            color: #888;
+            margin-top: 1.5rem;
+        }
+        @media (max-width: 600px) {
+            .snake-container { padding: 1rem 0.3rem 1rem 0.3rem; }
+            #snake-canvas { width: 260px !important; height: 260px !important; }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="snake-container">
+            <div class="snake-title">Yılan Oyunu</div>
+            <div class="snake-score">Skor: <span id="snake-score">0</span> &nbsp;|&nbsp; En Yüksek: <span id="snake-best">0</span></div>
+            <canvas id="snake-canvas" width="320" height="320" tabindex="0"></canvas>
+            <div class="snake-message" id="snake-message"></div>
+            <div class="snake-controls">
+                <button id="snake-restart">Yeniden Başlat</button>
+                <button onclick="window.location.href='index.html#portfoy'" class="btn secondary">Portföye Dön</button>
+            </div>
+            <div class="snake-footer">
+                <span>Ok tuşları veya WASD ile oynayabilirsin.</span>
+            </div>
+        </div>
+    </main>
+    <script>
+    // Oyun ayarları
+    const canvas = document.getElementById('snake-canvas');
+    const ctx = canvas.getContext('2d');
+    const box = 20; // Kare boyutu
+    const size = 16; // 16x16 grid
+    let snake, direction, food, score, best, gameOver, moveQueue;
+
+    function resetGame() {
+        snake = [{x: 8, y: 8}];
+        direction = {x: 1, y: 0};
+        moveQueue = [];
+        food = randomFood();
+        score = 0;
+        best = Number(localStorage.getItem('snakeBest') || 0);
+        gameOver = false;
+        document.getElementById('snake-score').textContent = score;
+        document.getElementById('snake-best').textContent = best;
+        document.getElementById('snake-message').textContent = '';
+    }
+
+    function randomFood() {
+        let pos;
+        do {
+            pos = {
+                x: Math.floor(Math.random() * size),
+                y: Math.floor(Math.random() * size)
+            };
+        } while (snake.some(s => s.x === pos.x && s.y === pos.y));
+        return pos;
+    }
+
+    function draw() {
+        // Temizle
+        ctx.fillStyle = "#e0e7ef";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Yılanı çiz
+        for (let i = 0; i < snake.length; i++) {
+            ctx.fillStyle = i === 0 ? "#7c3aed" : "#f472b6";
+            ctx.fillRect(snake[i].x * box, snake[i].y * box, box - 2, box - 2);
+        }
+
+        // Yemi çiz
+        ctx.fillStyle = "#22c55e";
+        ctx.fillRect(food.x * box, food.y * box, box - 2, box - 2);
+    }
+
+    function update() {
+        if (gameOver) return;
+        // Kuyruk hareketi
+        let head = {...snake[0]};
+        // Kuyruk büyümesi için yön kuyruğu
+        if (moveQueue.length) {
+            let next = moveQueue.shift();
+            if (next && (next.x !== -direction.x || next.y !== -direction.y)) direction = next;
+        }
+        head.x += direction.x;
+        head.y += direction.y;
+
+        // Duvara çarpma veya kendine çarpma
+        if (
+            head.x < 0 || head.x >= size ||
+            head.y < 0 || head.y >= size ||
+            snake.some(s => s.x === head.x && s.y === head.y)
+        ) {
+            gameOver = true;
+            document.getElementById('snake-message').textContent = "Oyun Bitti! Skor: " + score;
+            if (score > best) {
+                best = score;
+                localStorage.setItem('snakeBest', best);
+                document.getElementById('snake-best').textContent = best;
+            }
+            return;
+        }
+
+        snake.unshift(head);
+
+        // Yem yediyse büyü
+        if (head.x === food.x && head.y === food.y) {
+            score++;
+            document.getElementById('snake-score').textContent = score;
+            food = randomFood();
+        } else {
+            snake.pop();
+        }
+    }
+
+    function gameLoop() {
+        update();
+        draw();
+        if (!gameOver) setTimeout(gameLoop, 110 - Math.min(score * 2, 70)); // Skor arttıkça hızlanır
+    }
+
+    // Klavye kontrolleri
+    document.addEventListener('keydown', function(e) {
+        let key = e.key;
+        let nextDir = null;
+        if (key === "ArrowUp" || key === "w" || key === "W") nextDir = {x: 0, y: -1};
+        else if (key === "ArrowDown" || key === "s" || key === "S") nextDir = {x: 0, y: 1};
+        else if (key === "ArrowLeft" || key === "a" || key === "A") nextDir = {x: -1, y: 0};
+        else if (key === "ArrowRight" || key === "d" || key === "D") nextDir = {x: 1, y: 0};
+        if (nextDir) {
+            // Aynı anda ters yöne gitmeyi engelle
+            if (moveQueue.length === 0 || (moveQueue[moveQueue.length-1].x !== -nextDir.x || moveQueue[moveQueue.length-1].y !== -nextDir.y)) {
+                moveQueue.push(nextDir);
+            }
+        }
+        // Yeniden başlat kısayolu
+        if (gameOver && (key === " " || key === "Enter")) {
+            startGame();
+        }
+    });
+
+    document.getElementById('snake-restart').onclick = startGame;
+
+    function startGame() {
+        resetGame();
+        draw();
+        setTimeout(gameLoop, 300);
+    }
+
+    // Başlat
+    startGame();
+    </script>
+</body>
+</html>
