@@ -340,6 +340,14 @@ document.addEventListener('DOMContentLoaded', function() {
             blogCounter.setAttribute('data-count', blogCount);
             blogCounter.textContent = 0; // Sayaç animasyonu varsa, animasyon kodu bunu güncelliyor
         }
+
+        // Sertifika sayısını otomatik olarak güncelliyorum
+        var certCount = document.querySelectorAll('.certificate-card').length;
+        var certCounter = document.querySelector('.counter-number[data-count][class~="counter-number"]:not(#blog-count)');
+        if (certCounter) {
+            certCounter.setAttribute('data-count', certCount);
+            certCounter.textContent = 0;
+        }
     });
 
     // Scroll ile arka plan overlay efektini değiştir kaldırdım
