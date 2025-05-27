@@ -1,1 +1,3 @@
 İşe aslında sadece Web Programlama dersindeki ödevi yapmak için çıkmıştım ve iş buralara kadar geldi. İnternette kod paylaşan sayfaları takip ediyorum genelde ve çok beğendiğim kodlar oluyor, onları eklemekten kaçınmıyorum. Örnek olarak şu an verebileceğim yok çünkü hatırlamıyorum. Siteyi batuhanerkan.blog uzantılı bir domaine taşımayı planlıyorum (1 yıllığına), çünkü sürekli geliştirmeye çalışacağım ve güncelleyeceğim.
+https://iwixsy.github.io/iWixsy/
+site linki
