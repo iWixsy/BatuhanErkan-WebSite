@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Uzay Nişancı Oyunu | Batuhan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        body { background: #181825; margin: 0; font-family: 'Inter', Arial, sans-serif; color: #fff; }
+        #game3d-container { width: 100vw; height: 100vh; overflow: hidden; position: fixed; left:0; top:0; z-index: 1; }
+        .game3d-ui {
+            position: fixed; top: 0; left: 0; width: 100vw; z-index: 2; pointer-events: none;
+        }
+        .game3d-score, .game3d-health {
+            font-size: 1.2rem; font-weight: 700; margin: 1.2rem; display: inline-block; background: rgba(0,0,0,0.45); border-radius: 12px; padding: 0.5em 1.2em;
+        }
+        .game3d-health { float: right; }
+        .game3d-overlay {
+            position: fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(24,24,37,0.93); z-index: 10; display: flex; align-items: center; justify-content: center; flex-direction: column;
+        }
+        .game3d-overlay h1 { font-size: 2.2rem; color: #7c3aed; margin-bottom: 1.2rem; }
+        .game3d-overlay button {
+            background: #7c3aed; color: #fff; border: none; border-radius: 999px; padding: 0.7rem 2.2rem; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin: 1.2rem 0 0 0;
+        }
+        .game3d-overlay button:hover { background: #f472b6; }
+        .game3d-overlay .btn-secondary {
+            background: #38bdf8;
+            margin-left: 1.2rem;
+        }
+        @media (max-width: 700px) {
+            .game3d-score, .game3d-health { font-size: 1rem; margin: 0.5rem; padding: 0.3em 0.7em; }
+            .game3d-overlay h1 { font-size: 1.3rem; }
+            .game3d-overlay button { font-size: 1rem; padding: 0.5rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="game3d-container"></div>
+    <div class="game3d-ui">
+        <span class="game3d-score" id="game3d-score">Skor: 0</span>
+        <span class="game3d-health" id="game3d-health">Can: 3</span>
+    </div>
+    <div class="game3d-overlay" id="game3d-overlay">
+        <h1>3D Uzay Nişancı Oyunu</h1>
+        <p style="font-size:1.1rem;margin-bottom:1.2rem;">Klavye ile gemiyi yönlendir (← ↑ → ↓ veya WASD), <b>Boşluk</b> ile ateş et.<br>Hedefleri vur, çarpmalardan kaç!</p>
+        <button id="game3d-start">Başla</button>
+        <button class="btn-secondary" onclick="window.location.href='index.html#portfoy'">Portföye Dön</button>
+    </div>
+    <div class="game3d-overlay" id="game3d-over" style="display:none;">
+        <h1>Oyun Bitti</h1>
+        <div id="game3d-finalscore" style="font-size:1.3rem;margin-bottom:1.2rem;"></div>
+        <button id="game3d-restart">Tekrar Oyna</button>
+        <button class="btn-secondary" onclick="window.location.href='index.html#portfoy'">Portföye Dön</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
+    <script>
+    // --- 3D OYUN ---
+    let scene, camera, renderer, ship, bullets = [], enemies = [], stars = [], score = 0, health = 3, playing = false, lastEnemyTime = 0, keys = {};
+    const shipSpeed = 0.22, bulletSpeed = 0.45, enemySpeed = 0.13, enemySpawnInterval = 1200, maxHealth = 3;
+    const gameW = 12, gameH = 8; // Oyun alanı genişlik/yükseklik (3D bir kutu gibi)
+
+    function createStars() {
+        // 200 adet küçük beyaz yıldız
+        for (let i = 0; i < 200; i++) {
+            const geo = new THREE.SphereGeometry(Math.random()*0.06+0.03, 6, 6);
+            const mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: Math.random()*0.7+0.3 });
+            const star = new THREE.Mesh(geo, mat);
+            star.position.set(
+                (Math.random()-0.5)*gameW*1.5,
+                Math.random()*6-2,
+                Math.random()*-30
+            );
+            scene.add(star);
+            stars.push(star);
+        }
+    }
+
+    function animateStars() {
+        for (let s of stars) {
+            s.position.z += 0.04;
+            if (s.position.z > 10) s.position.z = Math.random()*-30;
+        }
+    }
+
+    function init3D() {
+        // Scene & Camera
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 100);
+        camera.position.set(0, 4, 15); // Biraz daha yukarıdan bakış
+        camera.lookAt(0, 0, 0);
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setClearColor(0x181825);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('game3d-container').innerHTML = '';
+        document.getElementById('game3d-container').appendChild(renderer.domElement);
+
+        // Yıldız arka planı
+        stars = [];
+        createStars();
+
+        // Işıklar
+        const light = new THREE.PointLight(0xffffff, 1.1, 100);
+        light.position.set(0, 10, 10);
+        scene.add(light);
+        const shipLight = new THREE.PointLight(0x7c3aed, 0.7, 6);
+        shipLight.position.set(0, 2, 2);
+        scene.add(shipLight);
+
+        // Zemin ve sınırlar
+        const floorGeo = new THREE.PlaneGeometry(gameW, gameH);
+        const floorMat = new THREE.MeshPhongMaterial({ color: 0x23263a, side: THREE.DoubleSide, opacity:0.85, transparent:true });
+        const floor = new THREE.Mesh(floorGeo, floorMat);
+        floor.rotation.x = -Math.PI/2;
+        floor.position.y = -1.5;
+        scene.add(floor);
+
+        // Sınır çizgileri
+        const borderMat = new THREE.LineBasicMaterial({ color: 0x38bdf8, linewidth: 2 });
+        const borderGeo = new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(-gameW/2, 0.01, -gameH/2),
+            new THREE.Vector3(gameW/2, 0.01, -gameH/2),
+            new THREE.Vector3(gameW/2, 0.01, gameH/2),
+            new THREE.Vector3(-gameW/2, 0.01, gameH/2),
+            new THREE.Vector3(-gameW/2, 0.01, -gameH/2)
+        ]);
+        const border = new THREE.Line(borderGeo, borderMat);
+        scene.add(border);
+
+        // Uzay gemisi (daha belirgin renk ve outline)
+        const shipGeo = new THREE.ConeGeometry(0.5, 1.5, 16);
+        const shipMat = new THREE.MeshPhongMaterial({ color: 0x7c3aed, shininess: 80, emissive: 0x3b0764, emissiveIntensity: 0.5 });
+        ship = new THREE.Mesh(shipGeo, shipMat);
+        ship.position.set(0, 0, 0);
+        ship.rotation.x = Math.PI/2;
+        scene.add(ship);
+
+        // Gemi gövdesi (silindir)
+        const bodyGeo = new THREE.CylinderGeometry(0.25, 0.25, 1.1, 12);
+        const bodyMat = new THREE.MeshPhongMaterial({ color: 0x38bdf8, shininess: 60, emissive: 0x0ea5e9, emissiveIntensity: 0.4 });
+        const body = new THREE.Mesh(bodyGeo, bodyMat);
+        body.position.set(0, -0.7, 0);
+        body.rotation.x = Math.PI/2;
+        ship.add(body);
+
+        // Gemi outline
+        const outlineGeo = new THREE.ConeGeometry(0.52, 1.55, 16);
+        const outlineMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, opacity:0.25, transparent:true });
+        const outline = new THREE.Mesh(outlineGeo, outlineMat);
+        outline.position.set(0,0,0);
+        outline.rotation.x = Math.PI/2;
+        ship.add(outline);
+
+        bullets = [];
+        enemies = [];
+        score = 0;
+        health = maxHealth;
+        updateUI();
+        lastEnemyTime = Date.now();
+    }
+
+    function updateUI() {
+        document.getElementById('game3d-score').textContent = "Skor: " + score;
+        document.getElementById('game3d-health').textContent = "Can: " + health;
+    }
+
+    function spawnEnemy() {
+        // Düşman: Parlak küre + glow
+        const geo = new THREE.SphereGeometry(0.5, 16, 16);
+        const mat = new THREE.MeshPhongMaterial({ color: 0xf472b6, shininess: 100, emissive: 0xbe185d, emissiveIntensity: 0.7 });
+        const enemy = new THREE.Mesh(geo, mat);
+        enemy.position.set((Math.random()-0.5)*gameW*0.8, 0, -15);
+        enemy.userData = { alive: true };
+        // Glow efekti için wireframe
+        const glowGeo = new THREE.SphereGeometry(0.56, 8, 8);
+        const glowMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24, wireframe: true, opacity:0.18, transparent:true });
+        const glow = new THREE.Mesh(glowGeo, glowMat);
+        enemy.add(glow);
+        scene.add(enemy);
+        enemies.push(enemy);
+    }
+
+    function shoot() {
+        // Mermi: Parlak silindir + glow
+        const geo = new THREE.CylinderGeometry(0.13, 0.13, 0.7, 8);
+        const mat = new THREE.MeshPhongMaterial({ color: 0xfbbf24, shininess: 100, emissive: 0xfbbf24, emissiveIntensity: 0.7 });
+        const bullet = new THREE.Mesh(geo, mat);
+        bullet.position.copy(ship.position);
+        bullet.position.y = 0;
+        bullet.rotation.x = Math.PI/2;
+        bullet.userData = { alive: true };
+        // Glow efekti
+        const glowGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.7, 8);
+        const glowMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, opacity:0.18, transparent:true });
+        const glow = new THREE.Mesh(glowGeo, glowMat);
+        glow.rotation.x = Math.PI/2;
+        bullet.add(glow);
+        scene.add(bullet);
+        bullets.push(bullet);
+    }
+
+    function animate() {
+        if (!playing) return;
+        requestAnimationFrame(animate);
+
+        animateStars();
+
+        // Gemi hareketi
+        let dx = 0, dz = 0;
+        if (keys['ArrowLeft'] || keys['a']) dx -= shipSpeed;
+        if (keys['ArrowRight'] || keys['d']) dx += shipSpeed;
+        if (keys['ArrowUp'] || keys['w']) dz -= shipSpeed;
+        if (keys['ArrowDown'] || keys['s']) dz += shipSpeed;
+        ship.position.x = Math.max(-gameW/2+0.7, Math.min(gameW/2-0.7, ship.position.x + dx));
+        ship.position.z = Math.max(-gameH/2+0.7, Math.min(gameH/2-0.7, ship.position.z + dz));
+
+        // Mermileri hareket ettir
+        for (let i = bullets.length-1; i >= 0; i--) {
+            const b = bullets[i];
+            b.position.z -= bulletSpeed;
+            if (b.position.z < -16) {
+                scene.remove(b);
+                bullets.splice(i,1);
+            }
+        }
+
+        // Düşmanları hareket ettir
+        for (let i = enemies.length-1; i >= 0; i--) {
+            const e = enemies[i];
+            e.position.z += enemySpeed;
+            // Çarpışma: Gemiye yakınsa can azalt
+            if (e.position.distanceTo(ship.position) < 0.7 && e.userData.alive) {
+                e.userData.alive = false;
+                scene.remove(e);
+                enemies.splice(i,1);
+                health--;
+                updateUI();
+                if (health <= 0) {
+                    endGame();
+                    return;
+                }
+            }
+            // Ekranı geçtiyse sil
+            else if (e.position.z > 13) {
+                scene.remove(e);
+                enemies.splice(i,1);
+            }
+        }
+
+        // Mermi-düşman çarpışması
+        for (let i = enemies.length-1; i >= 0; i--) {
+            const e = enemies[i];
+            for (let j = bullets.length-1; j >= 0; j--) {
+                const b = bullets[j];
+                if (e.position.distanceTo(b.position) < 0.6 && e.userData.alive) {
+                    e.userData.alive = false;
+                    scene.remove(e);
+                    enemies.splice(i,1);
+                    scene.remove(b);
+                    bullets.splice(j,1);
+                    score++;
+                    updateUI();
+                    break;
+                }
+            }
+        }
+
+        // Düşman üretimi
+        if (Date.now() - lastEnemyTime > enemySpawnInterval) {
+            spawnEnemy();
+            lastEnemyTime = Date.now();
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    // Oyun başlat/bitiş/tekrar
+    function startGame() {
+        document.getElementById('game3d-overlay').style.display = 'none';
+        document.getElementById('game3d-over').style.display = 'none';
+        playing = true;
+        init3D();
+        animate();
+    }
+    function endGame() {
+        playing = false;
+        document.getElementById('game3d-finalscore').textContent = "Skorunuz: " + score;
+        document.getElementById('game3d-over').style.display = 'flex';
+    }
+
+    // Klavye kontrolleri
+    window.addEventListener('keydown', function(e) {
+        keys[e.key] = true;
+        if (playing && (e.key === ' ' || e.key === 'Spacebar')) {
+            shoot();
+        }
+    });
+    window.addEventListener('keyup', function(e) {
+        keys[e.key] = false;
+    });
+
+    // Ekran boyutu değişirse
+    window.addEventListener('resize', function() {
+        if (!renderer || !camera) return;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Başlat ve tekrar butonları
+    document.getElementById('game3d-start').onclick = startGame;
+    document.getElementById('game3d-restart').onclick = startGame;
+
+    // Mobilde dokunmatik ateş desteği (ekrana çift dokun)
+    let lastTap = 0;
+    document.getElementById('game3d-container').addEventListener('touchend', function(e) {
+        if (!playing) return;
+        let now = Date.now();
+        if (now - lastTap < 350) shoot();
+        lastTap = now;
+    });
+
+    // Oyun başlatılana kadar 3D canvas'ı gizle
+    document.getElementById('game3d-container').style.display = 'none';
+    document.getElementById('game3d-overlay').style.display = 'flex';
+    document.getElementById('game3d-over').style.display = 'none';
+
+    // Oyun başladığında canvas'ı göster
+    function showGameCanvas() {
+        document.getElementById('game3d-container').style.display = 'block';
+    }
+    document.getElementById('game3d-start').addEventListener('click', showGameCanvas);
+    document.getElementById('game3d-restart').addEventListener('click', showGameCanvas);
+    </script>
+</body>
+</html>

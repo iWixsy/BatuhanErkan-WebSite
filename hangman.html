@@ -8,12 +8,12 @@
     <style>
         body { background: #f3f4f6; font-family: 'Inter', Arial, sans-serif; color: #222; }
         .hangman-container {
-            max-width: 420px;
+            max-width: 600px;
             margin: 3rem auto 2rem auto;
             background: #fff;
             border-radius: 18px;
             box-shadow: 0 8px 32px #7c3aed22;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            padding: 2.5rem 2.2rem 2rem 2.2rem;
             position: relative;
         }
         .hangman-title {
@@ -22,6 +22,14 @@
             font-weight: 700;
             color: #7c3aed;
             margin-bottom: 0.7rem;
+        }
+        .hangman-question {
+            text-align: center;
+            font-size: 1.15rem;
+            color: #4c1d95;
+            margin-bottom: 1.1rem;
+            font-weight: 600;
+            min-height: 2.2em;
         }
         .hangman-score {
             text-align: center;
@@ -37,7 +45,7 @@
         }
         .hangman-word {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.1rem;
             letter-spacing: 0.25em;
             margin-bottom: 1.2rem;
             font-family: 'Courier New', Courier, monospace;
@@ -107,9 +115,9 @@
             color: #888;
             margin-top: 1.5rem;
         }
-        @media (max-width: 600px) {
-            .hangman-container { padding: 1rem 0.3rem 1rem 0.3rem; }
-            #hangman-canvas { width: 220px !important; height: 220px !important; }
+        @media (max-width: 700px) {
+            .hangman-container { padding: 1rem 0.3rem 1rem 0.3rem; max-width: 99vw; }
+            #hangman-canvas { width: 260px !important; height: 260px !important; }
             .hangman-word { font-size: 1.3rem; }
         }
     </style>
@@ -118,8 +126,9 @@
     <main>
         <div class="hangman-container">
             <div class="hangman-title">Adam Asmaca</div>
+            <div class="hangman-question" id="hangman-question"></div>
             <div class="hangman-score">Yanlış: <span id="hangman-wrong">0</span> / 6 &nbsp;|&nbsp; Doğru: <span id="hangman-correct">0</span></div>
-            <canvas id="hangman-canvas" width="320" height="320"></canvas>
+            <canvas id="hangman-canvas" width="420" height="320"></canvas>
             <div class="hangman-word" id="hangman-word"></div>
             <div class="hangman-letters" id="hangman-letters"></div>
             <div class="hangman-message" id="hangman-message"></div>
@@ -133,11 +142,100 @@
         </div>
     </main>
     <script>
-    // Türkçe kelimeler (isteğe bağlı İngilizce de eklenebilir)
-    const kelimeler = [
-        "BİLGİSAYAR", "PROGRAMLAMA", "JAVASCRIPT", "İNTERNET", "TEKNOLOJİ", "YAZILIM", "DONANIM",
-        "ALGORİTMA", "VERİTABANI", "GÜVENLİK", "AĞ", "SİSTEM", "KOD", "PROJE", "PORTFÖY", "OYUN"
+    // Zor ve bilgi gerektiren sorular (daha fazla eklendi)
+    const sorular = [
+        {s: "DNA'nın çift sarmal yapısını kim keşfetmiştir?", c: "WATSONCRICK"},
+        {s: "Türkiye'nin ilk kadın başbakanı kimdir?", c: "TANSU ÇİLLER"},
+        {s: "Einstein'ın ünlü denklemi nedir? (harflerle)", c: "EMCİKARE"},
+        {s: "Dünyanın en derin okyanus çukuru?", c: "MARIANA"},
+        {s: "İlk yapay zeka satranç şampiyonu bilgisayar?", c: "DEEPBLUE"},
+        {s: "İstanbul'un fethinde kullanılan dev topun adı?", c: "ŞAHİ"},
+        {s: "Kuantum fiziğinin babası olarak bilinen bilim insanı?", c: "PLANCK"},
+        {s: "Türkiye'nin UNESCO Dünya Mirası Listesi'ndeki ilk antik kenti?", c: "HATTUŞAŞ"},
+        {s: "Dünyanın en büyük çölü?", c: "SAHARA"},
+        {s: "İlk Nobel Edebiyat Ödüllü Türk yazar?", c: "ORHAN PAMUK"},
+        {s: "İnsan vücudundaki en uzun kemik?", c: "FEMUR"},
+        {s: "Ay'a ilk ayak basan astronot?", c: "NEIL ARMSTRONG"},
+        {s: "Türkiye'nin en eski üniversitesi?", c: "İSTANBUL ÜNİVERSİTESİ"},
+        {s: "Dünyanın en hızlı kara hayvanı?", c: "ÇİTA"},
+        {s: "İlk elektrik ampulünü icat eden mucit?", c: "EDISON"},
+        {s: "Dünyanın en büyük gölü?", c: "HAZAR"},
+        {s: "Türkiye'nin en yüksek barajı?", c: "DERİNER"},
+        {s: "Dünyanın en uzun nehri?", c: "NİL"},
+        {s: "İlk Türk kadın pilot?", c: "SABİHA GÖKÇEN"},
+        {s: "Dünyanın en büyük adası?", c: "GRÖNLAND"},
+        {s: "Türkiye'nin en büyük doğal gölü?", c: "VAN"},
+        {s: "Dünyanın en eski yazılı destanı?", c: "GİLGAMIŞ"},
+        {s: "Türkiye'nin en uzun tüneli?", c: "OVİT"},
+        {s: "Dünyanın en yüksek şelalesi?", c: "ANGEL"},
+        {s: "İlk bilgisayar programcısı olarak kabul edilen kişi?", c: "ADA LOVELACE"},
+        {s: "Türkiye'nin en büyük adası?", c: "GÖKÇEADA"},
+        {s: "Dünyanın en büyük aktif yanardağı?", c: "MAUNA LOA"},
+        {s: "Türkiye'nin en uzun köprüsü?", c: "ÇANAKKALE"},
+        {s: "Dünyanın en büyük buzulu?", c: "LAMBERT"},
+        {s: "Türkiye'nin en eski tiyatrosu?", c: "ASPENDOS"},
+        {s: "Dünyanın en büyük okyanusu?", c: "PASİFİK"},
+        {s: "Türkiye'nin en uzun nehri?", c: "KIZILIRMAK"},
+        {s: "İlk Türk kadın savaş pilotu?", c: "SABİHA GÖKÇEN"},
+        {s: "Dünyanın en büyük gökdeleni?", c: "BURJ KHALIFA"},
+        {s: "Türkiye'nin en kalabalık şehri?", c: "İSTANBUL"},
+        {s: "Dünyanın en eski tapınağı?", c: "GÖBEKLİTEPE"},
+        {s: "Türkiye'nin en büyük adası?", c: "GÖKÇEADA"},
+        {s: "Dünyanın en büyük mağarası?", c: "SON DOONG"},
+        {s: "Türkiye'nin en yüksek dağı?", c: "AĞRI"},
+        {s: "Dünyanın en büyük nehri?", c: "AMAZON"},
+        {s: "Türkiye'nin en uzun kara sınırı hangi ülkeyledir?", c: "SURİYE"},
+        {s: "Dünyanın en büyük yarımadası?", c: "ARABİSTAN"},
+        {s: "Türkiye'nin en büyük gölü?", c: "VAN"},
+        {s: "Dünyanın en büyük adası?", c: "GRÖNLAND"},
+        {s: "Türkiye'nin en eski camisi?", c: "ULU CAMİ"},
+        {s: "Dünyanın en büyük denizi?", c: "GÜNEY ÇİN DENİZİ"},
+        {s: "Türkiye'nin en uzun tüneli?", c: "OVİT"},
+        {s: "Dünyanın en büyük barajı?", c: "THREE GORGES"},
+        {s: "Türkiye'nin en eski köprüsü?", c: "TAŞKÖPRÜ"},
+        // --- TEKRAR EDEN SORU SİLİNDİ ---
+        {s: "Türkiye'nin en eski üniversitesi?", c: "İSTANBUL ÜNİVERSİTESİ"},
+        {s: "Dünyanın en büyük gölü?", c: "HAZAR"},
+        {s: "Türkiye'nin en uzun nehri?", c: "KIZILIRMAK"},
+        {s: "Dünyanın en büyük çölü?", c: "SAHARA"},
+        {s: "Türkiye'nin en yüksek şelalesi?", c: "TORTUM"},
+        // --- YENİ ZOR SORULAR EKLENDİ ---
+        {s: "Türkiye'nin ilk yerli otomobili nedir?", c: "DEVRİM"},
+        {s: "Dünyanın en eski üniversitesi hangi ülkededir?", c: "FAS"},
+        {s: "Türkiye'nin en uzun tüneli hangi ilde?", c: "RİZE"},
+        {s: "Dünyanın en büyük havaalanı hangi şehirde?", c: "İSTANBUL"},
+        {s: "Türkiye'nin en eski tren garı?", c: "HAYDARPAŞA"},
+        {s: "Dünyanın en yüksek dağı?", c: "EVEREST"},
+        {s: "Türkiye'nin en uzun köprüsü hangi ilde?", c: "ÇANAKKALE"},
+        {s: "Dünyanın en büyük doğal limanı?", c: "SYDNEY"},
+        {s: "Türkiye'nin ilk milli parkı?", c: "YOZGAT"},
+        {s: "Dünyanın en eski tapınağı hangi ilde?", c: "ŞANLIURFA"},
+        {s: "Türkiye'nin en büyük adası hangi denizde?", c: "EGE"},
+        {s: "Dünyanın en büyük gölü hangi kıtadadır?", c: "ASYA"},
+        {s: "Türkiye'nin en yüksek barajı hangi ilde?", c: "ARTVİN"},
+        {s: "Dünyanın en büyük çölü hangi kıtadadır?", c: "AFRİKA"},
+        {s: "Türkiye'nin en eski tiyatrosu hangi ilde?", c: "ANTALYA"},
+        {s: "Dünyanın en uzun nehri hangi kıtadadır?", c: "AFRİKA"},
+        {s: "Türkiye'nin en büyük gölü hangi ilde?", c: "VAN"},
+        {s: "Dünyanın en büyük adası hangi okyanustadır?", c: "ATLANTİK"},
+        {s: "Türkiye'nin en eski camisi hangi ilde?", c: "BURSA"},
+        {s: "Dünyanın en büyük denizi hangi okyanusa bağlıdır?", c: "PASİFİK"},
+        {s: "Türkiye'nin en uzun tüneli hangi dağdadır?", c: "KAÇKAR"},
+        {s: "Dünyanın en büyük barajı hangi ülkededir?", c: "ÇİN"},
+        {s: "Türkiye'nin en eski köprüsü hangi ilde?", c: "ADANA"},
+        {s: "Dünyanın en büyük mağarası hangi ülkededir?", c: "VİETNAM"},
+        {s: "Türkiye'nin en eski üniversitesi hangi ilde?", c: "İSTANBUL"},
+        {s: "Dünyanın en büyük gölü hangi ülkededir?", c: "KAZAKİSTAN"},
+        {s: "Türkiye'nin en uzun nehri hangi denize dökülür?", c: "KARADENİZ"},
+        {s: "Dünyanın en büyük çölü hangi ülkededir?", c: "CEZAYİR"},
+        {s: "Türkiye'nin en yüksek şelalesi hangi ilde?", c: "ERZURUM"}
+        // ...daha fazla zor soru eklenebilir...
     ];
+
+    // Soru havuzunu karıştırıp sırayla sormak için bir dizi ve index tut
+    let soruHavuzu = [];
+    let soruIndex = 0;
+    let seciliSoru = {};
     let seciliKelime = "";
     let dogruHarfler = [];
     let yanlisHarfler = [];
@@ -152,18 +250,36 @@
     const wrongEl = document.getElementById('hangman-wrong');
     const correctEl = document.getElementById('hangman-correct');
     const restartBtn = document.getElementById('hangman-restart');
+    const questionEl = document.getElementById('hangman-question');
 
     // Alfabe (Türkçe karakterler dahil)
     const alfabe = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split("");
 
+    // Soru havuzunu karıştır
+    function karistirDizi(arr) {
+        let a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
     function yeniOyun() {
-        seciliKelime = kelimeler[Math.floor(Math.random() * kelimeler.length)];
+        // Eğer havuz bitti ise tekrar karıştır
+        if (soruHavuzu.length === 0 || soruIndex >= soruHavuzu.length) {
+            soruHavuzu = karistirDizi(sorular);
+            soruIndex = 0;
+        }
+        seciliSoru = soruHavuzu[soruIndex++];
+        seciliKelime = seciliSoru.c.toUpperCase().replace(/[^A-ZÇĞİÖŞÜ]/g, "");
         dogruHarfler = [];
         yanlisHarfler = [];
         oyunBitti = false;
         messageEl.textContent = "";
         wrongEl.textContent = "0";
         correctEl.textContent = "0";
+        questionEl.textContent = seciliSoru.s;
         ciz();
         guncelleKelime();
         guncelleKlavye();
@@ -219,7 +335,7 @@
                 ciz();
                 if (yanlisHarfler.length >= maxYanlis) {
                     oyunBitti = true;
-                    messageEl.textContent = `Kaybettiniz! Kelime: ${seciliKelime}`;
+                    messageEl.textContent = `Kaybettiniz! Cevap: ${seciliKelime}`;
                     tumButonlariKapat();
                 }
             }
