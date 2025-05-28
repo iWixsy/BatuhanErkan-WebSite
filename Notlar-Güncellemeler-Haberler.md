@@ -18,6 +18,7 @@ Kod yazarken internetteki açık kaynak kod paylaşım sitelerini ve geliştiric
 ## Son Güncellemeler
 
 - Adam Asmaca ve Yılan Oyunu gibi klasik oyunlar eklendi.
+- Portföydeki tüm oyunlar ve uygulamalar `oyunlar/` klasörüne taşındı, bağlantılar güncellendi.
 - Portföy bölümü 3'erli grid yapısına geçirildi, yeni projeler kolayca eklenebiliyor.
 - Koyu/Açık tema desteği ve modern scroll bar tasarımı eklendi.
 - Türkçe/İngilizce çoklu dil altyapısı hazırlandı (geliştirilmeye açık).

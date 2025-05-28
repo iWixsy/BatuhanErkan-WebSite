@@ -515,7 +515,7 @@ h3 {
     text-align: left;
 }
 #kardes-siteler h2 {
-    color: var(--primary);
+    color: #fff;
     font-size: 1.4rem;
     margin-bottom: 0.8rem;
     font-weight: 700;

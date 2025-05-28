@@ -399,13 +399,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 img: "assets/2048.png",
                 title: "2048 Oyunu",
                 desc: "HTML, CSS ve JavaScript ile geliştirilmiş, mobil uyumlu klasik 2048 bulmaca oyunu.",
-                link: "2048.html"
+                link: "oyunlar/2048.html"
             },
             {
                 img: "assets/QR.png",
                 title: "QR Kod Oluşturucu",
                 desc: "Metni QR koda çevir, anında indir. Tamamen tarayıcıda çalışır.",
-                link: "qr.html"
+                link: "oyunlar/qr.html"
             }
             // Eğer başka uygulama eklediyseniz buraya ekleyin
         ];
