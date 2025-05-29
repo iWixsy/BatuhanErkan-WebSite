@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sayı Tahmin Oyunu | Batuhan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .guess-container {
+            max-width: 420px;
+            margin: 3rem auto 2rem auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px #7c3aed22;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+        }
+        .guess-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 1.2rem;
+        }
+        .guess-form {
+            display: flex;
+            gap: 0.7rem;
+            margin-bottom: 1.2rem;
+        }
+        .guess-form input[type="number"] {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1.5px solid #e0e7ef;
+            font-size: 1rem;
+        }
+        .guess-form button {
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .guess-result {
+            text-align: center;
+            margin-top: 1.2rem;
+            font-size: 1.08rem;
+            min-height: 2.2em;
+        }
+        .guess-info {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.98em;
+            margin-bottom: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="guess-container">
+        <div class="guess-title">Sayı Tahmin Oyunu</div>
+        <div class="guess-info">1 ile 100 arasında bir sayı tuttum. Bakalım kaç denemede bulacaksın?</div>
+        <form class="guess-form" id="guessForm" autocomplete="off">
+            <input type="number" id="guessInput" min="1" max="100" placeholder="Tahminin..." required>
+            <button type="submit">Tahmin Et</button>
+        </form>
+        <div style="text-align:center;margin-bottom:1.2rem;">
+            <a href="index.html#portfoy" class="btn" style="background:#38bdf8;color:#fff;">Portföye Dön</a>
+        </div>
+        <div class="guess-result" id="guessResult"></div>
+    </div>
+    <script>
+        let secret = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        const form = document.getElementById('guessForm');
+        const input = document.getElementById('guessInput');
+        const result = document.getElementById('guessResult');
+        function resetGame() {
+            secret = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            result.textContent = "";
+            input.value = "";
+            input.disabled = false;
+        }
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            const val = parseInt(input.value, 10);
+            if (isNaN(val) || val < 1 || val > 100) {
+                result.textContent = "Lütfen 1 ile 100 arasında bir sayı girin.";
+                return;
+            }
+            attempts++;
+            if (val < secret) {
+                result.textContent = "Daha büyük bir sayı dene.";
+            } else if (val > secret) {
+                result.textContent = "Daha küçük bir sayı dene.";
+            } else {
+                result.innerHTML = `<span style="color:#22c55e;font-weight:700;">Tebrikler! ${attempts} denemede buldun 🎉</span><br>
+                <button type="button" class="btn success" id="playAgainBtn" style="margin-top:0.8em;">Tekrar Oyna</button>`;
+                input.disabled = true;
+                document.getElementById('playAgainBtn').onclick = resetGame;
+            }
+            input.value = "";
+            input.focus();
+        };
+    </script>
+</body>
+</html>
