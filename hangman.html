@@ -74,12 +74,14 @@
             text-decoration: line-through;
         }
         .hangman-letters button.correct {
-            background: #22c55e;
+            background: #22c55e; /* Yeşil */
             color: #fff;
+            border-color: #16a34a;
         }
         .hangman-letters button.wrong {
-            background: #ef4444;
+            background: #ef4444; /* Kırmızı */
             color: #fff;
+            border-color: #dc2626;
         }
         .hangman-message {
             text-align: center;
@@ -99,8 +101,8 @@
             background: #7c3aed;
             color: #fff;
             border: none;
-            border-radius: 999px;
-            padding: 0.5rem 1.3rem;
+            border-radius: 8px; /* Daha önce 999px idi, diğer butonlarla uyumlu hale getirildi */
+            padding: 0.5rem 1.2rem; /* Boyutlar diğer butonlarla eşitlendi */
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -135,6 +137,7 @@
             <div class="hangman-controls">
                 <button id="hangman-restart">Yeniden Oyna</button>
                 <button onclick="window.location.href='index.html#portfoy'" class="btn secondary">Portföye Dön</button>
+                <button onclick="dogruKelimeyiGoster()" class="btn">Doğru Kelimeyi Göster</button>
             </div>
             <div class="hangman-footer">
                 <span>Klavye veya ekrandan harf seçebilirsin.</span>
@@ -424,7 +427,7 @@
         questionEl.textContent = seciliSoru.s;
         ciz();
         guncelleKelime();
-        guncelleKlavye();
+        guncelleKlavye(); // Klavyeyi güncelle
     }
 
     function guncelleKelime() {
@@ -449,6 +452,18 @@
         }
     }
 
+    function guncelleKlavye() {
+        lettersEl.innerHTML = ""; // Klavyeyi temizle
+        alfabe.forEach(harf => {
+            const btn = document.createElement("button");
+            btn.textContent = harf;
+            btn.disabled = dogruHarfler.includes(harf) || yanlisHarfler.includes(harf);
+            btn.className = dogruHarfler.includes(harf) ? "correct" : yanlisHarfler.includes(harf) ? "wrong" : "";
+            btn.onclick = () => harfTahmin(harf);
+            lettersEl.appendChild(btn);
+        });
+    }
+
     function harfTahmin(harf) {
         if (oyunBitti) return;
 
@@ -456,12 +471,14 @@
             if (!dogruHarfler.includes(harf)) {
                 dogruHarfler.push(harf);
                 guncelleKelime();
+                guncelleKlavye(); // Klavyeyi güncelle
             }
         } else {
             if (!yanlisHarfler.includes(harf)) {
                 yanlisHarfler.push(harf);
                 wrongEl.textContent = yanlisHarfler.length;
                 ciz();
+                guncelleKlavye(); // Klavyeyi güncelle
                 if (yanlisHarfler.length >= maxYanlis) {
                     oyunBitti = true;
                     messageEl.textContent = `Kaybettiniz! Kelime: ${seciliKelime}`;
@@ -530,6 +547,13 @@
             ctx.lineTo(230, 250);
             ctx.stroke();
         }
+    }
+
+    function dogruKelimeyiGoster() {
+        wordEl.textContent = seciliKelime.split("").join(" ");
+        oyunBitti = true;
+        messageEl.textContent = `Doğru kelime: ${seciliKelime}`;
+        tumButonlariKapat();
     }
 
     restartBtn.onclick = yeniOyun;

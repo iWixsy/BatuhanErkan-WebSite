@@ -2,27 +2,27 @@
 
 ## Proje Hakkında
 
-Bu siteye başlarken asıl amacım sadece Web Programlama dersi için verilen ödevi tamamlamaktı. Ancak süreç içerisinde hem web geliştirme konusuna ilgim arttı hem de projeyi sürekli geliştirmek istedim. Şu anda site, kişisel portföyüm, blogum ve çeşitli web uygulamalarımı sergilediğim bir platform haline geldi.
+Bu site, kişisel portföyüm, blogum ve çeşitli web uygulamalarımı sergilediğim bir platformdur. Başlangıçta bir ders projesi olarak başlayan bu süreç, zamanla sürekli gelişen bir kişisel proje haline geldi.
 
 ## Kod ve İlham
 
-Kod yazarken internetteki açık kaynak kod paylaşım sitelerini ve geliştirici bloglarını sıkça takip ediyorum. Beğendiğim ve faydalı bulduğum kod parçalarını kendi projeme adapte etmekten çekinmiyorum. Ancak, doğrudan kopyaladığım bir kod parçası varsa da kaynak belirtmeye özen gösteriyorum. Şu an için örnek verebileceğim spesifik bir kod yok, çünkü çoğu zaman küçük parçalar halinde ilham alıyorum ve kendi ihtiyacıma göre uyarlıyorum.
+Kod yazarken açık kaynak kod paylaşım sitelerini ve geliştirici bloglarını sıkça takip ediyorum. İlham aldığım kod parçalarını kendi projeme adapte ediyorum. Ancak, doğrudan kopyaladığım bir kod varsa kaynak belirtmeye özen gösteriyorum.
 
 ## Gelecek Planları
 
-- **Alan Adı:** Siteyi yakında `batuhanerkan.blog` uzantılı bir domaine taşımayı planlıyorum (en az 1 yıl boyunca).
-- **Sürekli Gelişim:** Siteyi düzenli olarak güncellemeye ve yeni özellikler eklemeye devam edeceğim.
-- **Yeni Projeler:** Portföy kısmına yeni oyunlar ve uygulamalar eklemeye devam edeceğim.
+- **Alan Adı:** Site artık `batuhanerkan.me` domaini üzerinden erişilebilir.
+- **Sürekli Gelişim:** Site düzenli olarak güncellenmeye ve yeni özellikler eklenmeye devam edecek.
+- **Yeni Projeler:** Portföy kısmına yeni oyunlar ve uygulamalar eklenmeye devam edecek.
 - **Açık Kaynak:** Kodların büyük kısmı açık kaynak olarak paylaşılacak ve isteyen herkes faydalanabilecek.
 
 ## Son Güncellemeler
 
-- Adam Asmaca ve Yılan Oyunu gibi klasik oyunlar eklendi.
-- Portföydeki tüm oyunlar ve uygulamalar `oyunlar/` klasörüne taşındı, bağlantılar güncellendi.
-- Portföy bölümü 3'erli grid yapısına geçirildi, yeni projeler kolayca eklenebiliyor.
-- Koyu/Açık tema desteği ve modern scroll bar tasarımı eklendi.
-- Türkçe/İngilizce çoklu dil altyapısı hazırlandı (geliştirilmeye açık).
-- Ziyaretçi sayacı, motivasyon sözü ve animasyonlu sayaçlar eklendi.
+- **[2025-05-30]** Site `batuhanerkan.me` domainine taşındı.
+- **[2025-05-26]** Adam Asmaca ve Yılan Oyunu gibi klasik oyunlar eklendi.
+- **[2025-05-26]** Portföydeki tüm oyunlar ve uygulamalar `oyunlar/` klasörüne taşındı, bağlantılar güncellendi.
+- **[2025-05-26]** Portföy bölümü 3'erli grid yapısına geçirildi, yeni projeler kolayca eklenebiliyor.
+- **[2025-05-26]** Koyu/Açık tema desteği ve modern scroll bar tasarımı eklendi.
+- **[2025-05-26]** Ziyaretçi sayacı, motivasyon sözü ve animasyonlu sayaçlar eklendi.
 
 ## Geri Bildirim
 
@@ -32,3 +32,4 @@ Her türlü öneri, hata bildirimi veya iş birliği için bana ulaşabilirsiniz
 ---
 
 > **Not:** Bu dosya, sitenin gelişim sürecini ve önemli değişiklikleri takip etmek için düzenli olarak güncellenecektir.
+> **Sürüm:** v1.2.0
