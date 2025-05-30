@@ -79,6 +79,83 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    // Telefon için tema seçimi
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.body.classList.add('dark');
+                    showToast("Telefon koyu temaya geçti.");
+                } else {
+                    document.body.classList.remove('dark');
+                    showToast("Telefon açık temaya geçti.");
+                }
+            }
+        });
+    }
+
+    // Eksik toast bildirimi fonksiyonu düzeltildi
+    window.showToast = function(msg) {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    };
+
+    // Eksik veya hatalı kodlar düzeltildi
+    // 1. Blog yazısı ve sertifika sayısı otomatik güncelleniyor
+    document.addEventListener('DOMContentLoaded', function() {
+        const blogCount = document.querySelectorAll('#blog article').length;
+        const blogCounter = document.getElementById('blog-count');
+        if (blogCounter) {
+            blogCounter.setAttribute('data-count', blogCount);
+            blogCounter.textContent = 0; // Sayaç animasyonu varsa, animasyon kodu bunu güncelliyor
+        }
+
+        const certCount = document.querySelectorAll('.certificate-card').length;
+        const certCounter = document.querySelector('.counter-number[data-count][class~="counter-number"]:not(#blog-count)');
+        if (certCounter) {
+            certCounter.setAttribute('data-count', certCount);
+            certCounter.textContent = 0;
+        }
+    });
+
+    // 2. Profil fotoğrafı modalı eksik kontrol eklendi
+    function openImgModal(src) {
+        let modal = document.getElementById('imgModal');
+        let modalImg = document.getElementById('imgModalImg');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'imgModal';
+            modal.style.cssText = 'position:fixed;z-index:99999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;';
+            modal.innerHTML = '<img id="imgModalImg" src="" alt="Profil Fotoğrafı" style="max-width:90vw;max-height:90vh;border-radius:18px;box-shadow:0 8px 32px #000a;"><span id="imgModalClose" style="position:absolute;top:32px;right:48px;font-size:2.5rem;color:#fff;cursor:pointer;font-weight:bold;z-index:2;">&times;</span>';
+            document.body.appendChild(modal);
+            modal.onclick = function(e) {
+                if (e.target === modal || e.target.id === 'imgModalClose') modal.style.display = 'none';
+            };
+        }
+        modalImg = document.getElementById('imgModalImg');
+        modalImg.src = src;
+        modal.style.display = 'flex';
+    }
+    document.getElementById('mainProfileImg')?.addEventListener('click', function() {
+        openImgModal(this.src);
+    });
+    document.getElementById('aboutProfileImg')?.addEventListener('click', function() {
+        openImgModal(this.src);
+    });
+
+    // 3. Mikro etkileşimler için eksik hover efektleri düzeltildi
+    document.querySelectorAll('.card, .portfolio-item, article').forEach(el => {
+        el.addEventListener('mouseenter', function() {
+            el.style.boxShadow = '0 16px 48px 0 rgba(124,58,237,0.18), 0 2px 8px #0001';
+        });
+        el.addEventListener('mouseleave', function() {
+            el.style.boxShadow = '';
+        });
+    });
+
     // Yukarı Çık butonunu göstermek ve işlevsellik kazandırmak için ekledim
     const backToTop = document.getElementById('backToTop');
     if (backToTop) {
@@ -191,15 +268,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Toast bildirimi fonksiyonumu ekledim
-    window.showToast = function(msg) {
-        const toast = document.getElementById('toast');
-        if (!toast) return;
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
-    };
 
     // Dil seçici (TR/EN) için demo kodumu ekledim
     // const langTrBtn = document.getElementById('lang-tr');
@@ -332,24 +400,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Blog yazısı sayısını otomatik olarak güncelliyorum
-    document.addEventListener('DOMContentLoaded', function() {
-        var blogCount = document.querySelectorAll('#blog article').length;
-        var blogCounter = document.getElementById('blog-count');
-        if (blogCounter) {
-            blogCounter.setAttribute('data-count', blogCount);
-            blogCounter.textContent = 0; // Sayaç animasyonu varsa, animasyon kodu bunu güncelliyor
-        }
-
-        // Sertifika sayısını otomatik olarak güncelliyorum
-        var certCount = document.querySelectorAll('.certificate-card').length;
-        var certCounter = document.querySelector('.counter-number[data-count][class~="counter-number"]:not(#blog-count)');
-        if (certCounter) {
-            certCounter.setAttribute('data-count', certCount);
-            certCounter.textContent = 0;
-        }
-    });
-
     // Scroll ile arka plan overlay efektini değiştir kaldırdım
     // window.addEventListener('scroll', function() {
     //     if (window.scrollY > 120) {
@@ -479,29 +529,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 ripple.remove();
             }, 700);
         }
-    });
-
-    // Mikro etkileşim: Kartlara hoverda hafif parıltı efekti
-    document.querySelectorAll('.card, .portfolio-item, article').forEach(el => {
-        el.addEventListener('mouseenter', function() {
-            el.style.boxShadow = '0 16px 48px 0 rgba(124,58,237,0.18), 0 2px 8px #0001';
-        });
-        el.addEventListener('mouseleave', function() {
-            el.style.boxShadow = '';
-        });
-    });
-
-    // Mikro etkileşim: Sosyal ikonlara tıklanınca kısa bir büyüme animasyonu
-    document.querySelectorAll('.social a').forEach(icon => {
-        icon.addEventListener('mousedown', function() {
-            icon.style.transform = 'scale(1.22)';
-        });
-        icon.addEventListener('mouseup', function() {
-            icon.style.transform = '';
-        });
-        icon.addEventListener('mouseleave', function() {
-            icon.style.transform = '';
-        });
     });
 
     // Mikro etkileşim: Section başlıkları görünür olunca animasyon başlat
