@@ -146,14 +146,14 @@
                 <img src="assets/post1.jpg" alt="Batuhan'ın profil fotoğrafı" class="profile-img" id="aboutProfileImg" style="width:170px;height:170px;cursor:pointer;">
                 <div>
                     <p style="white-space:pre-line;line-height:1.7;">
-Şu anda Bilecik Şeyh Edebali Üniversitesi’nde İnternet ve Ağ Teknolojileri bölümünde öğrenim görüyorum. Lise dönemimde, Yıldızlar Yatırım Holding iştiraki olan İstanbul Gübre Sanayi A.Ş.’de bilgi işlem departmanında 9 ay süren bir staj programına katılarak kurumsal BT süreçlerine erken yaşta dahil oldum.
+                        Şu anda Bilecik Şeyh Edebali Üniversitesi’nde İnternet ve Ağ Teknolojileri bölümünde öğrenim görüyorum. Lise dönemimde, Yıldızlar Yatırım Holding iştiraki olan İstanbul Gübre Sanayi A.Ş.’de bilgi işlem departmanında 9 ay süren bir staj programına katılarak kurumsal BT süreçlerine erken yaşta dahil oldum.
 
 Bu süreçte donanım kurulumu, ağ bağlantısı sorunları, yazılım destekleri ve kullanıcı taleplerine müdahale gibi görevlerde aktif rol aldım. Hem sahada hem masa başında gerçek dünya tecrübesi kazandım.
 
 Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleşmeye yöneltti. Şu anda hem teorik bilgimi artırıyor hem de bu bilgiyi pratiğe dökme fırsatlarını arıyorum. Hedefim, ağ sistemleri, siber güvenlik ve sistem yönetimi gibi alanlarda uzmanlaşmak; gelişen dünyada güvenilir ve sağlam dijital altyapılar kuran ekiplerin bir parçası olmak.
                     </p>
                     <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.7rem;">
-                        <a href="assets/Batuhan_CV.pdf" download class="btn" aria-label="CV'yi indir">CV'yi İndir</a>
+                        <button class="btn" id="viewCvBtn" type="button">CV'yi Görüntüle</button>
                         <button class="btn" id="aboutModalBtn" type="button">Kısaca Tanıt</button>
                     </div>
                 </div>
@@ -363,5 +363,13 @@ Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleş
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="main.js"></script>
     <button id="backToTop" aria-label="Yukarı Çık"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- CV Modal -->
+<div id="cvModal" class="modal">
+    <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 1rem; display: flex; flex-direction: column; align-items: center;">
+        <span class="modal-close" id="cvModalClose">&times;</span>
+        <img src="assets/Cv kopya kişisel bilgiler gizlenmiş.png" alt="CV Görüntüsü" style="max-width: 100%; max-height: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
+    </div>
+</div>
 </body>
 </html>

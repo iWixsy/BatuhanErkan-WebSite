@@ -550,4 +550,16 @@ document.addEventListener('DOMContentLoaded', function() {
             loadingScreen.classList.add('hidden');
         }, 1500); // 1.5 saniye sonra gizlenir
     }
+
+    // CV modalını açıp kapatma
+    const viewCvBtn = document.getElementById('viewCvBtn');
+    const cvModal = document.getElementById('cvModal');
+    const cvModalClose = document.getElementById('cvModalClose');
+    if (viewCvBtn && cvModal && cvModalClose) {
+        viewCvBtn.onclick = () => cvModal.classList.add('show');
+        cvModalClose.onclick = () => cvModal.classList.remove('show');
+        window.addEventListener('click', (e) => {
+            if (e.target === cvModal) cvModal.classList.remove('show');
+        });
+    }
 });
