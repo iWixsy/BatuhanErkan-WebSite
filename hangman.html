@@ -228,7 +228,7 @@
         {s: "Dünyanın en büyük gölü hangi ülkededir?", c: "KAZAKİSTAN"},
         {s: "Türkiye'nin en uzun nehri hangi denize dökülür?", c: "KARADENİZ"},
         {s: "Dünyanın en büyük çölü hangi ülkededir?", c: "CEZAYİR"},
-        {s: "Türkiye'nin en yüksek şelalesi hangi ilde?", c: "ERZURUM"}
+        {s: "Türkiye'nin en yüksek şelalesi hangi ilde?", c: "ERZURUM"},
         {s: "Türkiye'nin ilk nükleer araştırma reaktörü nerede kurulmuştur?", c: "İSTANBUL"},
         {s: "Dünyanın ilk yazılı anlaşması nedir?", c: "KADEŞ"},
         {s: "Türkiye'nin ilk kadın büyükelçisi kimdir?", c: "FİLİZ DİNÇMEN"},
@@ -246,7 +246,7 @@
         {s: "Türkiye'de ilk televizyon yayını hangi yılda başladı?", c: "1968"},
         {s: "Dünyanın ilk atom saati hangi ülkede yapılmıştır?", c: "İNGİLTERE"},
         {s: "Türkiye'nin ilk kadın opera sanatçısı kimdir?", c: "SEMIHA BERKSOY"},
-        {s: "Dünyanın en eski su kemeri hangi şehirde bulunur?", c: "ROMA"}
+        {s: "Dünyanın en eski su kemeri hangi şehirde bulunur?", c: "ROMA"},
         {s: "Türkiye'nin ilk kadın avukatı kimdir?", c: "SÜREYYA AĞAOĞLU"},
         {s: "Dünyada ilk defa matbaa hangi ülkede kullanılmıştır?", c: "ÇİN"},
         {s: "Türkiye'nin ilk milli yer gözlem uydusu nedir?", c: "RASAT"},
@@ -266,7 +266,7 @@
         {s: "Türkiye'nin ilk kadın profesörü kimdir?", c: "ALEV LİMAN"},
         {s: "Dünyanın en eski taş köprüsü hangi ülkededir?", c: "TÜRKİYE"},
         {s: "Türkiye'nin ilk uydu yer istasyonu nerede kurulmuştur?", c: "ANKARA"},
-        {s: "Dünyanın en uzun demiryolu hattı hangi iki ülke arasında çalışır?", c: "RUSYA ÇİN"}
+        {s: "Dünyanın en uzun demiryolu hattı hangi iki ülke arasında çalışır?", c: "RUSYA ÇİN"},
         {s: "Dünyanın en eski tıp okulu hangi ülkededir?", c: "İTALYA"},
         {s: "Türkiye'nin ilk milli helikopteri nedir?", c: "T625"},
         {s: "Dünyanın ilk kadın pilotu kimdir?", c: "RAYMONDE DE LAROCHE"},
@@ -383,6 +383,20 @@
     // Alfabe (Türkçe karakterler dahil)
     const alfabe = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ".split("");
 
+    // Klavye desteği
+    document.addEventListener('keydown', function(e) {
+        if (oyunBitti) return;
+        let harf = e.key.toUpperCase();
+
+        // Türkçe karakter dönüşümleri
+        if (harf === 'I') harf = 'I';
+        if (harf === 'İ') harf = 'İ';
+
+        if (alfabe.includes(harf)) {
+            harfTahmin(harf);
+        }
+    });
+
     // Soru havuzunu karıştır
     function karistirDizi(arr) {
         let a = arr.slice();
@@ -426,6 +440,7 @@
         }
         wordEl.textContent = goster.trim();
         correctEl.textContent = dogruSay;
+
         // Kazanma kontrolü
         if (!oyunBitti && dogruSay === seciliKelime.length) {
             oyunBitti = true;
@@ -434,36 +449,22 @@
         }
     }
 
-    function guncelleKlavye() {
-        lettersEl.innerHTML = "";
-        alfabe.forEach(harf => {
-            const btn = document.createElement("button");
-            btn.textContent = harf;
-            btn.disabled = oyunBitti || dogruHarfler.includes(harf) || yanlisHarfler.includes(harf);
-            if (dogruHarfler.includes(harf)) btn.classList.add("correct");
-            if (yanlisHarfler.includes(harf)) btn.classList.add("wrong");
-            btn.onclick = () => harfTahmin(harf);
-            lettersEl.appendChild(btn);
-        });
-    }
-
     function harfTahmin(harf) {
         if (oyunBitti) return;
+
         if (seciliKelime.includes(harf)) {
             if (!dogruHarfler.includes(harf)) {
                 dogruHarfler.push(harf);
                 guncelleKelime();
-                guncelleKlavye();
             }
         } else {
             if (!yanlisHarfler.includes(harf)) {
                 yanlisHarfler.push(harf);
                 wrongEl.textContent = yanlisHarfler.length;
-                guncelleKlavye();
                 ciz();
                 if (yanlisHarfler.length >= maxYanlis) {
                     oyunBitti = true;
-                    messageEl.textContent = `Kaybettiniz! Cevap: ${seciliKelime}`;
+                    messageEl.textContent = `Kaybettiniz! Kelime: ${seciliKelime}`;
                     tumButonlariKapat();
                 }
             }
@@ -474,50 +475,60 @@
         lettersEl.querySelectorAll("button").forEach(btn => btn.disabled = true);
     }
 
-    // Klavye desteği
-    document.addEventListener('keydown', function(e) {
-        if (oyunBitti) return;
-        let harf = e.key.toUpperCase();
-        if (alfabe.includes(harf)) {
-            harfTahmin(harf);
-        }
-    });
-
-    // Adam çizimi (canvas)
     function ciz() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.strokeStyle = "#4c1d95";
         ctx.lineWidth = 4;
+
         // Zemin
         ctx.beginPath();
-        ctx.moveTo(40, 300); ctx.lineTo(280, 300); ctx.stroke();
+        ctx.moveTo(40, 300);
+        ctx.lineTo(280, 300);
+        ctx.stroke();
+
         // Direk
         ctx.beginPath();
-        ctx.moveTo(80, 300); ctx.lineTo(80, 40); ctx.lineTo(200, 40); ctx.lineTo(200, 70); ctx.stroke();
+        ctx.moveTo(80, 300);
+        ctx.lineTo(80, 40);
+        ctx.lineTo(200, 40);
+        ctx.lineTo(200, 70);
+        ctx.stroke();
+
         // Adam parçaları
         if (yanlisHarfler.length > 0) { // Kafa
             ctx.beginPath();
-            ctx.arc(200, 95, 25, 0, Math.PI * 2); ctx.stroke();
+            ctx.arc(200, 100, 30, 0, Math.PI * 2);
+            ctx.stroke();
         }
         if (yanlisHarfler.length > 1) { // Gövde
             ctx.beginPath();
-            ctx.moveTo(200, 120); ctx.lineTo(200, 200); ctx.stroke();
+            ctx.moveTo(200, 130);
+            ctx.lineTo(200, 200);
+            ctx.stroke();
         }
         if (yanlisHarfler.length > 2) { // Sol kol
             ctx.beginPath();
-            ctx.moveTo(200, 140); ctx.lineTo(170, 170); ctx.stroke();
+            ctx.moveTo(200, 150);
+            ctx.lineTo(170, 180);
+            ctx.stroke();
         }
         if (yanlisHarfler.length > 3) { // Sağ kol
             ctx.beginPath();
-            ctx.moveTo(200, 140); ctx.lineTo(230, 170); ctx.stroke();
+            ctx.moveTo(200, 150);
+            ctx.lineTo(230, 180);
+            ctx.stroke();
         }
         if (yanlisHarfler.length > 4) { // Sol bacak
             ctx.beginPath();
-            ctx.moveTo(200, 200); ctx.lineTo(170, 240); ctx.stroke();
+            ctx.moveTo(200, 200);
+            ctx.lineTo(170, 250);
+            ctx.stroke();
         }
         if (yanlisHarfler.length > 5) { // Sağ bacak
             ctx.beginPath();
-            ctx.moveTo(200, 200); ctx.lineTo(230, 240); ctx.stroke();
+            ctx.moveTo(200, 200);
+            ctx.lineTo(230, 250);
+            ctx.stroke();
         }
     }
 

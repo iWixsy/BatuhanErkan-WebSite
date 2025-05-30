@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesap Makinesi | Batuhan</title>
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .calculator-container {
+            max-width: 420px;
+            margin: 3rem auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px #7c3aed22;
+            padding: 2rem 1.5rem;
+        }
+        .calculator-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 1.2rem;
+        }
+        .calculator-mode {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        .calculator-mode button {
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .calculator-display {
+            width: 100%;
+            padding: 0.7rem 1rem; /* Sol ve sağ boşluk artırıldı */
+            font-size: 1.5rem;
+            text-align: right;
+            border: 1.5px solid #e0e7ef;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            background: #f9fafb;
+            box-sizing: border-box;
+        }
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.7rem;
+        }
+        .calculator-buttons button {
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            background: #7c3aed;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .calculator-buttons button:hover {
+            background: #4c1d95;
+        }
+        .advanced-buttons {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+        .advanced-buttons button {
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            background: #38bdf8;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .advanced-buttons button:hover {
+            background: #2563eb;
+        }
+        .calculator-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+        .calculator-actions button {
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .calculator-actions .btn-clear {
+            background: #ef4444;
+            color: #fff;
+        }
+        .calculator-actions .btn-clear:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-title">Hesap Makinesi</div>
+        <div class="calculator-mode">
+            <button id="basicModeBtn">Basit Mod</button>
+            <button id="advancedModeBtn">Kapsamlı Mod</button>
+        </div>
+        <input type="text" id="calculatorDisplay" class="calculator-display" readonly>
+        <div class="calculator-buttons" id="basicButtons">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>/</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>*</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>-</button>
+            <button>0</button>
+            <button>.</button>
+            <button>=</button>
+            <button>+</button>
+        </div>
+        <div class="advanced-buttons" id="advancedButtons">
+            <button>sin</button>
+            <button>cos</button>
+            <button>tan</button>
+            <button>√</button>
+            <button>^</button>
+            <button>log</button>
+            <button>π</button>
+            <button>e</button>
+        </div>
+        <div class="calculator-actions">
+            <button class="btn-clear" id="clearAllBtn">Tümünü Sil</button>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById('calculatorDisplay');
+        const basicButtons = document.getElementById('basicButtons');
+        const advancedButtons = document.getElementById('advancedButtons');
+        const basicModeBtn = document.getElementById('basicModeBtn');
+        const advancedModeBtn = document.getElementById('advancedModeBtn');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+
+        let currentInput = '';
+        let isAdvancedMode = false;
+
+        function updateDisplay(value) {
+            display.value = value;
+        }
+
+        function calculate(expression) {
+            try {
+                return eval(expression);
+            } catch {
+                return 'Hata';
+            }
+        }
+
+        basicButtons.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const value = e.target.textContent;
+                if (value === '=') {
+                    currentInput = calculate(currentInput);
+                } else {
+                    currentInput += value;
+                }
+                updateDisplay(currentInput);
+            }
+        });
+
+        advancedButtons.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const value = e.target.textContent;
+                if (value === 'sin') currentInput = Math.sin(eval(currentInput)).toFixed(4);
+                else if (value === 'cos') currentInput = Math.cos(eval(currentInput)).toFixed(4);
+                else if (value === 'tan') currentInput = Math.tan(eval(currentInput)).toFixed(4);
+                else if (value === '√') currentInput = Math.sqrt(eval(currentInput)).toFixed(4);
+                else if (value === '^') currentInput += '**';
+                else if (value === 'log') currentInput = Math.log10(eval(currentInput)).toFixed(4);
+                else if (value === 'π') currentInput += Math.PI.toFixed(4);
+                else if (value === 'e') currentInput += Math.E.toFixed(4);
+                updateDisplay(currentInput);
+            }
+        });
+
+        basicModeBtn.addEventListener('click', () => {
+            isAdvancedMode = false;
+            advancedButtons.style.display = 'none';
+            basicButtons.style.display = 'grid';
+        });
+
+        advancedModeBtn.addEventListener('click', () => {
+            isAdvancedMode = true;
+            advancedButtons.style.display = 'grid';
+            basicButtons.style.display = 'grid';
+        });
+
+        clearAllBtn.addEventListener('click', () => {
+            currentInput = '';
+            updateDisplay('');
+        });
+
+        // Klavyeden giriş desteği
+        document.addEventListener('keydown', (e) => {
+            const allowedKeys = '0123456789+-*/.=()';
+            if (allowedKeys.includes(e.key)) {
+                if (e.key === '=') {
+                    currentInput = calculate(currentInput);
+                } else {
+                    currentInput += e.key;
+                }
+                updateDisplay(currentInput);
+            } else if (e.key === 'Backspace') {
+                currentInput = currentInput.slice(0, -1);
+                updateDisplay(currentInput);
+            } else if (e.key === 'Enter') {
+                currentInput = calculate(currentInput);
+                updateDisplay(currentInput);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -335,22 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         });
     }
-    const skillsSection = document.querySelector('.skills-section');
-    let skillsAnimated = false;
-    if (skillsSection) {
-        window.addEventListener('scroll', () => {
-            if (!skillsAnimated && isInViewport(skillsSection)) {
-                animateSkills();
-                skillsAnimated = true;
-            }
-        });
-        if (isInViewport(skillsSection)) {
-            animateSkills();
-            skillsAnimated = true;
-        }
-    }
 
-    // Sayaçlar (Counter) animasyonunu ekledim
     function animateCounters() {
         const counters = document.querySelectorAll('.counter-number');
         counters.forEach(counter => {
@@ -369,6 +354,22 @@ document.addEventListener('DOMContentLoaded', function() {
             update();
         });
     }
+    const skillsSection = document.querySelector('.skills-section');
+    let skillsAnimated = false;
+    if (skillsSection) {
+        window.addEventListener('scroll', () => {
+            if (!skillsAnimated && isInViewport(skillsSection)) {
+                animateSkills();
+                skillsAnimated = true;
+            }
+        });
+        if (isInViewport(skillsSection)) {
+            animateSkills();
+            skillsAnimated = true;
+        }
+    }
+
+    // Sayaçlar (Counter) animasyonunu ekledim
     const counterSection = document.querySelector('.counter-section');
     let countersAnimated = false;
     if (counterSection) {
