@@ -114,8 +114,7 @@
     <div class="calculator-container">
         <div class="calculator-title">Hesap Makinesi</div>
         <div class="calculator-mode">
-            <button id="basicModeBtn">Basit Mod</button>
-            <button id="advancedModeBtn">Kapsamlı Mod</button>
+            <button id="toggleModeBtn">Kapsamlı Mod</button>
         </div>
         <input type="text" id="calculatorDisplay" class="calculator-display" readonly>
         <div class="calculator-buttons" id="basicButtons">
@@ -154,8 +153,7 @@
         const display = document.getElementById('calculatorDisplay');
         const basicButtons = document.getElementById('basicButtons');
         const advancedButtons = document.getElementById('advancedButtons');
-        const basicModeBtn = document.getElementById('basicModeBtn');
-        const advancedModeBtn = document.getElementById('advancedModeBtn');
+        const toggleModeBtn = document.getElementById('toggleModeBtn');
         const clearAllBtn = document.getElementById('clearAllBtn');
 
         let currentInput = '';
@@ -200,16 +198,10 @@
             }
         });
 
-        basicModeBtn.addEventListener('click', () => {
-            isAdvancedMode = false;
-            advancedButtons.style.display = 'none';
-            basicButtons.style.display = 'grid';
-        });
-
-        advancedModeBtn.addEventListener('click', () => {
-            isAdvancedMode = true;
-            advancedButtons.style.display = 'grid';
-            basicButtons.style.display = 'grid';
+        toggleModeBtn.addEventListener('click', () => {
+            isAdvancedMode = !isAdvancedMode;
+            advancedButtons.style.display = isAdvancedMode ? 'grid' : 'none';
+            toggleModeBtn.textContent = isAdvancedMode ? 'Basit Mod' : 'Kapsamlı Mod';
         });
 
         clearAllBtn.addEventListener('click', () => {
@@ -235,6 +227,9 @@
                 updateDisplay(currentInput);
             }
         });
+
+        // Başlangıçta sadece basit mod gösteriliyor
+        advancedButtons.style.display = 'none';
     </script>
 </body>
 </html>
