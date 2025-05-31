@@ -1,21 +1,21 @@
 /* Modern ve canlı renk paleti */
 :root {
-    --primary: #7c3aed;         /* canlı mor */
-    --primary-dark: #4c1d95;    /* koyu mor */
-    --secondary: #f472b6;       /* canlı pembe */
-    --secondary-dark: #be185d;  /* koyu pembe */
-    --accent: #38bdf8;          /* canlı mavi */
-    --success: #22c55e;         /* canlı yeşil */
-    --error: #ef4444;           /* canlı kırmızı */
-    --warning: #fbbf24;         /* canlı sarı */
-    --bg: #f3f4f6;              /* açık gri */
-    --bg-alt: #e0e7ef;          /* açık mavi-gri */
-    --text: #18181b;            /* koyu gri */
-    --text-light: #6b7280;      /* orta gri */
-    --card: #fff;
-    --border: #e5e7eb;
+    --primary: #8b5cf6;         /* parlak mor */
+    --primary-dark: #6d28d9;    /* koyu parlak mor */
+    --secondary: #ec4899;       /* parlak pembe */
+    --secondary-dark: #db2777;  /* koyu parlak pembe */
+    --accent: #0ea5e9;          /* parlak mavi */
+    --success: #16a34a;         /* parlak yeşil */
+    --error: #dc2626;           /* parlak kırmızı */
+    --warning: #f59e0b;         /* parlak sarı */
+    --bg: #f9fafb;              /* açık gri */
+    --bg-alt: #e5e7eb;          /* açık mavi-gri */
+    --text: #111827;            /* koyu gri */
+    --text-light: #4b5563;      /* orta gri */
+    --card: #ffffff;            /* beyaz */
+    --border: #d1d5db;          /* açık gri kenar */
     --radius: 18px;
-    --shadow: 0 4px 24px rgba(124,58,237,0.08);
+    --shadow: 0 4px 24px rgba(139,92,246,0.15); /* parlak gölge */
     --font: 'Inter', Arial, sans-serif;
     --transition: 0.22s cubic-bezier(.4,0,.2,1);
 }
