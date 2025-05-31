@@ -106,13 +106,13 @@ body.dark::before {
 }
 
 body.dark {
-    --bg: #181825;
-    --bg-alt: #23263a;
-    --text: #e0e7ef;
-    --text-light: #a1a1aa;
-    --card: #23263a;
-    --border: #312e81;
-    background: linear-gradient(120deg, #181825 0%, #23263a 100%);
+    --bg: #121212; /* Daha koyu arka plan */
+    --bg-alt: #1e1e1e; /* Daha koyu alternatif arka plan */
+    --text: #e4e4e4; /* Daha açık metin rengi */
+    --text-light: #b3b3b3; /* Daha açık gri metin */
+    --card: #1c1c1c; /* Kartlar için koyu arka plan */
+    --border: #333333; /* Daha koyu kenar rengi */
+    background: linear-gradient(120deg, #121212 0%, #1e1e1e 100%);
 }
 
 /* Koyu tema için kart, section ve modalı daha belirgin ve modern yap */
@@ -123,21 +123,21 @@ body.dark article,
 body.dark .modal-content,
 body.dark form,
 body.dark .ref-card {
-    background: rgba(36, 37, 46, 0.98);
-    border-color: #312e81;
-    box-shadow: 0 6px 32px 0 rgba(60, 60, 120, 0.18);
-    color: #e0e7ef;
+    background: rgba(28, 28, 28, 0.95); /* Kartlar için daha koyu arka plan */
+    border-color: #444444; /* Kenar rengi güncellendi */
+    box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.5); /* Daha yumuşak gölge */
+    color: #e4e4e4; /* Metin rengi */
 }
 
 body.dark input,
 body.dark textarea {
-    background: #23263a;
-    color: #e0e7ef;
-    border-color: #312e81;
+    background: #1e1e1e; /* Daha koyu giriş alanı */
+    color: #e4e4e4; /* Metin rengi */
+    border-color: #444444; /* Kenar rengi */
 }
 
 body.dark label {
-    color: #a5b4fc;
+    color: #a5a5a5; /* Daha açık gri */
 }
 
 body.dark .btn,
@@ -145,105 +145,105 @@ body.dark .btn.secondary,
 body.dark .btn.success,
 body.dark .btn.error {
     color: #fff;
-    box-shadow: 0 2px 12px #312e8133;
+    box-shadow: 0 2px 12px #444444; /* Daha koyu gölge */
 }
 
 body.dark .btn:hover,
 body.dark .btn:focus {
-    background: var(--secondary-dark);
+    background: var(--secondary-dark); /* Daha koyu pembe */
     color: #fff;
 }
 
 body.dark .theme-toggle {
-    background: var(--primary-dark);
+    background: var(--primary-dark); /* Daha koyu mor */
     color: #fff;
 }
 body.dark .theme-toggle:hover {
-    background: var(--secondary-dark);
+    background: var(--secondary-dark); /* Daha koyu pembe */
 }
 
 body.dark .counter-card {
-    background: #23263a;
-    border-color: #312e81;
+    background: #1e1e1e; /* Daha koyu kart arka planı */
+    border-color: #444444; /* Kenar rengi */
 }
 
 body.dark .counter-label {
-    color: #a1a1aa;
+    color: #b3b3b3; /* Daha açık gri */
 }
 
 body.dark .timeline-content {
-    background: #23263a;
-    color: #e0e7ef;
+    background: #1e1e1e; /* Daha koyu zaman çizelgesi arka planı */
+    color: #e4e4e4; /* Metin rengi */
 }
 
 body.dark .timeline-dot {
-    border-color: #23263a;
-    background: var(--secondary-dark);
+    border-color: #1e1e1e; /* Daha koyu nokta kenarı */
+    background: var(--secondary-dark); /* Daha koyu pembe */
 }
 
 body.dark .quote-banner {
-    background: #312e81;
-    color: #f472b6;
+    background: #333333; /* Daha koyu banner arka planı */
+    color: #f472b6; /* Pembe metin */
 }
 
 body.dark .welcome-hero-bg {
-    background: linear-gradient(120deg, #312e81 60%, #be185d 100%);
-    opacity: 0.80; /* Opaklık azaltıldı, yazı daha net */
+    background: linear-gradient(120deg, #333333 60%, #be185d 100%); /* Daha koyu geçiş */
+    opacity: 0.85; /* Opaklık artırıldı */
 }
 
 body.dark .welcome-hero-title,
 body.dark .welcome-hero-subtitle {
-    color: #fff;
+    color: #fff; /* Beyaz metin */
 }
 
 body.dark .welcome-hero-desc {
-    color: #fffde7;
-    background: rgba(60, 60, 80, 0.38);
-    border-left: 4px solid var(--primary);
-    box-shadow: 0 4px 18px #0005;
+    color: #e4e4e4; /* Daha açık metin */
+    background: rgba(40, 40, 40, 0.8); /* Daha koyu arka plan */
+    border-left: 4px solid var(--primary); /* Sol kenar rengi */
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5); /* Daha yumuşak gölge */
 }
 
 body.dark .welcome-hero-highlight {
-    color: #fffbe6;
+    color: #fff; /* Beyaz metin */
     background: none;
-    -webkit-text-fill-color: #fffbe6;
-    text-shadow: 0 2px 8px #000a;
+    -webkit-text-fill-color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); /* Daha koyu gölge */
 }
 
 body.dark .social a {
-    background: #23263a;
-    color: #a5b4fc;
+    background: #1e1e1e; /* Daha koyu sosyal ikon arka planı */
+    color: #a5a5a5; /* Daha açık gri */
 }
 body.dark .social a:hover,
 body.dark .social a:focus {
-    background: var(--primary-dark);
+    background: var(--primary-dark); /* Daha koyu mor */
     color: #fff;
 }
 
 body.dark .modal-content {
-    background: #23263a;
-    color: #e0e7ef;
-    border: 1.5px solid #312e81;
+    background: #1e1e1e; /* Daha koyu modal arka planı */
+    color: #e4e4e4; /* Metin rengi */
+    border: 1.5px solid #444444; /* Kenar rengi */
 }
 
 body.dark details {
-    background: #23263a;
-    color: #e0e7ef;
-    border: 1px solid #312e81;
+    background: #1e1e1e; /* Daha koyu detay arka planı */
+    color: #e4e4e4; /* Metin rengi */
+    border: 1px solid #444444; /* Kenar rengi */
 }
 body.dark details[open] {
-    background: #312e81;
+    background: #333333; /* Daha koyu açık detay arka planı */
 }
 
 body.dark .skill-bar-bg {
-    background: #23263a;
+    background: #1e1e1e; /* Daha koyu yetenek çubuğu arka planı */
 }
 body.dark .skill-bar-fill {
-    background: linear-gradient(90deg, var(--primary-dark), var(--secondary-dark));
+    background: linear-gradient(90deg, var(--primary-dark), var(--secondary-dark)); /* Daha koyu geçiş */
 }
 
 body.dark .achievements-list {
-    color: #e0e7ef;
+    color: #e4e4e4; /* Metin rengi */
 }
 
 /* Üstte ve altta yüzen blob efektlerini ekleyerek siteye canlılık kattım */
@@ -650,15 +650,15 @@ details {
     font-size: 0.98rem;
 }
 body.dark details {
-    background: #23263a;
-    color: #f1f5f9;
-    border: 1px solid #2d3143;
+    background: #1e1e1e; /* Daha koyu detay arka planı */
+    color: #e4e4e4; /* Metin rengi */
+    border: 1px solid #444444; /* Kenar rengi */
 }
 details[open] {
     background: #e0e7ef;
 }
 body.dark details[open] {
-    background: #2d3143;
+    background: #333333; /* Daha koyu açık detay arka planı */
 }
 details summary {
     font-weight: 700;
@@ -766,11 +766,11 @@ footer {
     gap: 0.3rem;
 }
 body.dark .counter-card {
-    background: #23263a;
-    border-color: #312e81;
+    background: #1e1e1e; /* Daha koyu kart arka planı */
+    border-color: #444444; /* Kenar rengi */
 }
 body.dark .counter-label {
-    color: #a1a1aa;
+    color: #b3b3b3; /* Daha açık gri */
 }
 
 /* Skill Barlar */
@@ -801,7 +801,7 @@ body.dark .counter-label {
     position: relative;
 }
 body.dark .skill-bar-bg {
-    background: #23263a;
+    background: #1e1e1e; /* Daha koyu yetenek çubuğu arka planı */
 }
 .skill-bar-fill {
     background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -919,8 +919,8 @@ body.dark .timeline-dot {
     text-align: center;
 }
 body.dark .modal-content {
-    background: #23263a;
-    color: #f1f5f9;
+    background: #1e1e1e; /* Daha koyu modal arka planı */
+    color: #e4e4e4; /* Metin rengi */
 }
 .modal-close {
     position: absolute;
@@ -1111,31 +1111,27 @@ body.dark .modal-content {
 
 /* Koyu temada karşılama yazısı ve motivasyon sözü için kontrast ve derinlik düzeltmeleri */
 body.dark .welcome-hero-bg {
-    background: linear-gradient(120deg, #312e81 60%, #be185d 100%);
-    opacity: 0.80; /* Opaklık azaltıldı, yazı daha net */
+    background: linear-gradient(120deg, #333333 60%, #be185d 100%); /* Daha koyu geçiş */
+    opacity: 0.85; /* Opaklık artırıldı */
 }
 
 body.dark .welcome-hero-desc {
-    color: #fffde7;
-    background: rgba(60, 60, 80, 0.38);
-    border-left: 4px solid var(--primary);
-    box-shadow: 0 4px 18px #0005;
+    color: #e4e4e4; /* Daha açık metin */
+    background: rgba(40, 40, 40, 0.8); /* Daha koyu arka plan */
+    border-left: 4px solid var(--primary); /* Sol kenar rengi */
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5); /* Daha yumuşak gölge */
 }
 
 body.dark .welcome-hero-highlight {
-    color: #fffbe6;
+    color: #fff; /* Beyaz metin */
     background: none;
-    -webkit-text-fill-color: #fffbe6;
-    text-shadow: 0 2px 8px #000a;
+    -webkit-text-fill-color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); /* Daha koyu gölge */
 }
 
 body.dark .quote-banner {
-    background: #181825;
-    color: #fbbf24;
-    box-shadow: 0 4px 18px #0007;
-    border: 1.5px solid #312e81;
-    position: relative;
-    z-index: 2;
+    background: #333333; /* Daha koyu banner arka planı */
+    color: #f472b6; /* Pembe metin */
 }
 
 /* Karşılama yazısı ve motivasyon sözü için açık temada da kontrast ve derinlik düzeltmeleri */
