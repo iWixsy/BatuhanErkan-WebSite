@@ -563,3 +563,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// MongoDB ile ilgili kodlar kaldırıldı
