@@ -562,6 +562,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target === cvModal) cvModal.classList.remove('show');
         });
     }
-});
 
-// MongoDB ile ilgili kodlar kaldırıldı
+    // .html uzantısını kaldırarak yönlendirme ile ilgili kodlar kaldırıldı
+});
