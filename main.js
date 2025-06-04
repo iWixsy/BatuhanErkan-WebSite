@@ -558,3 +558,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // .html uzantısını kaldırarak yönlendirme ile ilgili kodlar kaldırıldı
 });
+
+const version = "v3.6.0";
+const lastUpdate = "2025-06-04";
