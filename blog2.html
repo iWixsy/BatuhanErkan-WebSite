@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 2 | Batuhan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav aria-label="Site ana menüsü">
+            <a href="index.html#anasayfa" class="logo" aria-label="Anasayfa">Batuhan Erkan</a>
+            <ul id="nav-menu">
+                <li><a href="index.html#anasayfa">Anasayfa</a></li>
+                <li><a href="index.html#referanslar">Referanslar</a></li>
+                <li><a href="index.html#hakkimda">Hakkımda</a></li>
+                <li><a href="index.html#portfoy">Portföy</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Siteyle İlgili Kapsamlı Bilgiler</h1>
+            <h2>Güncellemeler</h2>
+            <p>Site, modern web teknolojileri kullanılarak geliştirilmiştir. Son güncelleme ile mobil uyumluluk artırıldı, koyu tema desteği eklendi ve mikro etkileşimler iyileştirildi.</p>
+            <h2>İlerisi İçin Planlar</h2>
+            <ul>
+                <li>Blog yazılarının dinamik olarak JSON dosyasından yüklenmesi.</li>
+                <li>Portföy projeleri için detaylı modal veya ayrı sayfa eklenmesi.</li>
+                <li>Oyunlar için skor tablosu ve kullanıcı kayıt sistemi.</li>
+                <li>Google Analytics entegrasyonu ile ziyaretçi davranışlarının izlenmesi.</li>
+                <li>Renk paleti özelleştirme aracı eklenmesi.</li>
+            </ul>
+            <h2>Site Özellikleri</h2>
+            <ul>
+                <li>Mobil uyumlu tasarım.</li>
+                <li>Koyu tema desteği.</li>
+                <li>Animasyonlu sayaçlar ve yetenek çubukları.</li>
+                <li>Dinamik motivasyon sözleri.</li>
+                <li>Geri dön butonu ve ilerleme çubuğu.</li>
+            </ul>
+            <h2>İletişim</h2>
+            <p>Her türlü soru, öneri veya iş birliği için <a href="mailto:batuhan.iletisimm2@gmail.com">batuhan.iletisimm2@gmail.com</a> adresinden bana ulaşabilirsiniz veya İletişim için <a href="iletisim.html">buraya tıklayın</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; <span id="year"></span> Batuhan. Tüm hakları saklıdır.</p>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
