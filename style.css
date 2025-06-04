@@ -1676,3 +1676,13 @@ body.dark footer .kardes-site-link a:focus {
 }
 
 /* Yükleniyor ekranı ile ilgili CSS kaldırıldı */
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+body.dark p {
+    color: #b3b3b3; /* Koyu temada daha açık gri */
+}

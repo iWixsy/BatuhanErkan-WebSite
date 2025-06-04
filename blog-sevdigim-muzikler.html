@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sevdiğim Müzikler | Batuhan</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .playlist-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .playlist-card {
+            max-width: 320px;
+            text-align: center;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            border: 1px solid var(--border);
+            transition: box-shadow 0.18s;
+        }
+        .playlist-card:hover {
+            box-shadow: 0 8px 32px rgba(37,99,235,0.13);
+            transform: none; /* Büyüme efekti iptal edildi */
+        }
+        .playlist-card iframe {
+            width: 100%;
+            border-radius: var(--radius);
+            margin-bottom: 0.7rem;
+        }
+        .playlist-card button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 0.5rem 1.3rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.18s, box-shadow 0.18s;
+        }
+        .playlist-card button:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav aria-label="Site ana menüsü">
+            <a href="index.html#anasayfa" class="logo" aria-label="Anasayfa">Batuhan Erkan</a>
+            <button id="nav-toggle" aria-label="Menüyü Aç/Kapat"><i class="fas fa-bars"></i></button>
+            <ul id="nav-menu">
+                <li><a href="index.html#anasayfa">Anasayfa</a></li>
+                <li><a href="index.html#referanslar">Referanslar</a></li>
+                <li><a href="index.html#hakkimda">Hakkımda</a></li>
+                <li><a href="index.html#portfoy">Portföy</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Sevdiğim Müzikler</h1>
+        <p>Bu sayfada sevdiğim müzikleri ve playlistleri bulabilirsiniz. Spotify'da dinlemek için ilgili butonlara tıklayabilirsiniz.</p>
+        <div class="playlist-container">
+            <div class="playlist-card">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1EQncLwOalG3K7?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <h2>Pop Mix</h2>
+                <button onclick="window.open('https://open.spotify.com/playlist/37i9dQZF1EQncLwOalG3K7', '_blank')">Spotify'da Aç</button>
+            </div>
+            <div class="playlist-card">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX29mEFPXNhRM?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <h2>Akustik Türkçe</h2>
+                <button onclick="window.open('https://open.spotify.com/playlist/37i9dQZF1DX29mEFPXNhRM', '_blank')">Spotify'da Aç</button>
+            </div>
+            <div class="playlist-card">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3naSJy3xHZSRGa27RMKoXZ?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <h2>Alternatif Arabesk</h2>
+                <button onclick="window.open('https://open.spotify.com/playlist/3naSJy3xHZSRGa27RMKoXZ', '_blank')">Spotify'da Aç</button>
+            </div>
+            <div class="playlist-card">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0QmdOLcmGcN?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <h2>Türkçe Alternatif</h2>
+                <button onclick="window.open('https://open.spotify.com/playlist/37i9dQZF1DX0QmdOLcmGcN', '_blank')">Spotify'da Aç</button>
+            </div>
+            <div class="playlist-card">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1E8BUoOW6z185W?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <h2>Kafile Radiosu</h2>
+                <button onclick="window.open('https://open.spotify.com/playlist/37i9dQZF1E8BUoOW6z185W', '_blank')">Spotify'da Aç</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="social">
+            <a href="https://www.instagram.com/batuhan._.erkan/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/iWixsy" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/batuhan-erkan-913481355/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/Batuhan51588979" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+        <div class="kardes-site-link">
+            <i class="fas fa-link"></i>
+            <a href="http://umutcangokhan.rf.gd/index.html" target="_blank" rel="noopener">
+                Kardeş Site: umutcangokhan.rf.gd
+            </a>
+        </div>
+        <div>
+            <a href="mailto:batuhan.iletisimm2@gmail.com" style="color:inherit;text-decoration:none;"><i class="fas fa-envelope"></i> batuhan.iletisimm2@gmail.com</a>
+            &nbsp;|&nbsp;
+            <a href="tel:+905551112233" style="color:inherit;text-decoration:none;"><i class="fas fa-phone"></i> +90 555 111 22 33</a>
+        </div>
+        <div style="margin:1rem 0 0.5rem 0;">
+            <span id="visitor-counter"><i class="fas fa-users"></i> Ziyaretçi: <span id="visitor-count">...</span></span>
+        </div>
+        <p>&copy; <span id="year"></span> Batuhan. Tüm hakları saklıdır.</p>
+        <div style="font-size:0.95em;color:#888;margin-top:0.5rem;">
+            Sürüm: v3.6.0 &nbsp;|&nbsp; Son güncelleme: 2025-06-04
+            &nbsp;|&nbsp; <a href="#" id="aboutSiteBtn" style="color:inherit;text-decoration:underline;">Site Hakkında</a>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
