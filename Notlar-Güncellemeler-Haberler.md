@@ -18,11 +18,11 @@ Kod yazarken açık kaynak kod paylaşım sitelerini ve geliştirici blogların�
 
 ## Son Güncellemeler
 
-- **[2025-07-01]** Site sürümü v3.7.0 olarak güncellendi. Açık/Koyu tema geçişi ve mobil uyumluluk iyileştirildi.
-- **[2025-06-30]** Open Graph meta etiketleri geliştirildi. Sosyal medya paylaşımı için daha iyi görseller eklendi.
-- **[2025-06-25]** Blog yazıları ve portföy projeleri için arama özelliği eklenmesi planlandı.
-- **[2025-06-20]** Ziyaretçi sayacı ve motivasyon sözü banner'ı güncellendi.
-- **[2025-06-15]** QR Kod Oluşturucu ve Sayı Tahmin Oyunu projeleri portföye eklendi.
+- **[2025-06-05]** Site sürümü v3.7.0 olarak güncellendi. Açık/Koyu tema geçişi ve mobil uyumluluk iyileştirildi.
+- **[2025-06-05]** Open Graph meta etiketleri geliştirildi. Sosyal medya paylaşımı için daha iyi görseller eklendi.
+- **[2025-05-25]** Blog yazıları ve portföy projeleri için arama özelliği eklenmesi planlandı.
+- **[2025-05-20]** Ziyaretçi sayacı ve motivasyon sözü banner'ı güncellendi.
+- **[2025-05-20]** QR Kod Oluşturucu ve Sayı Tahmin Oyunu projeleri portföye eklendi.
 
 ## Geri Bildirim
 
