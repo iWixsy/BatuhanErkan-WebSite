@@ -33,3 +33,6 @@ Her türlü öneri, hata bildirimi veya iş birliği için bana ulaşabilirsiniz
 
 > **Not:** Bu dosya, sitenin gelişim sürecini ve önemli değişiklikleri takip etmek için düzenli olarak güncellenecektir.
 > **Sürüm:** v1.3.0
+> **Tarih:** 2025-06-05
+> **Yazar:** Batuhan Erkan
+> **İletişim:** [batuhanerkan.me](https://batuhanerkan.me/iletisim.html)
