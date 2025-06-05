@@ -14,15 +14,15 @@ Kod yazarken açık kaynak kod paylaşım sitelerini ve geliştirici blogların�
 - **Sürekli Gelişim:** Site düzenli olarak güncellenmeye ve yeni özellikler eklenmeye devam edecek.
 - **Yeni Projeler:** Portföy kısmına yeni oyunlar ve uygulamalar eklenmeye devam edecek.
 - **Açık Kaynak:** Kodların büyük kısmı açık kaynak olarak paylaşılacak ve isteyen herkes faydalanabilecek.
+- **Çoklu Dil Desteği:** Türkçe ve İngilizce dillerinde içerik sunmayı planlıyorum.
 
 ## Son Güncellemeler
 
-- **[2025-05-30]** Site `batuhanerkan.me` domainine taşındı.
-- **[2025-05-26]** Adam Asmaca ve Yılan Oyunu gibi klasik oyunlar eklendi.
-- **[2025-05-26]** Portföydeki tüm oyunlar ve uygulamalar `oyunlar/` klasörüne taşındı, bağlantılar güncellendi.
-- **[2025-05-26]** Portföy bölümü 3'erli grid yapısına geçirildi, yeni projeler kolayca eklenebiliyor.
-- **[2025-05-26]** Koyu/Açık tema desteği ve modern scroll bar tasarımı eklendi.
-- **[2025-05-26]** Ziyaretçi sayacı, motivasyon sözü ve animasyonlu sayaçlar eklendi.
+- **[2025-07-01]** Site sürümü v3.7.0 olarak güncellendi. Açık/Koyu tema geçişi ve mobil uyumluluk iyileştirildi.
+- **[2025-06-30]** Open Graph meta etiketleri geliştirildi. Sosyal medya paylaşımı için daha iyi görseller eklendi.
+- **[2025-06-25]** Blog yazıları ve portföy projeleri için arama özelliği eklenmesi planlandı.
+- **[2025-06-20]** Ziyaretçi sayacı ve motivasyon sözü banner'ı güncellendi.
+- **[2025-06-15]** QR Kod Oluşturucu ve Sayı Tahmin Oyunu projeleri portföye eklendi.
 
 ## Geri Bildirim
 
@@ -32,4 +32,4 @@ Her türlü öneri, hata bildirimi veya iş birliği için bana ulaşabilirsiniz
 ---
 
 > **Not:** Bu dosya, sitenin gelişim sürecini ve önemli değişiklikleri takip etmek için düzenli olarak güncellenecektir.
-> **Sürüm:** v1.2.0
+> **Sürüm:** v1.3.0
