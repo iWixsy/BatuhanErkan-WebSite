@@ -561,3 +561,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const version = "v3.7.0";
 const lastUpdate = "2025-06-05";
+
+// Mobil için tema seçme butonu kaldırıldı
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileThemeSwitcher = document.getElementById('mobile-theme-switcher');
+    if (mobileThemeSwitcher) {
+        mobileThemeSwitcher.remove();
+    }
+});
+
+// Tema seçme butonu
+document.addEventListener('DOMContentLoaded', function() {
+    const themeSwitcher = document.createElement('button');
+    themeSwitcher.id = 'theme-switcher';
+    themeSwitcher.innerHTML = '<i class="fas fa-adjust"></i>'; // Simge eklendi
+    themeSwitcher.style.cssText = `
+        position: fixed;
+        bottom: 5.2rem; /* Yukarı çıkma tuşu ile aynı hiza */
+        right: 1.2rem;
+        background: #7c3aed;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 48px; /* Boyut büyütüldü */
+        height: 48px; /* Boyut büyütüldü */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem; /* Simge boyutu büyütüldü */
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 101;
+        transition: background 0.2s, transform 0.2s;
+    `;
+
+    themeSwitcher.onclick = () => {
+        const isDark = document.body.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        showToast(isDark ? 'Koyu tema aktif.' : 'Açık tema aktif.');
+    };
+
+    themeSwitcher.onmouseenter = () => {
+        themeSwitcher.style.transform = 'scale(1.1)';
+    };
+
+    themeSwitcher.onmouseleave = () => {
+        themeSwitcher.style.transform = 'scale(1)';
+    };
+
+    document.body.appendChild(themeSwitcher);
+});

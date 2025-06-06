@@ -503,6 +503,15 @@ h3 {
     color: #fff;
 }
 
+#theme-switcher {
+    transition: background 0.2s, transform 0.2s;
+}
+
+#theme-switcher:hover {
+    background: #6d28d9;
+    transform: scale(1.1);
+}
+
 /* Mobil uyumluluk */
 @media (max-width: 700px) {
     #kardes-siteler {
@@ -1688,3 +1697,11 @@ body.dark p {
 }
 
 /* Sürüm: v3.7.0 | Son güncelleme: 2025-06-05 */
+
+#mobile-theme-switcher button {
+    transition: background 0.2s, color 0.2s;
+}
+
+#mobile-theme-switcher button:hover {
+    filter: brightness(1.1);
+}
