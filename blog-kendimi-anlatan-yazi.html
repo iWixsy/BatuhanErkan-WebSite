@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendimi Anlatan Yazı | Batuhan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav aria-label="Site ana menüsü">
+            <a href="index.html" class="logo" aria-label="Anasayfa">Batuhan Erkan</a>
+            <button id="nav-toggle" aria-label="Menüyü Aç/Kapat"><i class="fas fa-bars"></i></button>
+            <ul id="nav-menu">
+                <li><a href="index.html">Anasayfa</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Kendimi Anlatan Yazı</h1>
+            <article>
+                <h2>Merhaba!</h2>
+                <p>
+                    Ben Batuhan Erkan, Bilecik Şeyh Edebali Üniversitesi’nde İnternet ve Ağ Teknolojileri bölümünde öğrenim görüyorum. Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleşmeye yöneltti. Şu anda hem teorik bilgimi artırıyor hem de bu bilgiyi pratiğe dökme fırsatlarını arıyorum.
+                </p>
+                <p>
+                    Lise dönemimde, Yıldızlar Yatırım Holding iştiraki olan İstanbul Gübre Sanayi A.Ş.’de bilgi işlem departmanında 9 ay süren bir staj programına katılarak kurumsal BT süreçlerine erken yaşta dahil oldum. Bu süreçte donanım kurulumu, ağ bağlantısı sorunları, yazılım destekleri ve kullanıcı taleplerine müdahale gibi görevlerde aktif rol aldım. Hem sahada hem masa başında gerçek dünya tecrübesi kazandım.
+                </p>
+                <p>
+                    Üniversite hayatım boyunca ağ sistemleri, siber güvenlik ve sistem yönetimi gibi alanlarda kendimi geliştirmeye devam ediyorum. Hedefim, gelişen dünyada güvenilir ve sağlam dijital altyapılar kuran ekiplerin bir parçası olmak. Bu süreçte öğrendiğim her yeni bilgi ve edindiğim her deneyim beni daha ileriye taşıyor.
+                </p>
+                <p>
+                    Kendi kişisel web sitemi kurarak dijital dünyada kendime ait bir alan oluşturdum. Tasarım, içerik yönetimi ve yayınlama süreçlerini kendim yönettim. Bu site, hem portföyümü sergilediğim hem de blog yazılarımı paylaştığım bir platform olarak hizmet veriyor.
+                </p>
+                <p>
+                    Teknolojiye olan tutkum, sürekli öğrenme isteğim ve problem çözme becerimle bu alanda fark yaratmayı hedefliyorum. Eğer benimle iletişime geçmek isterseniz, <a href="iletisim.html">iletişim</a> sayfasını ziyaret edebilirsiniz.
+                </p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; <span id="year"></span> Batuhan. Tüm hakları saklıdır.</p>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
