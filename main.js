@@ -1,3 +1,4 @@
+// Sürüm: v4.10.2
 // Mobil menüyü açıp kapatmak için bu kısmı yazdım
 document.addEventListener('DOMContentLoaded', function() {
     // Navigasyon menüsünü açıp kapatmak için kodumu yazdım
@@ -69,6 +70,35 @@ document.addEventListener('DOMContentLoaded', function() {
         themeBtn.onclick = () => {
             document.body.classList.toggle('dark');
             updateThemeIcon();
+            // Kullanıcının tema tercihini kaydediyorum
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+            showToast(document.body.classList.contains('dark') ? "Koyu tema aktif." : "Açık tema aktif.");
+        };
+    }
+
+    // Mobil tema seçme tuşunu ekledim
+    if (!document.querySelector('.mobile-theme-toggle')) {
+        const mobileThemeBtn = document.createElement('button');
+        mobileThemeBtn.className = 'mobile-theme-toggle';
+        mobileThemeBtn.type = 'button';
+        mobileThemeBtn.setAttribute('aria-label', 'Mobil Tema Değiştir');
+        document.body.appendChild(mobileThemeBtn);
+
+        function updateMobileThemeIcon() {
+            mobileThemeBtn.innerHTML = document.body.classList.contains('dark')
+                ? '<i class="fas fa-sun"></i>'
+                : '<i class="fas fa-moon"></i>';
+        }
+
+        updateMobileThemeIcon();
+
+        mobileThemeBtn.onclick = () => {
+            document.body.classList.toggle('dark');
+            updateMobileThemeIcon();
             // Kullanıcının tema tercihini kaydediyorum
             if (document.body.classList.contains('dark')) {
                 localStorage.setItem('theme', 'dark');
