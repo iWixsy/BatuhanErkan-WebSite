@@ -9,30 +9,23 @@
     <meta name="description" content="Batuhan'ın portföyü, blogu, referansları ve iletişim bilgileri. Modern, erişilebilir ve mobil uyumlu kişisel web sitesi.">
     <!-- Open Graph -->
     <meta property="og:title" content="Batuhan | Kişisel Web Sitesi">
-    <meta property="og:description" content="Batuhan'ın portföyü, blogu, referansları ve iletişim bilgileri. Modern, erişilebilir ve mobil uyumlu kişisel web sitesi.">
-    <meta property="og:image" content="https://batuhanerkan.me/assets/opengraphpngsi.png">
-    <meta property="og:image:alt" content="Batuhan'ın kişisel web sitesi görseli">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:description" content="Batuhan'ın portföyü, blogu, referansları ve iletişim bilgileri.">
+    <meta property="og:image" content="assets/og-image.jpg">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://github.com/iWixsy/BatuhanErkan-WebSite">
-    <meta property="og:locale" content="tr_TR">
-    <meta property="og:site_name" content="Batuhan | Kişisel Web Sitesi">
+    <meta property="og:url" content="https://iwixsy.github.io/iWixsy/">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Batuhan | Kişisel Web Sitesi">
     <meta name="twitter:description" content="Batuhan'ın portföyü, blogu, referansları ve iletişim bilgileri.">
-    <meta name="twitter:image" content="https://batuhanerkan.me/assets/opengraphpngsi.png">
-    <meta name="twitter:image:alt" content="Batuhan'ın kişisel web sitesi görseli">
+    <meta name="twitter:image" content="assets/og-image.jpg">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <!-- Font Awesome ikonlar için -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-</head>
-<!-- Google tag (gtag.js) -->
+    <!-- Google Analytics kodunu buraya ekledim -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FGX5K46R2"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FGX5K46R2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -41,24 +34,33 @@
 
   gtag('config', 'G-8FGX5K46R2');
 </script>
+</head>
 <body>
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">Yükleniyor...</div>
+    </div>
+    <!-- Dil seçici (TR/EN) -->
+    <!-- <div id="lang-switcher" ...> ... </div> -->
     <!-- Blob efektlerini burada ekledim, arka planı daha canlı yapmak için -->
     <div class="bg-blob top"></div>
     <div class="bg-blob bottom"></div>
     <header>
-    <nav aria-label="Site ana menüsü">
-        <a href="#anasayfa" class="logo" aria-label="Anasayfa">Batuhan Erkan</a>
-        <button id="nav-toggle" aria-label="Menüyü Aç/Kapat"><i class="fas fa-bars"></i></button>
-        <ul id="nav-menu">
-            <li><a href="#anasayfa">Anasayfa</a></li>
-            <li><a href="#referanslar">Referanslar</a></li>
-            <li><a href="#hakkimda">Hakkımda</a></li>
-            <li><a href="#portfoy">Portföy</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="iletisim.html">İletişim</a></li>
-        </ul>
-    </nav>
-</header>
+        <!-- Navigasyon menümü burada oluşturdum -->
+        <nav aria-label="Site ana menüsü">
+            <a href="#anasayfa" class="logo" aria-label="Anasayfa">Batuhan Erkan</a>
+            <button id="nav-toggle" aria-label="Menüyü Aç/Kapat"><i class="fas fa-bars"></i></button>
+            <ul id="nav-menu">
+                <li><a href="#anasayfa">Anasayfa</a></li>
+                <li><a href="#referanslar">Referanslar</a></li>
+                <li><a href="#hakkimda">Hakkımda</a></li>
+                <li><a href="#portfoy">Portföy</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+ 
+            </ul>
+        </nav>
+    </header>
     <!-- Progress bar (sayfa yukarıda ilerleme çubuğu) -->
     <div id="progress-bar"></div>
     <main>
@@ -95,7 +97,7 @@
             <!-- Animasyonlu Sayaçlar -->
             <div class="counter-section">
                 <div class="counter-card">
-                    <div class="counter-number" data-count="6">0</div>
+                    <div class="counter-number" data-count="3">0</div>
                     <div class="counter-label"><i class="fas fa-briefcase"></i> Tamamlanan Proje</div>
                 </div>
                 <div class="counter-card">
@@ -169,7 +171,7 @@ Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleş
                     <div class="skill-bar-bg"><div class="skill-bar-fill" data-skill="10"></div></div>
                 </div>
                 <div class="skill-bar">
-                    <span>Kali Linux</span>
+                    <span>Linux</span>
                     <div class="skill-bar-bg"><div class="skill-bar-fill" data-skill="20"></div></div>
                 </div>
             </div>
@@ -293,19 +295,11 @@ Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleş
             <div class="blog-list">
                 <article>
                     <h2>Blog Başlığı 1</h2>
-                    <p>Kapsamlı bir yazı özeti. <a href="blog1.html">Devamını oku</a></p>
+                    <p>Kapsamlı bir yazı özeti. <a href="#">Devamını oku</a></p>
                 </article>
                 <article>
-                    <h2>Siteyle İlgili Kapsamlı Bilgiler</h2>
-                    <p>Site güncellemeleri, planlar ve özellikler hakkında detaylı bilgi. <a href="blog2.html">Devamını oku</a></p>
-                </article>
-                <article>
-                    <h2>Sevdiğim Oyunlar</h2>
-                    <p>Favori oyunlarım hakkında detaylı bilgiler. <a href="blog-sevdigim-oyunlar.html">Devamını oku</a></p>
-                </article>
-                <article>
-                    <h2>Sevdiğim Müzikler</h2>
-                    <p>Favori müziklerim ve Spotify playlistlerim. <a href="blog-sevdigim-muzikler.html">Devamını oku</a></p>
+                    <h2>Blog Başlığı 2</h2>
+                    <p>Kapsamlı bir yazı özeti. <a href="#">Devamını oku</a></p>
                 </article>
             </div>
         </section>
@@ -335,7 +329,7 @@ Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleş
         </div>
         <p>&copy; <span id="year"></span> Batuhan. Tüm hakları saklıdır.</p>
         <div style="font-size:0.95em;color:#888;margin-top:0.5rem;">
-            Sürüm: v3.7.0 &nbsp;|&nbsp; Son güncelleme: 2025-06-05
+            Sürüm: v3.0.0 &nbsp;|&nbsp; Son güncelleme: 2025-05-30
             &nbsp;|&nbsp; <a href="#" id="aboutSiteBtn" style="color:inherit;text-decoration:underline;">Site Hakkında</a>
         </div>
     </footer>
@@ -353,7 +347,7 @@ Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleş
             <span class="modal-close" id="aboutSiteModalClose">&times;</span>
             <h2>Site Hakkında</h2>
             <p>Bu site Batuhan tarafından 2025 yılında geliştirilmiştir. Modern web teknolojileri, erişilebilirlik ve mobil uyumluluk ön planda tutulmuştur. Tüm kodlar GitHub'da açık kaynak olarak paylaşılmıştır.</p>
-            <p style="font-size:0.95em;color:#888;">Sürüm: v3.6.0<br>Son güncelleme: 2025-06-04</p>
+            <p style="font-size:0.95em;color:#888;">Sürüm: v3.0.0<br>Son güncelleme: 2025-05-30</p>
         </div>
     </div>
     <!-- Sertifika modalı -->
@@ -372,11 +366,11 @@ Teknolojiye olan ilgim ve sistemlere olan merakım beni bu alanda daha derinleş
     <button id="backToTop" aria-label="Yukarı Çık"><i class="fas fa-arrow-up"></i></button>
 
     <!-- CV Modal -->
-    <div id="cvModal" class="modal">
-        <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 1rem; display: flex; flex-direction: column; align-items: center;">
-            <span class="modal-close" id="cvModalClose">&times;</span>
-            <img src="assets/Cv kopya kişisel bilgiler gizlenmiş.png" alt="CV Görüntüsü" style="max-width: 100%; max-height: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
-        </div>
+<div id="cvModal" class="modal">
+    <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 1rem; display: flex; flex-direction: column; align-items: center;">
+        <span class="modal-close" id="cvModalClose">&times;</span>
+        <img src="assets/Cv kopya kişisel bilgiler gizlenmiş.png" alt="CV Görüntüsü" style="max-width: 100%; max-height: 100%; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);">
     </div>
+</div>
 </body>
 </html>

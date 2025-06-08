@@ -14,47 +14,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
     if (form && formMessage) {
-        form.addEventListener('submit', async function(e) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            // Form verilerini al
+            // reCAPTCHA kontrolünü burada yapıyorum
+            if (typeof grecaptcha !== "undefined" && grecaptcha.getResponse().length === 0) {
+                formMessage.textContent = "Lütfen reCAPTCHA doğrulamasını tamamlayın.";
+                return;
+            }
             const data = new FormData(form);
-            const formData = Object.fromEntries(data.entries());
-
-            // Formspree.io'ya gönder
-            try {
-                const formspreeResponse = await fetch(form.action, {
-                    method: "POST",
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (formspreeResponse.ok) {
+            fetch(form.action, {
+                method: "POST",
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
                     formMessage.textContent = "Mesajınız iletildi. Teşekkürler!";
+                    form.reset();
+                    if (typeof grecaptcha !== "undefined") grecaptcha.reset();
                 } else {
-                    formMessage.textContent = "Formspree ile gönderim başarısız oldu.";
+                    formMessage.textContent = "Bir hata oluştu. Lütfen tekrar deneyin.";
                 }
-            } catch (error) {
-                formMessage.textContent = "Formspree ile gönderim sırasında bir hata oluştu.";
-            }
-
-            // Supabase'e gönder
-            try {
-                const supabaseResponse = await supabase.from('contacts').insert([formData]);
-
-                if (supabaseResponse.error) {
-                    console.error("Supabase hatası:", supabaseResponse.error.message);
-                    formMessage.textContent = "Supabase ile gönderim başarısız oldu.";
-                } else {
-                    console.log("Supabase'e başarıyla gönderildi:", supabaseResponse.data);
-                }
-            } catch (error) {
-                console.error("Supabase gönderim hatası:", error);
-                formMessage.textContent = "Supabase ile gönderim sırasında bir hata oluştu.";
-            }
-
-            // Formu sıfırla
-            form.reset();
+            }).catch(() => {
+                formMessage.textContent = "Bir hata oluştu. Lütfen tekrar deneyin.";
+            });
         });
     }
 
@@ -562,6 +544,13 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateTitlesOnScroll);
     window.addEventListener('DOMContentLoaded', animateTitlesOnScroll);
 
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 1500); // 1.5 saniye sonra gizlenir
+    }
+
     // CV modalını açıp kapatma
     const viewCvBtn = document.getElementById('viewCvBtn');
     const cvModal = document.getElementById('cvModal');
@@ -573,70 +562,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.target === cvModal) cvModal.classList.remove('show');
         });
     }
-
-    // .html uzantısını kaldırarak yönlendirme ile ilgili kodlar kaldırıldı
 });
 
-const version = "v3.7.0";
-const lastUpdate = "2025-06-05";
-
-// Mobil için tema seçme butonu kaldırıldı
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileThemeSwitcher = document.getElementById('mobile-theme-switcher');
-    if (mobileThemeSwitcher) {
-        mobileThemeSwitcher.remove();
-    }
-});
-
-// Tema seçme butonu
-document.addEventListener('DOMContentLoaded', function() {
-    const themeSwitcher = document.createElement('button');
-    themeSwitcher.id = 'theme-switcher';
-    themeSwitcher.innerHTML = '<i class="fas fa-adjust"></i>'; // Simge eklendi
-    themeSwitcher.style.cssText = `
-        position: fixed;
-        bottom: 5.2rem; /* Yukarı çıkma tuşu ile aynı hiza */
-        right: 1.2rem;
-        background: #7c3aed;
-        color: #fff;
-        border: none;
-        border-radius: 50%;
-        width: 48px; /* Boyut büyütüldü */
-        height: 48px; /* Boyut büyütüldü */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem; /* Simge boyutu büyütüldü */
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-        z-index: 101;
-        transition: background 0.2s, transform 0.2s;
-    `;
-
-    themeSwitcher.onclick = () => {
-        const isDark = document.body.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        showToast(isDark ? 'Koyu tema aktif.' : 'Açık tema aktif.');
-    };
-
-    themeSwitcher.onmouseenter = () => {
-        themeSwitcher.style.transform = 'scale(1.1)';
-    };
-
-    themeSwitcher.onmouseleave = () => {
-        themeSwitcher.style.transform = 'scale(1)';
-    };
-
-    document.body.appendChild(themeSwitcher);
-});
-
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-import dotenv from 'https://cdn.jsdelivr.net/npm/dotenv/+esm';
-
-dotenv.config();
-
-const supabaseUrl = 'https://iqmwbqdkgiyvzdtcmvqz.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY; // .env dosyasından çekiliyor
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-console.log('Supabase client initialized:', supabase);
+// MongoDB ile ilgili kodlar kaldırıldı

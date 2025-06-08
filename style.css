@@ -1,21 +1,21 @@
 /* Modern ve canlı renk paleti */
 :root {
-    --primary: #8b5cf6;         /* parlak mor */
-    --primary-dark: #6d28d9;    /* koyu parlak mor */
-    --secondary: #ec4899;       /* parlak pembe */
-    --secondary-dark: #db2777;  /* koyu parlak pembe */
-    --accent: #0ea5e9;          /* parlak mavi */
-    --success: #16a34a;         /* parlak yeşil */
-    --error: #dc2626;           /* parlak kırmızı */
-    --warning: #f59e0b;         /* parlak sarı */
-    --bg: #f9fafb;              /* açık gri */
-    --bg-alt: #e5e7eb;          /* açık mavi-gri */
-    --text: #111827;            /* koyu gri */
-    --text-light: #4b5563;      /* orta gri */
-    --card: #ffffff;            /* beyaz */
-    --border: #d1d5db;          /* açık gri kenar */
+    --primary: #7c3aed;         /* canlı mor */
+    --primary-dark: #4c1d95;    /* koyu mor */
+    --secondary: #f472b6;       /* canlı pembe */
+    --secondary-dark: #be185d;  /* koyu pembe */
+    --accent: #38bdf8;          /* canlı mavi */
+    --success: #22c55e;         /* canlı yeşil */
+    --error: #ef4444;           /* canlı kırmızı */
+    --warning: #fbbf24;         /* canlı sarı */
+    --bg: #f3f4f6;              /* açık gri */
+    --bg-alt: #e0e7ef;          /* açık mavi-gri */
+    --text: #18181b;            /* koyu gri */
+    --text-light: #6b7280;      /* orta gri */
+    --card: #fff;
+    --border: #e5e7eb;
     --radius: 18px;
-    --shadow: 0 4px 24px rgba(139,92,246,0.15); /* parlak gölge */
+    --shadow: 0 4px 24px rgba(124,58,237,0.08);
     --font: 'Inter', Arial, sans-serif;
     --transition: 0.22s cubic-bezier(.4,0,.2,1);
 }
@@ -106,13 +106,13 @@ body.dark::before {
 }
 
 body.dark {
-    --bg: #121212; /* Daha koyu arka plan */
-    --bg-alt: #1e1e1e; /* Daha koyu alternatif arka plan */
-    --text: #e4e4e4; /* Daha açık metin rengi */
-    --text-light: #b3b3b3; /* Daha açık gri metin */
-    --card: #1c1c1c; /* Kartlar için koyu arka plan */
-    --border: #333333; /* Daha koyu kenar rengi */
-    background: linear-gradient(120deg, #121212 0%, #1e1e1e 100%);
+    --bg: #181825;
+    --bg-alt: #23263a;
+    --text: #e0e7ef;
+    --text-light: #a1a1aa;
+    --card: #23263a;
+    --border: #312e81;
+    background: linear-gradient(120deg, #181825 0%, #23263a 100%);
 }
 
 /* Koyu tema için kart, section ve modalı daha belirgin ve modern yap */
@@ -123,21 +123,21 @@ body.dark article,
 body.dark .modal-content,
 body.dark form,
 body.dark .ref-card {
-    background: rgba(28, 28, 28, 0.95); /* Kartlar için daha koyu arka plan */
-    border-color: #444444; /* Kenar rengi güncellendi */
-    box-shadow: 0 6px 32px 0 rgba(0, 0, 0, 0.5); /* Daha yumuşak gölge */
-    color: #e4e4e4; /* Metin rengi */
+    background: rgba(36, 37, 46, 0.98);
+    border-color: #312e81;
+    box-shadow: 0 6px 32px 0 rgba(60, 60, 120, 0.18);
+    color: #e0e7ef;
 }
 
 body.dark input,
 body.dark textarea {
-    background: #1e1e1e; /* Daha koyu giriş alanı */
-    color: #e4e4e4; /* Metin rengi */
-    border-color: #444444; /* Kenar rengi */
+    background: #23263a;
+    color: #e0e7ef;
+    border-color: #312e81;
 }
 
 body.dark label {
-    color: #a5a5a5; /* Daha açık gri */
+    color: #a5b4fc;
 }
 
 body.dark .btn,
@@ -145,105 +145,105 @@ body.dark .btn.secondary,
 body.dark .btn.success,
 body.dark .btn.error {
     color: #fff;
-    box-shadow: 0 2px 12px #444444; /* Daha koyu gölge */
+    box-shadow: 0 2px 12px #312e8133;
 }
 
 body.dark .btn:hover,
 body.dark .btn:focus {
-    background: var(--secondary-dark); /* Daha koyu pembe */
+    background: var(--secondary-dark);
     color: #fff;
 }
 
 body.dark .theme-toggle {
-    background: var(--primary-dark); /* Daha koyu mor */
+    background: var(--primary-dark);
     color: #fff;
 }
 body.dark .theme-toggle:hover {
-    background: var(--secondary-dark); /* Daha koyu pembe */
+    background: var(--secondary-dark);
 }
 
 body.dark .counter-card {
-    background: #1e1e1e; /* Daha koyu kart arka planı */
-    border-color: #444444; /* Kenar rengi */
+    background: #23263a;
+    border-color: #312e81;
 }
 
 body.dark .counter-label {
-    color: #b3b3b3; /* Daha açık gri */
+    color: #a1a1aa;
 }
 
 body.dark .timeline-content {
-    background: #1e1e1e; /* Daha koyu zaman çizelgesi arka planı */
-    color: #e4e4e4; /* Metin rengi */
+    background: #23263a;
+    color: #e0e7ef;
 }
 
 body.dark .timeline-dot {
-    border-color: #1e1e1e; /* Daha koyu nokta kenarı */
-    background: var(--secondary-dark); /* Daha koyu pembe */
+    border-color: #23263a;
+    background: var(--secondary-dark);
 }
 
 body.dark .quote-banner {
-    background: #333333; /* Daha koyu banner arka planı */
-    color: #f472b6; /* Pembe metin */
+    background: #312e81;
+    color: #f472b6;
 }
 
 body.dark .welcome-hero-bg {
-    background: linear-gradient(120deg, #333333 60%, #be185d 100%); /* Daha koyu geçiş */
-    opacity: 0.85; /* Opaklık artırıldı */
+    background: linear-gradient(120deg, #312e81 60%, #be185d 100%);
+    opacity: 0.80; /* Opaklık azaltıldı, yazı daha net */
 }
 
 body.dark .welcome-hero-title,
 body.dark .welcome-hero-subtitle {
-    color: #fff; /* Beyaz metin */
+    color: #fff;
 }
 
 body.dark .welcome-hero-desc {
-    color: #e4e4e4; /* Daha açık metin */
-    background: rgba(40, 40, 40, 0.8); /* Daha koyu arka plan */
-    border-left: 4px solid var(--primary); /* Sol kenar rengi */
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5); /* Daha yumuşak gölge */
+    color: #fffde7;
+    background: rgba(60, 60, 80, 0.38);
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 4px 18px #0005;
 }
 
 body.dark .welcome-hero-highlight {
-    color: #fff; /* Beyaz metin */
+    color: #fffbe6;
     background: none;
-    -webkit-text-fill-color: #fff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); /* Daha koyu gölge */
+    -webkit-text-fill-color: #fffbe6;
+    text-shadow: 0 2px 8px #000a;
 }
 
 body.dark .social a {
-    background: #1e1e1e; /* Daha koyu sosyal ikon arka planı */
-    color: #a5a5a5; /* Daha açık gri */
+    background: #23263a;
+    color: #a5b4fc;
 }
 body.dark .social a:hover,
 body.dark .social a:focus {
-    background: var(--primary-dark); /* Daha koyu mor */
+    background: var(--primary-dark);
     color: #fff;
 }
 
 body.dark .modal-content {
-    background: #1e1e1e; /* Daha koyu modal arka planı */
-    color: #e4e4e4; /* Metin rengi */
-    border: 1.5px solid #444444; /* Kenar rengi */
+    background: #23263a;
+    color: #e0e7ef;
+    border: 1.5px solid #312e81;
 }
 
 body.dark details {
-    background: #1e1e1e; /* Daha koyu detay arka planı */
-    color: #e4e4e4; /* Metin rengi */
-    border: 1px solid #444444; /* Kenar rengi */
+    background: #23263a;
+    color: #e0e7ef;
+    border: 1px solid #312e81;
 }
 body.dark details[open] {
-    background: #333333; /* Daha koyu açık detay arka planı */
+    background: #312e81;
 }
 
 body.dark .skill-bar-bg {
-    background: #1e1e1e; /* Daha koyu yetenek çubuğu arka planı */
+    background: #23263a;
 }
 body.dark .skill-bar-fill {
-    background: linear-gradient(90deg, var(--primary-dark), var(--secondary-dark)); /* Daha koyu geçiş */
+    background: linear-gradient(90deg, var(--primary-dark), var(--secondary-dark));
 }
 
 body.dark .achievements-list {
-    color: #e4e4e4; /* Metin rengi */
+    color: #e0e7ef;
 }
 
 /* Üstte ve altta yüzen blob efektlerini ekleyerek siteye canlılık kattım */
@@ -503,15 +503,6 @@ h3 {
     color: #fff;
 }
 
-#theme-switcher {
-    transition: background 0.2s, transform 0.2s;
-}
-
-#theme-switcher:hover {
-    background: #6d28d9;
-    transform: scale(1.1);
-}
-
 /* Mobil uyumluluk */
 @media (max-width: 700px) {
     #kardes-siteler {
@@ -659,15 +650,15 @@ details {
     font-size: 0.98rem;
 }
 body.dark details {
-    background: #1e1e1e; /* Daha koyu detay arka planı */
-    color: #e4e4e4; /* Metin rengi */
-    border: 1px solid #444444; /* Kenar rengi */
+    background: #23263a;
+    color: #f1f5f9;
+    border: 1px solid #2d3143;
 }
 details[open] {
     background: #e0e7ef;
 }
 body.dark details[open] {
-    background: #333333; /* Daha koyu açık detay arka planı */
+    background: #2d3143;
 }
 details summary {
     font-weight: 700;
@@ -775,11 +766,11 @@ footer {
     gap: 0.3rem;
 }
 body.dark .counter-card {
-    background: #1e1e1e; /* Daha koyu kart arka planı */
-    border-color: #444444; /* Kenar rengi */
+    background: #23263a;
+    border-color: #312e81;
 }
 body.dark .counter-label {
-    color: #b3b3b3; /* Daha açık gri */
+    color: #a1a1aa;
 }
 
 /* Skill Barlar */
@@ -810,7 +801,7 @@ body.dark .counter-label {
     position: relative;
 }
 body.dark .skill-bar-bg {
-    background: #1e1e1e; /* Daha koyu yetenek çubuğu arka planı */
+    background: #23263a;
 }
 .skill-bar-fill {
     background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -928,8 +919,8 @@ body.dark .timeline-dot {
     text-align: center;
 }
 body.dark .modal-content {
-    background: #1e1e1e; /* Daha koyu modal arka planı */
-    color: #e4e4e4; /* Metin rengi */
+    background: #23263a;
+    color: #f1f5f9;
 }
 .modal-close {
     position: absolute;
@@ -1120,27 +1111,31 @@ body.dark .modal-content {
 
 /* Koyu temada karşılama yazısı ve motivasyon sözü için kontrast ve derinlik düzeltmeleri */
 body.dark .welcome-hero-bg {
-    background: linear-gradient(120deg, #333333 60%, #be185d 100%); /* Daha koyu geçiş */
-    opacity: 0.85; /* Opaklık artırıldı */
+    background: linear-gradient(120deg, #312e81 60%, #be185d 100%);
+    opacity: 0.80; /* Opaklık azaltıldı, yazı daha net */
 }
 
 body.dark .welcome-hero-desc {
-    color: #e4e4e4; /* Daha açık metin */
-    background: rgba(40, 40, 40, 0.8); /* Daha koyu arka plan */
-    border-left: 4px solid var(--primary); /* Sol kenar rengi */
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5); /* Daha yumuşak gölge */
+    color: #fffde7;
+    background: rgba(60, 60, 80, 0.38);
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 4px 18px #0005;
 }
 
 body.dark .welcome-hero-highlight {
-    color: #fff; /* Beyaz metin */
+    color: #fffbe6;
     background: none;
-    -webkit-text-fill-color: #fff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); /* Daha koyu gölge */
+    -webkit-text-fill-color: #fffbe6;
+    text-shadow: 0 2px 8px #000a;
 }
 
 body.dark .quote-banner {
-    background: #333333; /* Daha koyu banner arka planı */
-    color: #f472b6; /* Pembe metin */
+    background: #181825;
+    color: #fbbf24;
+    box-shadow: 0 4px 18px #0007;
+    border: 1.5px solid #312e81;
+    position: relative;
+    z-index: 2;
 }
 
 /* Karşılama yazısı ve motivasyon sözü için açık temada da kontrast ve derinlik düzeltmeleri */
@@ -1320,7 +1315,7 @@ h1 { animation-delay: 0.1s; }
 h2 { animation-delay: 0.2s; }
 h3 { animation-delay: 0.3s; }
 
-/* Mobil uyumluluk geliştirmeleri */
+/* Mobil uyumluluk geliştirmeleri ve eksiklerin tamamlanması */
 @media (max-width: 900px) {
     main {
         max-width: 100%;
@@ -1380,13 +1375,14 @@ h3 { animation-delay: 0.3s; }
     .skills-section, .achievements-section {
         margin: 1rem 0;
     }
+    /* Footer sosyal ikonları ve iletişim satırı daha iyi hizalansın */
     footer .social {
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.5rem;
     }
     footer > div {
-        word-break: break-word;
+        word-break: break-all;
         font-size: 0.97rem;
     }
 }
@@ -1455,6 +1451,7 @@ h3 { animation-delay: 0.3s; }
         right: 0.7rem;
         bottom: 0.7rem;
     }
+    /* Footer iletişim satırı dikeyde daha iyi görünsün */
     footer > div {
         display: block;
         margin-bottom: 0.5rem;
@@ -1684,24 +1681,55 @@ body.dark footer .kardes-site-link a:focus {
     color: #f472b6;
 }
 
-/* Yükleniyor ekranı ile ilgili CSS kaldırıldı */
-
-p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--text-light);
+/* Yükleniyor ekranı */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(120deg, #7c3aed, #4c1d95);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    z-index: 99999;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+#loading-screen .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
     margin-bottom: 1rem;
 }
-body.dark p {
-    color: #b3b3b3; /* Koyu temada daha açık gri */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
-
-/* Sürüm: v3.7.0 | Son güncelleme: 2025-06-05 */
-
-#mobile-theme-switcher button {
-    transition: background 0.2s, color 0.2s;
+#loading-screen .loading-text {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    animation: fadeInOut 1.5s ease-in-out infinite;
 }
-
-#mobile-theme-switcher button:hover {
-    filter: brightness(1.1);
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
 }
