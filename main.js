@@ -544,13 +544,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateTitlesOnScroll);
     window.addEventListener('DOMContentLoaded', animateTitlesOnScroll);
 
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-        setTimeout(() => {
-            loadingScreen.classList.add('hidden');
-        }, 1500); // 1.5 saniye sonra gizlenir
-    }
-
     // CV modalını açıp kapatma
     const viewCvBtn = document.getElementById('viewCvBtn');
     const cvModal = document.getElementById('cvModal');
