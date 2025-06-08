@@ -14,29 +14,47 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
     if (form && formMessage) {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            // reCAPTCHA kontrolünü burada yapıyorum
-            if (typeof grecaptcha !== "undefined" && grecaptcha.getResponse().length === 0) {
-                formMessage.textContent = "Lütfen reCAPTCHA doğrulamasını tamamlayın.";
-                return;
-            }
+
+            // Form verilerini al
             const data = new FormData(form);
-            fetch(form.action, {
-                method: "POST",
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
+            const formData = Object.fromEntries(data.entries());
+
+            // Formspree.io'ya gönder
+            try {
+                const formspreeResponse = await fetch(form.action, {
+                    method: "POST",
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (formspreeResponse.ok) {
                     formMessage.textContent = "Mesajınız iletildi. Teşekkürler!";
-                    form.reset();
-                    if (typeof grecaptcha !== "undefined") grecaptcha.reset();
                 } else {
-                    formMessage.textContent = "Bir hata oluştu. Lütfen tekrar deneyin.";
+                    formMessage.textContent = "Formspree ile gönderim başarısız oldu.";
                 }
-            }).catch(() => {
-                formMessage.textContent = "Bir hata oluştu. Lütfen tekrar deneyin.";
-            });
+            } catch (error) {
+                formMessage.textContent = "Formspree ile gönderim sırasında bir hata oluştu.";
+            }
+
+            // Supabase'e gönder
+            try {
+                const supabaseResponse = await supabase.from('contacts').insert([formData]);
+
+                if (supabaseResponse.error) {
+                    console.error("Supabase hatası:", supabaseResponse.error.message);
+                    formMessage.textContent = "Supabase ile gönderim başarısız oldu.";
+                } else {
+                    console.log("Supabase'e başarıyla gönderildi:", supabaseResponse.data);
+                }
+            } catch (error) {
+                console.error("Supabase gönderim hatası:", error);
+                formMessage.textContent = "Supabase ile gönderim sırasında bir hata oluştu.";
+            }
+
+            // Formu sıfırla
+            form.reset();
         });
     }
 
@@ -611,3 +629,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.body.appendChild(themeSwitcher);
 });
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+import dotenv from 'https://cdn.jsdelivr.net/npm/dotenv/+esm';
+
+dotenv.config();
+
+const supabaseUrl = 'https://iqmwbqdkgiyvzdtcmvqz.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY; // .env dosyasından çekiliyor
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+console.log('Supabase client initialized:', supabase);
